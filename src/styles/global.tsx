@@ -36,7 +36,7 @@ export const globalStyles = globalCss({
 
   html: {
     fontFamily: '$base',
-    fontSize: '$default',
+    fontSize: '$md',
     background: '$black100',
     color: '$white100',
   },
