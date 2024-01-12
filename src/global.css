@@ -6,4 +6,8 @@
   body {
     @apply bg-black100 text-white100;
   }
+
+  button {
+    @apply cursor-pointer;
+  }
 }

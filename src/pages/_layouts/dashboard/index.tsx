@@ -1,5 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
+import { Button } from '@/components/button'
+
 export function DashboardLayout() {
   return (
     <div className="w-full h-screen flex justify-start flex-col bg-black100">
@@ -9,7 +11,7 @@ export function DashboardLayout() {
           <span className="text-pink-500">.</span>
         </h1>
 
-        <button>Sign In</button>
+        <Button>Sign In</Button>
       </nav>
 
       <Outlet />
