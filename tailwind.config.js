@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+// import defaultTheme from 'tailwindcss/defaultTheme'
+
 export default {
   content: [
     './pages/**/*.{ts,tsx}',
@@ -9,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: '"Inter", sans-serif',
+      },
       colors: {
         white: '#ffffff',
         white100: '#fafafa',
