@@ -8,20 +8,10 @@
   }
 
   body {
-    @apply bg-black100 text-white100 font-body text-[1.6rem];
+    @apply bg-black-100 text-white-100 font-body text-[1.6rem];
   }
 
   button {
     @apply cursor-pointer;
-  }
-}
-
-@layer components {
-  .input {
-    @apply h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black100 text-white100 border border-[#27272a] rounded-[0.8rem] placeholder-[#767676] focus:border-[transparent] focus:outline outline-2 outline-pink500;
-  }
-
-  .btn {
-    @apply h-[4rem] py-0 px-[1.6rem] flex items-center justify-center text-[1.4rem] leading-[100%] font-semibold bg-pink500 transition-colors hover:bg-pink600 rounded-[0.8rem];
   }
 }

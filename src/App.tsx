@@ -8,7 +8,7 @@ import { router } from './routes'
 export function App() {
   return (
     <HelmetProvider>
-      <Helmet titleTemplate="%s | ui.app" />
+      <Helmet titleTemplate="%s | Athena" />
 
       <RouterProvider router={router} />
     </HelmetProvider>
