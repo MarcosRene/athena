@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-import defaultTheme from 'tailwindcss/defaultTheme'
-
 export default {
   content: [
     './pages/**/*.{ts,tsx}',
@@ -13,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         body: '"Inter", sans-serif',
-        logo: '"Montserrat", sans-serif;',
+        logo: '"Montserrat", sans-serif',
       },
       colors: {
         white: 'hsl(0, 0%, 100%)',
