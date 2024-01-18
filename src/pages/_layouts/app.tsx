@@ -1,13 +1,19 @@
-import { Header } from '@/components/header'
 import { Outlet } from 'react-router-dom'
+
+import { Header } from '@/components/header'
+import { Sidebar } from '@/components/sidebar'
 
 export function AppLayout() {
   return (
-    <div className="w-full h-screen flex justify-start flex-col bg-black100">
+    <div className="container px-[1.6rem] h-screen m-auto flex justify-start flex-col">
       <Header />
 
-      <div className="px-12">
-        <Outlet />
+      <div className="h-full flex">
+        <Sidebar />
+
+        <div className="ml-[2.4rem]">
+          <Outlet />
+        </div>
       </div>
     </div>
   )
