@@ -8,6 +8,12 @@ export default {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        '2xl': '1480px',
+      },
+    },
     extend: {
       fontFamily: {
         body: '"Inter", sans-serif',
@@ -33,6 +39,20 @@ export default {
         'green-700': 'hsl(146, 50%, 24%)',
         'green-800': 'hsl(146, 58%, 14%)',
         'green-900': 'hsl(137, 100%, 4%)',
+      },
+      keyframes: {
+        'slider-right-to-left': {
+          '0%': { transform: 'translateX(100px)', opacity: 0 },
+          '100%': { transform: 'translateX(0px)', opacity: 1 },
+        },
+        'slider-left-to-right': {
+          '0%': { transform: 'translateX(-100px)', opacity: 0 },
+          '100%': { transform: 'translateX(0px)', opacity: 1 },
+        },
+      },
+      animation: {
+        'slider-right-to-left': 'slider-right-to-left 0.5s ease-in-out',
+        'slider-left-to-right': 'slider-left-to-right 0.5s ease-in-out',
       },
     },
   },
