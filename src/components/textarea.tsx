@@ -14,10 +14,7 @@ export function Textarea({ label, ...attrs }: TextareaProps) {
   return (
     <div className="flex flex-col items-start">
       {!!label && (
-        <label
-          className="mb-[0.8rem] text-[1.2rem] font-medium block"
-          htmlFor={textAreaId}
-        >
+        <label className="mb-[0.8rem] text-[1.2rem] block" htmlFor={textAreaId}>
           {label}
         </label>
       )}

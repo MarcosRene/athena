@@ -17,10 +17,7 @@ export function Input({ icon: Icon, label, ...attrs }: TextInputProps) {
   return (
     <div className="flex flex-col items-start mb-[1.6rem]">
       {!!label && (
-        <label
-          className=" mb-[0.8rem] text-[1.2rem] font-medium"
-          htmlFor={inputId}
-        >
+        <label className=" mb-[0.8rem] text-[1.2rem]" htmlFor={inputId}>
           {label}
         </label>
       )}
