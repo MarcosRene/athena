@@ -1,3 +1,18 @@
-export function isLinkActive(pathnames: string[], currentPath: string) {
-  return pathnames.some((path: string) => currentPath.startsWith(path))
+interface LinkActiveProps {
+  pathnames: string[] | []
+  currentPath: string
+}
+
+interface LinkActiveResult {
+  isActiveLink: boolean
+}
+
+export function isLinkActive({
+  pathnames,
+  currentPath,
+}: LinkActiveProps): LinkActiveResult {
+  const isActiveLink =
+    pathnames.some((path: string) => currentPath.startsWith(path)) || false
+
+  return { isActiveLink }
 }

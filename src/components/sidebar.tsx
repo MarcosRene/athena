@@ -11,7 +11,10 @@ export function Sidebar() {
 
   const pathnames = ['/new-schedule', `/${params.id}/edit-schedule`]
 
-  const isActiveLink = isLinkActive(pathnames, location.pathname)
+  const { isActiveLink } = isLinkActive({
+    pathnames,
+    currentPath: location.pathname,
+  })
 
   return (
     <aside className="w-full max-w-[25rem] pb-[1.6rem] flex flex-col justify-between">
@@ -20,12 +23,13 @@ export function Sidebar() {
           Geral
         </span>
 
-        <div className="my-[3.2rem] flex items-start flex-col gap-8">
+        <div className="my-[3.2rem] flex items-start flex-col">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `w-full flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${(isActive || isActiveLink) && 'text-green-500'}`
+              `w-full mb-[2.4rem] flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${(isActive || isActiveLink) && 'text-green-500'}`
             }
+            title="Início"
           >
             <LayoutGrid size={20} />
             Início
@@ -34,8 +38,9 @@ export function Sidebar() {
           <NavLink
             to="/profile"
             className={({ isActive }) =>
-              `w-full flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${isActive && 'text-green-500'}`
+              `w-full mb-[2.4rem] flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${isActive && 'text-green-500'}`
             }
+            title="Perfil"
           >
             <User size={20} />
             Perfil
