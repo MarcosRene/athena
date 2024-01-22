@@ -2,24 +2,19 @@ import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { LayoutGrid, User, LogOut } from 'lucide-react'
 
 import { Button } from './button'
-import { useEffect, useState } from 'react'
+
+import { isLinkActive } from '@/utils/active-link'
 
 export function Sidebar() {
   const location = useLocation()
   const params = useParams()
 
-  const [isActiveLink, setIsActiveLink] = useState(false)
+  const pathnames = ['/new-schedule', `/${params.id}/edit-schedule`]
 
-  useEffect(() => {
-    const pathnames = ['/new-schedule', `/${params.id}/edit-schedule`]
-
-    if (pathnames.includes(location.pathname)) setIsActiveLink(true)
-
-    return () => setIsActiveLink(false)
-  }, [location.pathname, params.id])
+  const isActiveLink = isLinkActive(pathnames, location.pathname)
 
   return (
-    <aside className="w-[25rem] pb-[1.6rem] flex flex-col justify-between">
+    <aside className="w-full max-w-[25rem] pb-[1.6rem] flex flex-col justify-between">
       <div>
         <span className="text-[1.4rem] font-bold text-gray-300 uppercase">
           Geral
