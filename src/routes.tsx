@@ -8,6 +8,7 @@ import { EditSchedule } from './pages/app/edit-schedule'
 import { Profile } from './pages/app/profile'
 import { SignIn } from './pages/auth/sign-in'
 import { SignUp } from './pages/auth/sign-up'
+import { NotFound } from './pages/404'
 
 export const router = createBrowserRouter([
   {
@@ -51,5 +52,9 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ])
