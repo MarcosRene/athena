@@ -1,30 +1,59 @@
-import { Link } from 'react-router-dom'
-import { LayoutGrid, User } from 'lucide-react'
+import { NavLink, useLocation, useParams } from 'react-router-dom'
+import { LayoutGrid, User, LogOut } from 'lucide-react'
+
+import { Button } from './button'
+import { useEffect, useState } from 'react'
 
 export function Sidebar() {
+  const location = useLocation()
+  const params = useParams()
+
+  const [isActiveLink, setIsActiveLink] = useState(false)
+
+  useEffect(() => {
+    const pathnames = ['/new-schedule', `/${params.id}/edit-schedule`]
+
+    if (pathnames.includes(location.pathname)) setIsActiveLink(true)
+
+    return () => setIsActiveLink(false)
+  }, [location.pathname, params.id])
+
   return (
-    <aside className="w-[25rem]">
-      <div className="flex flex-col">
+    <aside className="w-[25rem] pb-[1.6rem] flex flex-col justify-between">
+      <div>
         <span className="text-[1.4rem] font-bold text-gray-300 uppercase">
           Geral
         </span>
 
         <div className="my-[3.2rem] flex items-start flex-col gap-8">
-          <div className="flex items-center gap-4 transition-colors hover:text-green-500">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `w-full flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${(isActive || isActiveLink) && 'text-green-500'}`
+            }
+          >
             <LayoutGrid size={20} />
-            <Link to="/" className="font-medium leading-[100%]">
-              Dashboard
-            </Link>
-          </div>
+            Início
+          </NavLink>
 
-          <div className="flex items-center gap-4 transition-colors hover:text-green-500">
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `w-full flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${isActive && 'text-green-500'}`
+            }
+          >
             <User size={20} />
-            <Link to="/profile" className="font-medium leading-[100%]">
-              Perfil
-            </Link>
-          </div>
+            Perfil
+          </NavLink>
         </div>
       </div>
+
+      <Button
+        className="justify-start gap-4 bg-transparent p-0 hover:bg-transparent hover:text-green-500"
+        icon={LogOut}
+      >
+        Sair
+      </Button>
     </aside>
   )
 }

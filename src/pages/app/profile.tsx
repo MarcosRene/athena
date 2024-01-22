@@ -1,5 +1,6 @@
-import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Helmet } from 'react-helmet-async'
+
+import { Breadcrumbs } from '@/components/breadcrumbs'
 
 export function Profile() {
   return (

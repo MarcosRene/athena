@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
+
 import { cn } from '@/lib/utils'
 
 interface BreadcrumbsProps {
@@ -13,7 +14,7 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
         {Object.entries(breadcrumbs).map(
           ([index, { label, href, activeLink }]) => (
             <li
-              key={href}
+              key={`${href}-${index}`}
               aria-current={activeLink}
               className={cn(
                 activeLink ? 'text-green-500 font-medium' : 'text-gray-300'

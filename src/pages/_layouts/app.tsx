@@ -5,7 +5,7 @@ import { Sidebar } from '@/components/sidebar'
 
 export function AppLayout() {
   return (
-    <div className="container px-[1.6rem] h-screen m-auto flex justify-start flex-col">
+    <div className="container px-[2.4rem] h-screen m-auto flex justify-start flex-col">
       <Header />
 
       <div className="h-full flex">

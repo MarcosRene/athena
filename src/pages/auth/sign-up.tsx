@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 import { Button } from '@/components/button'
-import { Helmet } from 'react-helmet-async'
 
 export function SignUp() {
   const navigate = useNavigate()

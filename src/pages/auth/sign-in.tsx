@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/button'
 
@@ -13,7 +13,9 @@ export function SignIn() {
 
   const isBackFromSignUpPage = location.state?.from === '/sign-up'
 
-  function onSubmit() {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
     navigate('/')
   }
 
@@ -31,33 +33,35 @@ export function SignIn() {
         <form
           onSubmit={onSubmit}
           aria-label="sign-in-form"
-          className="w-full max-w-[40rem] py-[4.8rem] px-[3.8rem] border border-[#27272a] rounded-[0.8rem]"
+          className="w-full max-w-[40rem] py-[4.8rem] px-[3.8rem] border border-gray-900 rounded-[0.8rem]"
         >
           <label className="text-[1.2rem] mb-[1.6rem] block" htmlFor="email">
             <input
               id="email"
+              name="email"
               type="email"
               placeholder="E-mail"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-[#27272a] rounded-[0.8rem] placeholder-[#767676] focus:border-[transparent] focus:outline outline-2 outline-green-600"
+              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-gray-900 rounded-[0.8rem] placeholder-gray-700 focus:border-[transparent] focus:outline outline-2 outline-green-600"
             />
           </label>
 
           <label className="text-[1.2rem] mb-[1.6rem] block" htmlFor="password">
             <input
               id="password"
+              name="password"
               type="password"
               placeholder="Senha"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-[#27272a] rounded-[0.8rem] placeholder-[#767676] focus:border-[transparent] focus:outline outline-2 outline-green-600"
+              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-gray-900 rounded-[0.8rem] placeholder-gray-700 focus:border-[transparent] focus:outline outline-2 outline-green-600"
             />
           </label>
 
           <Link
             to="/sign-up"
-            className="w-full h-auto mb-[2.4rem] bg-transparent underline text-[1.2rem] text-end transition-colors block hover:text-[#a1a1aa]"
+            className="w-full h-auto mb-[2.4rem] bg-transparent underline text-[1.2rem] text-end transition-colors block hover:text-gray-500"
           >
             Cadastre-se aqui 👈
           </Link>

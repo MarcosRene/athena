@@ -1,7 +1,7 @@
 export function Profile() {
   return (
     <div className="flex items-center gap-8">
-      <div className="hidden sm:flex flex-col items-end gap-1">
+      <div className="hidden sm:flex flex-col items-end">
         <span>Marcos Renê</span>
         <span className="text-gray-500 text-[1.4rem]">
           marcosrenedev@gmail.com
