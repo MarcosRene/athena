@@ -12,7 +12,7 @@ export function App() {
       <Helmet titleTemplate="%s | Athena" />
 
       <RouterProvider router={router} />
-      <Toaster position="bottom-right" />
+      <Toaster richColors />
     </HelmetProvider>
   )
 }

@@ -1,8 +1,10 @@
 import { FormEvent, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { User2Icon, LockIcon } from 'lucide-react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/button'
+import { Input } from '@/components/input'
 
 export function SignIn() {
   const navigate = useNavigate()
@@ -35,29 +37,22 @@ export function SignIn() {
           aria-label="sign-in-form"
           className="w-full max-w-[40rem] py-[4.8rem] px-[3.8rem] border border-gray-900 rounded-[0.8rem]"
         >
-          <label className="text-[1.2rem] mb-[1.6rem] block" htmlFor="email">
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="E-mail"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-gray-900 rounded-[0.8rem] placeholder-gray-700 focus:border-[transparent] focus:outline outline-2 outline-green-600"
-            />
-          </label>
+          <Input
+            id="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            icon={User2Icon}
+          />
 
-          <label className="text-[1.2rem] mb-[1.6rem] block" htmlFor="password">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Senha"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-gray-900 rounded-[0.8rem] placeholder-gray-700 focus:border-[transparent] focus:outline outline-2 outline-green-600"
-            />
-          </label>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Senha"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            icon={LockIcon}
+          />
 
           <Link
             to="/sign-up"

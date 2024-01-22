@@ -1,7 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import { User2Icon, LockIcon, MailIcon } from 'lucide-react'
 
 import { Button } from '@/components/button'
+import { Input } from '@/components/input'
 
 export function SignUp() {
   const navigate = useNavigate()
@@ -22,59 +24,48 @@ export function SignUp() {
         >
           <h2 className="mb-[4rem] text-4xl font-bold">Crie sua conta</h2>
 
-          <label className="text-[1.2rem] mb-[2.4rem] block" htmlFor="email">
-            <input
-              id="email"
-              type="email"
-              placeholder="E-mail"
-              value={''}
-              onChange={(event) => {
-                console.log(event.target.name)
-              }}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-[#27272a] rounded-[0.8rem] placeholder-[#767676] focus:border-[transparent] focus:outline outline-2 outline-green-600"
-            />
-          </label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="E-mail"
+            value={''}
+            onChange={(event) => {
+              console.log(event.target.name)
+            }}
+            icon={MailIcon}
+          />
 
-          <label className="text-[1.2rem] mb-[2.4rem] block" htmlFor="name">
-            <input
-              id="name"
-              placeholder="Nome"
-              value={''}
-              onChange={(event) => {
-                console.log(event.target.name)
-              }}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-[#27272a] rounded-[0.8rem] placeholder-[#767676] focus:border-[transparent] focus:outline outline-2 outline-green-600"
-            />
-          </label>
+          <Input
+            id="name"
+            placeholder="Nome"
+            value={''}
+            onChange={(event) => {
+              console.log(event.target.name)
+            }}
+            icon={User2Icon}
+          />
 
-          <label className="text-[1.2rem] mb-[2.4rem] block" htmlFor="password">
-            <input
-              id="password"
-              type="password"
-              placeholder="Senha"
-              value={''}
-              onChange={(event) => {
-                console.log(event.target.name)
-              }}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-[#27272a] rounded-[0.8rem] placeholder-[#767676] focus:border-[transparent] focus:outline outline-2 outline-green-600"
-            />
-          </label>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Senha"
+            value={''}
+            onChange={(event) => {
+              console.log(event.target.name)
+            }}
+            icon={LockIcon}
+          />
 
-          <label
-            className="text-[1.2rem] mb-[2.4rem] block"
-            htmlFor="confirm_password"
-          >
-            <input
-              id="confirm_password"
-              type="password"
-              placeholder="Confirmar senha"
-              value={''}
-              onChange={(event) => {
-                console.log(event.target.name)
-              }}
-              className="h-[4rem] w-full py-0 px-[1.6rem] text-[1.4rem] bg-black-100 text-white-100 border border-[#27272a] rounded-[0.8rem] placeholder-[#767676] focus:border-[transparent] focus:outline outline-2 outline-green-600"
-            />
-          </label>
+          <Input
+            id="confirm_password"
+            type="password"
+            placeholder="Confirmar senha"
+            value={''}
+            onChange={(event) => {
+              console.log(event.target.name)
+            }}
+            icon={LockIcon}
+          />
 
           <Link
             to="/sign-in"
