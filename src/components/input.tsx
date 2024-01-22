@@ -17,12 +17,15 @@ export function Input({ icon: Icon, label, ...attrs }: TextInputProps) {
   return (
     <div className="flex flex-col items-start mb-[1.6rem]">
       {!!label && (
-        <label className="text-[1.2rem] mb-[0.8rem]" htmlFor={inputId}>
+        <label
+          className=" mb-[0.8rem] text-[1.2rem] font-medium"
+          htmlFor={inputId}
+        >
           {label}
         </label>
       )}
 
-      <div className="relative w-full h-[4rem] flex items-center text-[1.4rem] border border-gray-900 rounded-[0.8rem] focus-within:border-[transparent] focus-within:outline outline-2 outline-green-600">
+      <div className="relative w-full h-[4rem] flex items-center border border-gray-900 rounded-[0.8rem] overflow-hidden focus-within:border-[transparent] focus-within:outline outline-2 outline-green-600">
         {!!Icon && (
           <Icon
             size={16}
@@ -34,7 +37,7 @@ export function Input({ icon: Icon, label, ...attrs }: TextInputProps) {
           id={inputId}
           type={type}
           className={cn(
-            'flex-1 h-full pr-[1.6rem] pl-[4rem] py-0 bg-transparent text-white-100 placeholder-gray-700 focus:outline-none',
+            `flex-1 h-full pr-[1.6rem] ${!Icon ? 'pl-[1.6rem]' : 'pl-[4rem]'} py-0 text-[1.4rem] bg-black-100 text-white-100 placeholder-gray-700 focus:outline-none`,
             className
           )}
           onFocus={() => setFocused(true)}
