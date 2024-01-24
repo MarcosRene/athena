@@ -20,7 +20,7 @@ describe('isLinkActive', () => {
   })
 
   it('When currentPath to empty', () => {
-    const pathnames = ['/new-schedule', 'edit-schedule']
+    const pathnames = ['/new-schedule', '/edit-schedule']
     const currentPath = ''
 
     const isActiveLink = isLinkActive({ pathnames, currentPath })
