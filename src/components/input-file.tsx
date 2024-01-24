@@ -53,7 +53,7 @@ export function InputFile({ onFileSelected, ...attrs }: InputFile) {
         {previewURL ? (
           <img src={previewURL} alt="" className="absolute inset-0" />
         ) : (
-          <div className="absolute inset-0 bg-gray-500 text-4xl font-semibold flex items-center justify-center">
+          <div className="absolute inset-0 bg-gray-500 text-4xl font-logo font-semibold flex items-center justify-center">
             US
           </div>
         )}

@@ -1,7 +1,5 @@
 import { NavLink, useLocation, useParams } from 'react-router-dom'
-import { LayoutGrid, User, LogOut } from 'lucide-react'
-
-import { Button } from './button'
+import { LayoutGrid, User } from 'lucide-react'
 
 import { isLinkActive } from '@/utils/active-link'
 
@@ -17,7 +15,7 @@ export function Sidebar() {
   })
 
   return (
-    <aside className="w-full max-w-[25rem] pb-[1.6rem] flex flex-col justify-between">
+    <aside className="w-full max-w-[25rem] h-[calc(100vh-120px)] pb-[1.6rem] flex flex-col justify-between">
       <div>
         <span className="text-[1.4rem] font-bold text-gray-300 uppercase">
           Geral
@@ -47,13 +45,6 @@ export function Sidebar() {
           </NavLink>
         </div>
       </div>
-
-      <Button
-        className="justify-start gap-4 bg-transparent p-0 hover:bg-transparent hover:text-green-500"
-        icon={LogOut}
-      >
-        Sair
-      </Button>
     </aside>
   )
 }
