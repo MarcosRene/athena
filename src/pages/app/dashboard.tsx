@@ -57,7 +57,10 @@ export function Dashboard() {
                 <td className="pl-[6.4rem] py-[1.6rem] text-[1.4rem]">
                   Tema TCC
                 </td>
-                <td className="pl-[6.4rem] py-[1.6rem] text-[1.4rem]">
+                <td
+                  className="pl-[6.4rem] py-[1.6rem] text-[1.4rem] overflow-hidden overflow-ellipsis whitespace-nowrap"
+                  title={'Fala sobre o tema do meu tcc'}
+                >
                   Fala sobre o tema do meu tcc
                 </td>
                 <td className="pl-[6.4rem] py-[1.6rem] text-[1.4rem]">
