@@ -11,7 +11,7 @@ export function AppLayout() {
       <div className="h-full flex">
         <Sidebar />
 
-        <div className="ml-[2.4rem]">
+        <div className="w-full ml-[2.4rem]">
           <Outlet />
         </div>
       </div>
