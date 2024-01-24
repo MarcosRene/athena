@@ -1,4 +1,5 @@
 import { ChangeEvent, ComponentProps, useMemo, useState } from 'react'
+import { toast } from 'sonner'
 
 import { cn } from '@/lib/utils'
 
@@ -21,7 +22,7 @@ export function InputFile({ onFileSelected, ...attrs }: InputFile) {
     const selectedFile = files[0]
 
     if (!selectedFile.type.startsWith('image/')) {
-      alert('Aquivo inválido!')
+      toast.error('Selecione um arquivo válido!')
       return
     }
 

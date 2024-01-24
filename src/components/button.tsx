@@ -24,7 +24,7 @@ export function Button({
       )}
       {...attrs}
     >
-      {!!Icon && <Icon size={iconSize} />}
+      {!!Icon && <Icon size={iconSize} className="flex-shrink-0" />}
       {children}
     </button>
   )
