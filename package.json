@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.0",
+    "dayjs": "^1.11.10",
     "localforage": "^1.10.0",
     "lucide-react": "^0.312.0",
     "match-sorter": "^6.3.1",

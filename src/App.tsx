@@ -1,4 +1,5 @@
 import './global.css'
+import '@/lib/dayjs'
 
 import { RouterProvider } from 'react-router-dom'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
