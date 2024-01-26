@@ -1,8 +1,16 @@
+import { Dayjs } from 'dayjs'
+import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 
 import { Breadcrumbs } from '@/components/breadcrumbs'
+import { Calendar } from '@/components/calendar'
+import { Input } from '@/components/input'
+import { Select } from '@/components/select'
+import { Textarea } from '@/components/textarea'
 
 export function NewSchedule() {
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
+
   return (
     <>
       <Helmet title="Novo" />
@@ -15,7 +23,23 @@ export function NewSchedule() {
         ]}
       />
 
-      <div>NewSchedule</div>
+      <div className="flex flex-col items-start">
+        <Input id="subject" label="Assunto" placeholder="ex: TCC" />
+
+        <Select id="teacher" label="Professor" options={[]} />
+
+        <Textarea
+          id="description"
+          label="Descrição"
+          placeholder="ex: Discutir tema do TCC"
+        />
+
+        <Calendar
+          label="Data/Hora"
+          selectedDate={selectedDate}
+          onDateSelected={setSelectedDate}
+        />
+      </div>
     </>
   )
 }

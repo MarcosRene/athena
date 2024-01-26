@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ComponentRef, useRef, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 
 import { CalendarPicker } from './calendar-picker'
@@ -6,48 +6,45 @@ import { TimerPicker } from './timer-picker'
 
 interface CalendarProps {
   label?: string
-  selectedDate: Dayjs
+  selectedDate: Dayjs | null
   onDateSelected: (date: Dayjs) => void
 }
-
-const availabilityTimes = [
-  '08:00',
-  '08:30',
-  '09:00',
-  '09:30',
-  '10:00',
-  '10:30',
-  '11:00',
-  '11:30',
-  '14:00',
-  '14:30',
-  '15:00',
-  '15:30',
-  '16:00',
-  '16:30',
-]
 
 export function Calendar({
   label,
   selectedDate,
   onDateSelected,
 }: CalendarProps) {
+  const calendarRef = useRef<ComponentRef<'div'>>(null)
+
   const [currentDate, setCurrentDate] = useState(() => {
     return dayjs().set('date', 1)
   })
   const [selectedTime, setSelectedTime] = useState('')
+  console.log(selectedTime)
 
-  console.log('selectedTime', selectedTime)
+  function handleFocus() {
+    if (calendarRef.current) {
+      calendarRef.current?.focus()
+    }
+  }
 
   return (
     <div className="relative flex flex-col mb-[1.6rem]">
       {!!label && (
-        <label className="mb-[0.8rem] text-[1.2rem] block">{label}</label>
+        <label
+          className="mb-[0.8rem] text-[1.2rem] block"
+          onClick={handleFocus}
+          aria-label={label}
+        >
+          {label}
+        </label>
       )}
 
       <div
-        id="calendar"
-        className={`relative bg-[#0c0c10] border border-gray-900 rounded-[0.8rem] flex overflow-hidden z-10 shadow-2xl`}
+        ref={calendarRef}
+        className={`relative bg-[#0c0c10] border border-gray-900 rounded-[0.8rem] flex overflow-hidden z-10 shadow-2xl focus:outline outline-2 outline-green-600`}
+        tabIndex={0}
       >
         <CalendarPicker
           currentDate={currentDate}
@@ -58,7 +55,6 @@ export function Calendar({
         {!!selectedDate && (
           <TimerPicker
             selectedDate={selectedDate}
-            availabilityTimes={availabilityTimes}
             onSelecedTime={setSelectedTime}
           />
         )}
