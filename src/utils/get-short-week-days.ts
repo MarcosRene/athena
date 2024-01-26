@@ -1,5 +1,11 @@
-export function getShortWeekDays() {
-  const formatter = new Intl.DateTimeFormat('pt-BR', {
+interface ShortWeekDaysProps {
+  language?: string
+}
+
+export function getShortWeekDays({
+  language = 'pt-BR',
+}: ShortWeekDaysProps = {}) {
+  const formatter = new Intl.DateTimeFormat(`${language}`, {
     weekday: 'short',
   })
 
