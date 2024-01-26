@@ -3,11 +3,17 @@ import { ChevronDownIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-interface SelectProps extends ComponentProps<'select'> {
-  label?: string
+type OptionProps = {
+  label: string
+  value: string
 }
 
-export function Select({ label, ...attrs }: SelectProps) {
+interface SelectProps extends ComponentProps<'select'> {
+  label?: string
+  options: OptionProps[]
+}
+
+export function Select({ label, options = [], ...attrs }: SelectProps) {
   const { id, name, className } = attrs
 
   const selecteId = id ?? name
@@ -27,9 +33,16 @@ export function Select({ label, ...attrs }: SelectProps) {
             `appearance-none flex-1 h-full px-[1.6rem] py-0 text-[1.4rem] bg-black-100 text-white-100 placeholder-gray-700 focus:outline-none`,
             className
           )}
+          {...attrs}
         >
-          <option value="">2</option>
-          <option value="">3</option>
+          <option defaultChecked>Selecione um professor</option>
+          {options.length > 0
+            ? options.map(({ label, value }) => (
+                <option key={value} value={value} className="text-white-100">
+                  {label}
+                </option>
+              ))
+            : null}
         </select>
 
         <ChevronDownIcon
