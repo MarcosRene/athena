@@ -74,6 +74,7 @@ export function Dashboard() {
                       title="Editar"
                       aria-label="Edit Button"
                       className="w-[3.2rem] h-[3.2rem] p-0 bg-[#1F70C6] hover:bg-[#14609b] flex justify-center gap-0"
+                      onClick={() => navigate('/1/edit-schedule')}
                     ></Button>
                     <Button
                       icon={Trash2Icon}
