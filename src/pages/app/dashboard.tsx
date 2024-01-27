@@ -11,7 +11,7 @@ export function Dashboard() {
     <>
       <Helmet title="Dashboard" />
 
-      <div className="mb-[4.2rem] flex items-center justify-between">
+      <div className="mb-12 flex items-center justify-between">
         <span>Dashboard</span>
 
         <Button

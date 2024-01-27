@@ -39,7 +39,7 @@ export function InputFile({ onFileSelected, ...attrs }: InputFile) {
   }, [imageFile])
 
   return (
-    <div className="mb-[4.8rem] block">
+    <div className="mb-[1.6rem] block">
       <label
         htmlFor="video"
         className={cn(
