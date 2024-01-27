@@ -8,20 +8,20 @@ interface CalendarProps {
   label?: string
   selectedDate: Dayjs | null
   onDateSelected: (date: Dayjs) => void
+  onTimeSelected: (time: string | null) => void
 }
 
 export function Calendar({
   label,
   selectedDate,
   onDateSelected,
+  onTimeSelected,
 }: CalendarProps) {
   const calendarRef = useRef<ComponentRef<'div'>>(null)
 
   const [currentDate, setCurrentDate] = useState(() => {
     return dayjs().set('date', 1)
   })
-  const [selectedTime, setSelectedTime] = useState('')
-  console.log(selectedTime)
 
   function handleFocus() {
     if (calendarRef.current) {
@@ -55,7 +55,7 @@ export function Calendar({
         {!!selectedDate && (
           <TimerPicker
             selectedDate={selectedDate}
-            onSelecedTime={setSelectedTime}
+            onTimeSelected={onTimeSelected}
           />
         )}
       </div>

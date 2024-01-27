@@ -1,6 +1,6 @@
-import { Dayjs } from 'dayjs'
 import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { Dayjs } from 'dayjs'
 
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Calendar } from '@/components/calendar'
@@ -10,6 +10,9 @@ import { Textarea } from '@/components/textarea'
 
 export function NewSchedule() {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
+  const [selectedtime, setSelectedTime] = useState<string | null>(null)
+
+  console.log({ selectedDate, selectedtime })
 
   return (
     <>
@@ -38,6 +41,7 @@ export function NewSchedule() {
           label="Data/Hora"
           selectedDate={selectedDate}
           onDateSelected={setSelectedDate}
+          onTimeSelected={setSelectedTime}
         />
       </div>
     </>
