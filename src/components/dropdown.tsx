@@ -1,13 +1,46 @@
-import { ComponentProps, ElementType } from 'react'
+import {
+  ComponentProps,
+  ComponentRef,
+  ElementType,
+  useEffect,
+  useRef,
+} from 'react'
 
 import { cn } from '@/lib/utils'
 
-interface DropdownRootProps extends ComponentProps<'div'> {}
+interface DropdownRootProps extends ComponentProps<'div'> {
+  isOpen: boolean
+  onClose: (value: boolean) => void
+}
+
 interface DropdownItemProps extends ComponentProps<'div'> {}
 
-function DropdownRoot({ children, className }: DropdownRootProps) {
+function DropdownRoot({
+  children,
+  className,
+  isOpen,
+  onClose,
+}: DropdownRootProps) {
+  const dropdownRootRef = useRef<ComponentRef<'div'>>(null)
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      if (
+        dropdownRootRef.current &&
+        !dropdownRootRef.current.contains(event.target as Node)
+      ) {
+        onClose(!isOpen)
+      }
+    }
+
+    window.addEventListener('mousedown', handleOutsideClick)
+
+    return () => window.removeEventListener('mousedown', handleOutsideClick)
+  }, [isOpen, onClose])
+
   return (
     <div
+      ref={dropdownRootRef}
       className={cn(
         'absolute bottom-[-50%] translate-y-[100%] right-0 max-w-fit bg-[#0c0c10] border border-gray-900 rounded-[0.8rem] overflow-hidden',
         className

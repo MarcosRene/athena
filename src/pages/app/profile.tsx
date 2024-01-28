@@ -17,7 +17,7 @@ export function Profile() {
         ]}
       />
 
-      <div className="pt-4 flex gap-16">
+      <div className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-16">
         <div className="w-full max-w-[16rem] flex flex-col items-center">
           <InputFile
             onFileSelected={(value) => {
@@ -28,7 +28,7 @@ export function Profile() {
           <span className="font-medium text-[2.4rem]">Marcos Renê</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-6 w-full self-baseline">
+        <div className="block md:grid md:grid-cols-2 gap-x-6 w-full self-baseline">
           <Input
             id="email"
             placeholder="johndoe@email.com"

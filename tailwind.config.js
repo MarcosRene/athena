@@ -55,10 +55,20 @@ export default {
           '0%': { transform: 'translateX(-100px)', opacity: 0 },
           '100%': { transform: 'translateX(0px)', opacity: 1 },
         },
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        'fade-out': {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
       },
       animation: {
         'slider-right-to-left': 'slider-right-to-left 0.5s ease-in-out',
         'slider-left-to-right': 'slider-left-to-right 0.5s ease-in-out',
+        'fade-in': 'fade-in 180ms ease-in-out',
+        'fade-out': 'fade-out 180ms ease-in-out',
       },
     },
   },

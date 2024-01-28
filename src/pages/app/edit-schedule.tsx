@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Dayjs } from 'dayjs'
 
+import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Calendar } from '@/components/calendar'
 import { Input } from '@/components/input'
@@ -43,6 +44,10 @@ export function EditSchedule() {
           onDateSelected={setSelectedDate}
           onTimeSelected={setSelectedTime}
         />
+
+        <div className="w-full flex justify-end mt-[1.6rem]">
+          <Button className="uppercase font-medium">Salvar</Button>
+        </div>
       </div>
     </>
   )

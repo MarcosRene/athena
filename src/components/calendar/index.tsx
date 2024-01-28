@@ -43,7 +43,7 @@ export function Calendar({
 
       <div
         ref={calendarRef}
-        className={`relative bg-[#0c0c10] border border-gray-900 rounded-[0.8rem] flex overflow-hidden z-10 shadow-2xl focus:outline outline-2 outline-green-600`}
+        className={`relative bg-[#0c0c10] border border-gray-900 rounded-[0.8rem] flex flex-col md:flex-row overflow-hidden z-10 shadow-2xl focus:outline outline-2 outline-green-600`}
         tabIndex={0}
       >
         <CalendarPicker

@@ -1,14 +1,14 @@
+import { useCallback, useState } from 'react'
 import { LogOutIcon } from 'lucide-react'
 
 import { Dropdownm } from './dropdown'
-import { useState } from 'react'
 
 export function Profile() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  function handleDropdownOpen() {
+  const handleDropdownOpen = useCallback(() => {
     setIsDropdownOpen((prevState) => !prevState)
-  }
+  }, [])
 
   return (
     <div className="relative">
@@ -33,7 +33,7 @@ export function Profile() {
       </div>
 
       {isDropdownOpen && (
-        <Dropdownm.Root>
+        <Dropdownm.Root isOpen={isDropdownOpen} onClose={setIsDropdownOpen}>
           <Dropdownm.Item className="font-medium gap-4 text-gray-100">
             <Dropdownm.Icon icon={LogOutIcon} />
             Sair
