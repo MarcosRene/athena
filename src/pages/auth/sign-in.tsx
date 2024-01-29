@@ -13,7 +13,7 @@ export function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const isBackFromSignUpPage = location.state?.from === '/sign-up'
+  const hasBackFromSignUpPage = location.state?.from === '/sign-up'
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -26,16 +26,16 @@ export function SignIn() {
       <Helmet title="Login" />
 
       <div
-        className={`max-w-[102.4rem] py-[4.8rem] px-[3.8rem] flex items-center justify-between gap-8 ${isBackFromSignUpPage && 'animate-slider-left-to-right'}`}
+        className={`max-w-[1024px] py-12 px-10 flex items-center justify-between gap-8 ${hasBackFromSignUpPage && 'animate-slider-left-to-right'}`}
       >
-        <h1 className="text-[9.2rem] font-black leading-[8.8rem]">
+        <h1 className="text-[92px] font-black leading-[88px]">
           Gerencie seus <span className="text-green-500">horários</span>.
         </h1>
 
         <form
           onSubmit={onSubmit}
           aria-label="sign-in-form"
-          className="w-full max-w-[40rem] py-[4.8rem] px-[3.8rem] border border-gray-900 rounded-[0.8rem]"
+          className="w-full max-w-[400px] py-12 px-10 border border-gray-900 rounded-lg"
         >
           <Input
             id="email"
@@ -56,12 +56,12 @@ export function SignIn() {
 
           <Link
             to="/sign-up"
-            className="w-full h-auto mb-[2.4rem] bg-transparent underline text-[1.2rem] text-end transition-colors block hover:text-gray-500"
+            className="w-full h-auto mb-6 bg-transparent underline text-xs text-end transition-colors block hover:text-gray-500"
           >
             Cadastre-se aqui 👈
           </Link>
 
-          <Button type="submit" className="w-full mb-[1.6rem] uppercase">
+          <Button type="submit" className="w-full mb-4 uppercase">
             Entrar
           </Button>
         </form>

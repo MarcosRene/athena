@@ -12,7 +12,7 @@ export function Profile() {
 
       <Breadcrumbs breadcrumbs={[{ label: 'Perfil', href: '/profile' }]} />
 
-      <div className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-16">
+      <div className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-8 lg:gap-16">
         <div className="w-full max-w-40 flex flex-col items-center">
           <InputFile
             onFileSelected={(value) => {

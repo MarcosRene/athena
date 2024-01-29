@@ -43,7 +43,7 @@ export function InputFile({ onFileSelected, ...attrs }: InputFile) {
       <label
         htmlFor="video"
         className={cn(
-          'relative w-32 h-32 border border-[#27272a] flex rounded-full ring-2 ring-[#27272a] overflow-hidden cursor-pointer',
+          'relative w-28 h-28 lg:w-32 lg:h-32 border border-[#27272a] flex rounded-full ring-2 ring-[#27272a] overflow-hidden cursor-pointer',
           className
         )}
         title="Selecione uma foto"
@@ -53,7 +53,7 @@ export function InputFile({ onFileSelected, ...attrs }: InputFile) {
         {previewURL ? (
           <img src={previewURL} alt="" className="absolute inset-0" />
         ) : (
-          <div className="absolute inset-0 bg-gray-500 text-4xl font-logo font-semibold flex items-center justify-center">
+          <div className="absolute inset-0 bg-gray-500 text-2xl lg:text-4xl font-logo font-semibold flex items-center justify-center">
             US
           </div>
         )}

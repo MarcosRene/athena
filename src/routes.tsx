@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { Navigate, createBrowserRouter } from 'react-router-dom'
 
 import { AppLayout } from './pages/_layouts/app'
 import { AuthLayout } from './pages/_layouts/auth'
@@ -10,10 +10,28 @@ import { SignIn } from './pages/auth/sign-in'
 import { SignUp } from './pages/auth/sign-up'
 import { NotFound } from './pages/404'
 
+interface PrivateRoutesProps {
+  children: React.ReactNode
+}
+
+function PrivateRoutes({ children }: PrivateRoutesProps) {
+  const isLoggedInUser = false
+
+  if (!isLoggedInUser) {
+    return <Navigate to="/sign-in" replace />
+  }
+
+  return children
+}
+
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppLayout />,
+    element: (
+      <PrivateRoutes>
+        <AppLayout />
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: '/',

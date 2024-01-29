@@ -20,9 +20,9 @@ export function SignUp() {
         <form
           aria-label="sign-up-form"
           onSubmit={onSubmit}
-          className="w-full max-w-[40rem] py-[4.8rem] px-[3.8rem] border border-[#27272a] rounded-[0.8rem] animate-slider-right-to-left"
+          className="w-full max-w-[400px] py-12 px-[38px] border border-gray-900 rounded-[0.8rem] animate-slider-right-to-left"
         >
-          <h2 className="mb-[4rem] text-4xl font-bold">Crie sua conta</h2>
+          <h2 className="mb-10 text-2xl font-bold">Crie sua conta</h2>
 
           <Input
             id="email"
@@ -70,7 +70,7 @@ export function SignUp() {
           <Link
             to="/sign-in"
             state={{ from: '/sign-up' }}
-            className="w-full h-auto mb-[2.4rem] bg-transparent underline text-[1.2rem] text-end transition-colors block hover:text-[#a1a1aa]"
+            className="w-full h-auto mb-6 bg-transparent underline text-xs text-end transition-colors block hover:text-[#a1a1aa]"
           >
             Voltar para login 👈
           </Link>
