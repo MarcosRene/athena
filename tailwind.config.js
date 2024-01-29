@@ -22,6 +22,7 @@ export default {
       colors: {
         white: 'hsl(0, 0%, 100%)',
         'white-100': 'hsl(0, 0%, 95%)',
+        'white-200': 'hsl(0, 40%, 96.1%)',
 
         black: 'hsl(0, 0%, 0%)',
         'black-100': 'hsl(240, 10%, 4%)',

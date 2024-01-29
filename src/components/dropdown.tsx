@@ -42,7 +42,7 @@ function DropdownRoot({
     <div
       ref={dropdownRootRef}
       className={cn(
-        'absolute bottom-[-50%] translate-y-[100%] right-0 max-w-fit bg-[#0c0c10] border border-gray-900 rounded-[0.8rem] overflow-hidden',
+        'absolute -bottom-2/4 translate-y-full right-0 max-w-fit bg-[#0c0c10] border border-gray-900 rounded-lg overflow-hidden',
         className
       )}
     >
@@ -55,7 +55,7 @@ function DropdownItem({ children, className }: DropdownItemProps) {
   return (
     <div
       className={cn(
-        'w-[13.2rem] py-[1rem] px-[1.6rem] text-[1.4rem] border-b border-b-gray-900 flex items-center transition-colors cursor-pointer hover:bg-gray-900 last:border-none',
+        'w-32 py-3 px-4 text-sm border-b border-b-gray-900 flex items-center transition-colors cursor-pointer hover:bg-gray-900 last:border-none',
         className
       )}
     >

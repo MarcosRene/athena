@@ -21,7 +21,6 @@ export function EditSchedule() {
 
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Geral', href: '/' },
           { label: 'Dashboard', href: '/' },
           { label: 'Editar', href: '/edit-schedule', activeLink: true },
         ]}
@@ -45,7 +44,7 @@ export function EditSchedule() {
           onTimeSelected={setSelectedTime}
         />
 
-        <div className="w-full flex justify-end mt-[1.6rem]">
+        <div className="w-full flex justify-end mt-4">
           <Button className="uppercase font-medium">Salvar</Button>
         </div>
       </div>

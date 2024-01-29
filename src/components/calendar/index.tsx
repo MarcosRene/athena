@@ -30,10 +30,10 @@ export function Calendar({
   }
 
   return (
-    <div className="relative flex flex-col mb-[1.6rem]">
+    <div className="relative flex flex-col mb-4">
       {!!label && (
         <label
-          className="mb-[0.8rem] text-[1.2rem] block"
+          className="mb-2 text-xs block"
           onClick={handleFocus}
           aria-label={label}
         >
@@ -43,7 +43,7 @@ export function Calendar({
 
       <div
         ref={calendarRef}
-        className={`relative bg-[#0c0c10] border border-gray-900 rounded-[0.8rem] flex flex-col md:flex-row overflow-hidden z-10 shadow-2xl focus:outline outline-2 outline-green-600`}
+        className={`relative bg-[#0c0c10] border border-gray-900 rounded-lg flex flex-col md:flex-row overflow-hidden z-10 shadow-2xl focus:outline outline-2 outline-green-600`}
         tabIndex={0}
       >
         <CalendarPicker

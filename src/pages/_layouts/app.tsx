@@ -5,12 +5,12 @@ import { Profile } from '@/components/profile'
 
 export function AppLayout() {
   return (
-    <div className="container px-[2.4rem] m-auto flex justify-start flex-col">
+    <div className="container px-6 m-auto flex justify-start flex-col">
       <div className="h-full flex">
         <Sidebar />
 
-        <div className="ml-0 w-full md:ml-[2.4rem] mb-[4.8rem]">
-          <header className="mt-[2.4rem] mb-[4.8rem] flex items-center justify-end">
+        <div className="ml-0 w-full md:ml-6 mb-12">
+          <header className="mt-6 mb-12 flex items-center justify-end">
             <Profile />
           </header>
 

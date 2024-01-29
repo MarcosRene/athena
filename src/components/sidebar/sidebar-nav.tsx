@@ -22,24 +22,24 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
 
   return (
     <div className="block">
-      <span className="text-[1.4rem] font-bold text-gray-300 uppercase flex items-center justify-between">
+      <span className="font-bold text-gray-300 uppercase flex items-center justify-between">
         <span>Geral</span>
 
         {!!onClose && (
           <Button
             icon={XIcon}
             iconSize={20}
-            className="w-[2.4rem] h-[2.4rem] p-[1.6rem] bg-transparent"
+            className="w-6 h-6 p-4 bg-transparent"
             onClick={onClose}
           ></Button>
         )}
       </span>
 
-      <div className="my-[3.2rem] flex items-start flex-col">
+      <div className="my-8 flex items-start flex-col">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `w-full mb-[2.4rem] flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${(isActive || isActiveLink) && 'text-green-500'}`
+            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${(isActive || isActiveLink) && 'text-green-500'}`
           }
           title="Início"
         >
@@ -50,7 +50,7 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
         <NavLink
           to="/profile"
           className={({ isActive }) =>
-            `w-full mb-[2.4rem] flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${isActive && 'text-green-500'}`
+            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${isActive && 'text-green-500'}`
           }
           title="Perfil"
         >

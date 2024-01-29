@@ -10,7 +10,7 @@ interface BreadcrumbsProps {
 export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
   return (
     <nav aria-label="Breadcrumb" className="mb-12 block">
-      <ol className="flex text-xl md:text-2xl">
+      <ol className="flex">
         {Object.entries(breadcrumbs).map(
           ([index, { label, href, activeLink }]) => (
             <li
@@ -22,7 +22,7 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
             >
               <Link to={href}>{label}</Link>
               {Number(index) < breadcrumbs.length - 1 ? (
-                <ChevronRight size={20} className="mx-3 inline-block" />
+                <ChevronRight size={20} className="mx-2 inline-block" />
               ) : null}
             </li>
           )

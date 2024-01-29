@@ -39,11 +39,11 @@ export function InputFile({ onFileSelected, ...attrs }: InputFile) {
   }, [imageFile])
 
   return (
-    <div className="mb-[1.6rem] block">
+    <div className="mb-4 block">
       <label
         htmlFor="video"
         className={cn(
-          'relative w-[12.8rem] h-[12.8rem] border border-[#27272a] flex rounded-full ring-2 ring-[#27272a] overflow-hidden cursor-pointer',
+          'relative w-32 h-32 border border-[#27272a] flex rounded-full ring-2 ring-[#27272a] overflow-hidden cursor-pointer',
           className
         )}
         title="Selecione uma foto"

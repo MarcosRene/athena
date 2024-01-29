@@ -10,22 +10,17 @@ export function Profile() {
     <>
       <Helmet title="Perfil" />
 
-      <Breadcrumbs
-        breadcrumbs={[
-          { label: 'Geral', href: '/' },
-          { label: 'Perfil', href: '/profile', activeLink: true },
-        ]}
-      />
+      <Breadcrumbs breadcrumbs={[{ label: 'Perfil', href: '/profile' }]} />
 
       <div className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-16">
-        <div className="w-full max-w-[16rem] flex flex-col items-center">
+        <div className="w-full max-w-40 flex flex-col items-center">
           <InputFile
             onFileSelected={(value) => {
               console.log({ value })
             }}
           />
 
-          <span className="font-medium text-[2.4rem]">Marcos Renê</span>
+          <span className="font-medium text-2xl">Marcos Renê</span>
         </div>
 
         <div className="block md:grid md:grid-cols-2 gap-x-6 w-full self-baseline">

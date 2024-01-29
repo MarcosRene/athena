@@ -19,18 +19,18 @@ export function Select({ label, options = [], ...attrs }: SelectProps) {
   const selecteId = id ?? name
 
   return (
-    <div className="w-full flex flex-col items-start mb-[1.6rem]">
+    <div className="w-full flex flex-col items-start mb-4">
       {!!label && (
-        <label className="mb-[0.8rem] text-[1.2rem]" htmlFor={selecteId}>
+        <label className="mb-2 text-xs" htmlFor={selecteId}>
           {label}
         </label>
       )}
 
-      <div className="relative w-full h-[4rem] flex items-center border border-gray-900 rounded-[0.8rem] overflow-hidden focus-within:border-[transparent] focus-within:outline outline-2 outline-green-600">
+      <div className="relative w-full h-10 flex items-center border border-gray-900 rounded-lg overflow-hidden focus-within:border-[transparent] focus-within:outline outline-2 outline-green-600">
         <select
           id={selecteId}
           className={cn(
-            `appearance-none flex-1 h-full px-[1.6rem] py-0 text-[1.4rem] bg-black-100 text-white-100 placeholder-gray-700 focus:outline-none`,
+            `appearance-none flex-1 h-full px-4 py-0 text-sm bg-black-100 text-white-100 placeholder-gray-700 focus:outline-none`,
             className
           )}
           {...attrs}
@@ -45,10 +45,7 @@ export function Select({ label, options = [], ...attrs }: SelectProps) {
             : null}
         </select>
 
-        <ChevronDownIcon
-          size={18}
-          className="absolute right-[1.6rem] text-gray-700"
-        />
+        <ChevronDownIcon size={18} className="absolute right-4 text-gray-700" />
       </div>
     </div>
   )

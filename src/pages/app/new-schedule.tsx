@@ -50,7 +50,6 @@ export function NewSchedule() {
 
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Geral', href: '/' },
           { label: 'Dashboard', href: '/' },
           { label: 'Novo', href: '/new-schedule', activeLink: true },
         ]}
@@ -88,7 +87,7 @@ export function NewSchedule() {
           onTimeSelected={setSelectedTime}
         />
 
-        <div className="w-full flex justify-end mt-[1.6rem]">
+        <div className="w-full flex justify-end mt-4">
           <Button
             className={`uppercase font-medium ${!isFormValid && 'opacity-50 cursor-not-allowed hover:bg-green-600'}`}
             disabled={!isFormValid}

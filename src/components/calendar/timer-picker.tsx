@@ -32,16 +32,16 @@ export function TimerPicker({
   }, [selectedDate])
 
   return (
-    <div className="w-[28rem] p-[1.6rem] border-l border-l-gray-900">
-      <span className="mt-[0.4rem] mb-[2.4rem] text-[1.4rem] font-medium text-gray-100 block">
+    <div className="w-72 p-4 border-l border-l-gray-900">
+      <span className="mt-1 mb-6 text-sm font-medium text-gray-100 block">
         {weekDay}, <span>{describedDate}</span>
       </span>
 
-      <ul className="w-full grid grid-cols-[auto,auto] gap-4 text-center">
+      <ul className="w-full grid grid-cols-[auto,auto] gap-2 text-center">
         {availabilityTimes.map(({ time, disabled }) => (
           <li key={time}>
             <Button
-              className={`w-full font-normal text-[1.4rem] text-gray-100 bg-gray-900 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
+              className={`w-full font-normal text-sm text-gray-100 bg-gray-900 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
               onClick={() => onTimeSelected(time)}
               disabled={disabled}
             >

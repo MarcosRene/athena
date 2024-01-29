@@ -88,12 +88,12 @@ export function CalendarPicker({
   }, [currentDate])
 
   return (
-    <div className="flex flex-col p-[1.6rem]">
-      <header className="mb-[2.4rem] flex items-center justify-between">
+    <div className="flex flex-col p-4">
+      <header className="mb-6 flex items-center justify-between">
         <Button
           icon={ChevronLeftIcon}
           iconSize={18}
-          className="w-[3.2rem] h-[3.2rem] p-0 bg-transparent text-gray-100"
+          className="w-8 h-w-8 p-0 bg-transparent text-gray-100"
           onClick={handlePreviusMonth}
         ></Button>
 
@@ -104,19 +104,16 @@ export function CalendarPicker({
         <Button
           icon={ChevronRightIcon}
           iconSize={18}
-          className="w-[3.2rem] h-[3.2rem] p-0 bg-transparent text-gray-100"
+          className="w-8 h-8 p-0 bg-transparent text-gray-100"
           onClick={handleNextMonth}
         ></Button>
       </header>
 
-      <table className="border-separate border-spacing-[0.8rem] table-fixed">
+      <table className="border-separate border-spacing-2 table-fixed">
         <thead>
           <tr>
             {shortWeekDays.map((weekDay) => (
-              <th
-                key={weekDay}
-                className="text-[1.4rem] text-gray-700 font-medium"
-              >
+              <th key={weekDay} className="text-sm text-gray-700 font-medium">
                 {weekDay}
               </th>
             ))}
@@ -130,7 +127,7 @@ export function CalendarPicker({
                 <td key={`date-${index + 1}`}>
                   {!!date && (
                     <Button
-                      className={`py-0 w-[4.8rem] h-[4.8rem] font-normal bg-transparent text-gray-100 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
+                      className={`py-0 w-12 h-w-12 font-normal bg-transparent text-gray-100 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
                       onClick={() => onDateSelected(date)}
                       disabled={disabled}
                     >
