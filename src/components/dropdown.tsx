@@ -1,80 +1,36 @@
-import {
-  ComponentProps,
-  ComponentRef,
-  ElementType,
-  useEffect,
-  useRef,
-} from 'react'
+import { ComponentProps, ElementType } from 'react'
 
 import { cn } from '@/lib/utils'
 
-interface DropdownRootProps extends ComponentProps<'div'> {
-  isOpen: boolean
-  onClose: (value: boolean) => void
+type DropdownOption = {
+  label: string
+  icon?: ElementType
 }
 
-interface DropdownItemProps extends ComponentProps<'div'> {}
+interface DropdownProps extends ComponentProps<'ol'> {
+  options: DropdownOption[]
+}
 
-function DropdownRoot({
-  children,
-  className,
-  isOpen,
-  onClose,
-}: DropdownRootProps) {
-  const dropdownRootRef = useRef<ComponentRef<'div'>>(null)
-
-  useEffect(() => {
-    function handleOutsideClick(event: MouseEvent) {
-      if (
-        dropdownRootRef.current &&
-        !dropdownRootRef.current.contains(event.target as Node)
-      ) {
-        onClose(!isOpen)
-      }
-    }
-
-    window.addEventListener('mousedown', handleOutsideClick)
-
-    return () => window.removeEventListener('mousedown', handleOutsideClick)
-  }, [isOpen, onClose])
+export function Dropdown({ options, ...attrs }: DropdownProps) {
+  const { className } = attrs
 
   return (
-    <div
-      ref={dropdownRootRef}
+    <ol
       className={cn(
         'absolute -bottom-2/4 translate-y-full right-0 max-w-fit bg-[#0c0c10] border border-gray-900 rounded-lg overflow-hidden',
         className
       )}
+      {...attrs}
     >
-      {children}
-    </div>
+      {options.map(({ icon: Icon = '', label }) => (
+        <li
+          key={label}
+          className="w-32 py-3 px-4 text-sm border-b border-b-gray-900 flex items-center gap-2 transition-colors cursor-pointer hover:bg-gray-900 last:border-none"
+        >
+          <Icon size={18} />
+          <span className="font-medium gap-4 text-gray-100">{label}</span>
+        </li>
+      ))}
+    </ol>
   )
-}
-
-function DropdownItem({ children, className }: DropdownItemProps) {
-  return (
-    <div
-      className={cn(
-        'w-32 py-3 px-4 text-sm border-b border-b-gray-900 flex items-center transition-colors cursor-pointer hover:bg-gray-900 last:border-none',
-        className
-      )}
-    >
-      {children}
-    </div>
-  )
-}
-
-interface DropdownIconProps {
-  icon: ElementType
-  size?: number
-}
-
-function DropdownIcon({ icon: Icon, size = 16, ...attrs }: DropdownIconProps) {
-  return <Icon size={size} {...attrs} />
-}
-
-export const Dropdownm = {
-  Root: DropdownRoot,
-  Item: DropdownItem,
-  Icon: DropdownIcon,
 }

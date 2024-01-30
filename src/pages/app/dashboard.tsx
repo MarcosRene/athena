@@ -14,7 +14,7 @@ export function Dashboard() {
     <>
       <Helmet title="Dashboard" />
 
-      <div className="mb-12 flex items-start justify-between">
+      <div className="flex items-start justify-between">
         <Breadcrumbs breadcrumbs={[{ label: 'Dashboard', href: '/' }]} />
 
         <Button
