@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { Loader2Icon, SettingsIcon, Trash2Icon } from 'lucide-react'
 
 import { Button } from '@/components/button'
+import { Modal } from '@/components/modal'
 
 export function ListSchedules() {
   const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   new Promise<void>((resolve) => {
     setTimeout(() => {
@@ -79,6 +81,7 @@ export function ListSchedules() {
                       title="Deletar"
                       aria-label="Delete Button"
                       className="w-8 h-8 p-0 bg-[#DD0939] hover:bg-[#ad0337] flex justify-center gap-0"
+                      onClick={() => setIsModalOpen(true)}
                     ></Button>
                   </div>
                 </td>
@@ -87,6 +90,15 @@ export function ListSchedules() {
           </tbody>
         )}
       </table>
+
+      <Modal
+        title="Deseja excluir o agendamento?"
+        description="Você tem certeza que deseja excluir o agendamento? Após a exclusão, não será possível visualizar mais informações sobre o agendamento."
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={() => {}}
+        labelSubmitAction="Excluir"
+      />
     </div>
   )
 }
