@@ -9,7 +9,7 @@ export function AppLayout() {
       <div className="h-full flex">
         <Sidebar />
 
-        <div className="ml-0 w-full md:ml-6 mb-12">
+        <div className="ml-0 w-full lg:ml-6 mb-12">
           <header className="mt-6 mb-12 flex items-center justify-end">
             <Profile />
           </header>

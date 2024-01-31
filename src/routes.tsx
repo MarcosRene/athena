@@ -15,7 +15,7 @@ interface PrivateRoutesProps {
 }
 
 function PrivateRoutes({ children }: PrivateRoutesProps) {
-  const isLoggedInUser = false
+  const isLoggedInUser = true
 
   if (!isLoggedInUser) {
     return <Navigate to="/sign-in" replace />

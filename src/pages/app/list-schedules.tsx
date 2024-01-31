@@ -1,95 +1,122 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Loader2Icon, SettingsIcon, Trash2Icon } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { PencilIcon, Trash2Icon } from 'lucide-react'
 
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 
+import { ListSchedulesSkeleton } from './list-schedules-skeleton'
+
+interface Schedule {
+  identifier: string
+  subject: string
+  description: string
+  teacher: string
+  dateTime: string
+  oldScheduling: boolean
+}
+
 export function ListSchedules() {
   const navigate = useNavigate()
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [schedules, setSchedules] = useState<Schedule[]>([])
 
-  new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve()
-      setIsLoading(false)
-    }, 2000)
-  })
+  useEffect(() => {
+    async function fetchSchedules() {
+      setIsLoading(true)
+
+      try {
+        await new Promise<void>((resolve) => setTimeout(() => resolve(), 3000))
+
+        const response = await fetch('http://localhost:3333/schedules')
+        const schedules = await response.json()
+
+        if (!schedules) return
+
+        setSchedules(schedules)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchSchedules()
+  }, [])
 
   return (
-    <div className="overflow-x-auto border border-gray-900 rounded-lg">
-      <table className="w-full relative min-h-44">
-        <thead>
-          <tr className="border-b border-b-gray-900">
-            <th className="min-w-28 lg:w-auto pl-6 lg:pl-16 py-4 text-start text-sm font-medium">
-              Identificador
-            </th>
-            <th className="min-w-28 lg:w-auto pl-6 lg:pl-16 py-4 text-start text-sm font-medium">
-              Assunto
-            </th>
-            <th className="max-w-28 lg:w-auto pl-6 lg:pl-16 py-4 text-start text-sm font-medium">
-              Descrição
-            </th>
-            <th className="min-w-52 lg:w-auto pl-6 lg:pl-16 py-4 text-start text-sm font-medium">
-              Data/Horário
-            </th>
-            <th className="min-w-28 lg:w-auto pl-6 pr-6 lg:pl-16"></th>
-          </tr>
-        </thead>
-
-        {isLoading ? (
-          <div className="absolute top-2/4 right-2/4 -translate-x-2/4">
-            <Loader2Icon className="h-12 w-h-12 animate-spin text-green-500" />
-          </div>
-        ) : (
-          <tbody>
-            {Array.from(Array(10).keys()).map((index) => (
-              <tr
-                key={`tr-${index}`}
-                className="border-b border-b-gray-900 even:bg-[#0c0c10] last:border-none"
-              >
-                <td className="min-w-28 lg:w-auto pl-6 lg:pl-16 py-4 text-sm">
-                  #12345678
-                </td>
-                <td className="min-w-28 lg:w-auto pl-6 lg:pl-16 py-4 text-sm">
-                  Tema TCC
-                </td>
-                <td
-                  className="max-w-52 lg:w-auto pl-6 lg:pl-16 py-4 text-sm overflow-hidden overflow-ellipsis whitespace-nowrap"
-                  title={'Fala sobre o tema do meu tcc'}
+    <>
+      {isLoading ? (
+        <ListSchedulesSkeleton />
+      ) : (
+        <ul className="grid grid-cols-1 gap-[1px] md:grid-cols-3 xl:grid-cols-4 bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
+          {schedules
+            .slice(0, 12)
+            .map(
+              ({
+                identifier,
+                subject,
+                description,
+                dateTime,
+                oldScheduling,
+              }) => (
+                <li
+                  key={identifier}
+                  className="relative p-4 bg-zinc-950/75 transition-colors hover:bg-black-100"
                 >
-                  Fala sobre o tema do meu tcc
-                </td>
-                <td className="min-w-52 lg:w-auto pl-6 lg:pl-16 py-4 text-sm">
-                  08 de Janeiro, às 14:00
-                </td>
-                <td className="min-w-28 lg:w-auto pl-6 pr-pl-6 lg:pl-16 py-4 text-sm">
-                  <div className="flex items-center gap-4">
-                    <Button
-                      icon={SettingsIcon}
-                      iconSize={16}
-                      title="Editar"
-                      aria-label="Edit Button"
-                      className="w-8 h-8 p-0 bg-[#1F70C6] hover:bg-[#14609b] flex justify-center gap-0"
-                      onClick={() => navigate('/1/edit-schedule')}
-                    ></Button>
-                    <Button
-                      icon={Trash2Icon}
-                      iconSize={16}
-                      title="Deletar"
-                      aria-label="Delete Button"
-                      className="w-8 h-8 p-0 bg-[#DD0939] hover:bg-[#ad0337] flex justify-center gap-0"
-                      onClick={() => setIsModalOpen(true)}
-                    ></Button>
+                  <div className="mb-4 flex items-center justify-between gap-1">
+                    <Link
+                      to="/1/edit-schedule"
+                      className={`relative text-sm font-medium block underline before:h-2 before:w-2 before:absolute before:top-1 before:-right-4 before:rounded-full ${oldScheduling ? 'before:bg-orange-600' : 'before:bg-green-600'}`}
+                    >
+                      {identifier}
+                    </Link>
+
+                    <div className="flex gap-1">
+                      <Button
+                        className="w-6 h-6 p-0 bg-transparent text-gray-500"
+                        icon={PencilIcon}
+                        iconSize={16}
+                        onClick={() => navigate('/1/edit-schedule')}
+                        title="Botão editar"
+                      ></Button>
+
+                      <Button
+                        className="w-6 h-6 p-0 bg-transparent text-gray-500"
+                        icon={Trash2Icon}
+                        iconSize={16}
+                        onClick={() => setIsModalOpen(true)}
+                        title="Botão excluír"
+                      ></Button>
+                    </div>
                   </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        )}
-      </table>
+
+                  <div className="flex flex-col gap-2">
+                    <h4
+                      className="text-sm font-medium line-clamp-1"
+                      title={subject}
+                    >
+                      {subject}
+                    </h4>
+
+                    <p
+                      className="min-h-10 text-sm text-gray-500 line-clamp-2"
+                      title={description}
+                    >
+                      {description}
+                    </p>
+
+                    <span className="w-full text-sm text-gray-500 block">
+                      • {dateTime}
+                    </span>
+                  </div>
+                </li>
+              )
+            )}
+        </ul>
+      )}
 
       <Modal
         title="Deseja excluir o agendamento?"
@@ -99,6 +126,6 @@ export function ListSchedules() {
         onSubmit={() => {}}
         labelSubmitAction="Excluir"
       />
-    </div>
+    </>
   )
 }
