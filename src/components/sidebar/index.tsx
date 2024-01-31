@@ -21,7 +21,7 @@ export function Sidebar() {
         <Button
           icon={MenuIcon}
           iconSize={20}
-          className="flex lg:hidden w-6 h-w-6 p-4 bg-transparent absolute top-12 left-8 md:left-14"
+          className="flex w-6 h-w-6 p-4 bg-transparent absolute top-6 left-6 lg:hidden"
           onClick={handleDrawerSidebar}
           aria-label="Open button sidebar"
         />
@@ -38,7 +38,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="w-full max-w-64 pb-4 hidden lg:flex flex-col">
+    <aside className="min-w-56 pb-4 hidden lg:flex flex-col">
       <Link
         to="/"
         className="mt-6 mb-12 text-2xl font-logo font-extrabold leading-normal"

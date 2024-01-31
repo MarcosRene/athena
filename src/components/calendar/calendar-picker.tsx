@@ -97,7 +97,7 @@ export function CalendarPicker({
           onClick={handlePreviusMonth}
         ></Button>
 
-        <span className="capitalize text-gray-100">
+        <span className="text-sm capitalize text-gray-100 md:text-base">
           {currentMonth} <span>{currentYear}</span>
         </span>
 
@@ -109,11 +109,17 @@ export function CalendarPicker({
         ></Button>
       </header>
 
-      <table className="border-separate border-spacing-2 table-fixed">
+      <table
+        data-label="."
+        className="h-3/4 border-separate border-spacing-2 md:table-auto before:content-[attr(data-label)] before:text-transparent"
+      >
         <thead>
           <tr>
             {shortWeekDays.map((weekDay) => (
-              <th key={weekDay} className="text-sm text-gray-700 font-medium">
+              <th
+                key={weekDay}
+                className="text-xs md:text-sm text-gray-700 font-medium"
+              >
                 {weekDay}
               </th>
             ))}
@@ -127,7 +133,7 @@ export function CalendarPicker({
                 <td key={`date-${index + 1}`}>
                   {!!date && (
                     <Button
-                      className={`py-0 w-12 h-w-12 font-normal bg-transparent text-gray-100 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
+                      className={`px-0 w-8 h-8 md:py-0 md:w-12 md:h-12 text-xs md:text-sm font-normal bg-transparent text-gray-100 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
                       onClick={() => onDateSelected(date)}
                       disabled={disabled}
                     >

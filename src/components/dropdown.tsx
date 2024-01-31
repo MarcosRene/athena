@@ -11,9 +11,7 @@ interface DropdownProps extends ComponentProps<'ol'> {
   options: DropdownOption[]
 }
 
-export function Dropdown({ options, ...attrs }: DropdownProps) {
-  const { className } = attrs
-
+export function Dropdown({ options, className, ...attrs }: DropdownProps) {
   return (
     <ol
       className={cn(

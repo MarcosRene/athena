@@ -13,9 +13,14 @@ interface SelectProps extends ComponentProps<'select'> {
   options: OptionProps[]
 }
 
-export function Select({ label, options = [], ...attrs }: SelectProps) {
-  const { id, name, className } = attrs
-
+export function Select({
+  label,
+  options = [],
+  id,
+  name,
+  className,
+  ...attrs
+}: SelectProps) {
   const selecteId = id ?? name
 
   return (

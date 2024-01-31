@@ -7,9 +7,7 @@ interface InputFile extends ComponentProps<'label'> {
   onFileSelected: (file: File) => void
 }
 
-export function InputFile({ onFileSelected, ...attrs }: InputFile) {
-  const { className } = attrs
-
+export function InputFile({ onFileSelected, className, ...attrs }: InputFile) {
   const [imageFile, setImageFile] = useState<File | null>(null)
 
   function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {

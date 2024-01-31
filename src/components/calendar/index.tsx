@@ -30,7 +30,7 @@ export function Calendar({
   }
 
   return (
-    <div className="relative flex flex-col mb-4">
+    <div className="relative mb-4 flex flex-col">
       {!!label && (
         <label
           className="mb-2 text-xs block"

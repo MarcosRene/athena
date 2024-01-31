@@ -6,9 +6,13 @@ interface TextareaProps extends ComponentProps<'textarea'> {
   label?: string
 }
 
-export function Textarea({ label, ...attrs }: TextareaProps) {
-  const { id, name, className } = attrs
-
+export function Textarea({
+  label,
+  id,
+  name,
+  className,
+  ...attrs
+}: TextareaProps) {
   const textAreaId = id ?? name
 
   return (
