@@ -5,7 +5,7 @@ import { PencilIcon, Trash2Icon } from 'lucide-react'
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 
-import { ListSchedulesSkeleton } from './list-schedules-skeleton'
+import { SchedulesSkeleton } from './schedules-skeleton'
 
 interface Schedule {
   identifier: string
@@ -49,7 +49,7 @@ export function ListSchedules() {
   return (
     <>
       {isLoading ? (
-        <ListSchedulesSkeleton />
+        <SchedulesSkeleton />
       ) : (
         <ul className="grid grid-cols-1 gap-[1px] md:grid-cols-3 xl:grid-cols-4 bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
           {schedules

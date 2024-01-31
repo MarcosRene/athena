@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/skeleton'
 
-export function ListSchedulesSkeleton() {
+export function SchedulesSkeleton() {
   return (
     <ul className="grid grid-cols-1 gap-[1px] md:grid-cols-3 xl:grid-cols-4 bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
       {Array.from(Array(12).keys()).map((index) => (
