@@ -16,9 +16,7 @@ export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
             <li
               key={`${href}-${index}`}
               aria-current={activeLink}
-              className={cn(
-                activeLink ? 'text-green-500 font-medium' : 'text-gray-300'
-              )}
+              className={cn(activeLink && 'text-green-500 font-medium')}
             >
               <Link to={href}>{label}</Link>
               {Number(index) < breadcrumbs.length - 1 ? (

@@ -47,7 +47,6 @@ export default {
           900: 'hsl(137, 100%, 4%)',
         },
       },
-
       keyframes: {
         'slider-right-to-left': {
           '0%': { transform: 'translateX(100px)', opacity: 0 },

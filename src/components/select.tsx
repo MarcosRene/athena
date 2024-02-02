@@ -13,20 +13,15 @@ interface SelectProps extends ComponentProps<'select'> {
   options: OptionProps[]
 }
 
-export function Select({
-  label,
-  options = [],
-  id,
-  name,
-  className,
-  ...attrs
-}: SelectProps) {
+export function Select({ label, options = [], ...attrs }: SelectProps) {
+  const { id, name, className } = attrs
+
   const selecteId = id ?? name
 
   return (
     <div className="w-full flex flex-col items-start mb-4">
       {!!label && (
-        <label className="mb-2 text-xs" htmlFor={selecteId}>
+        <label className="mb-2 text-sm" htmlFor={selecteId}>
           {label}
         </label>
       )}
@@ -35,7 +30,7 @@ export function Select({
         <select
           id={selecteId}
           className={cn(
-            `appearance-none flex-1 h-full px-4 py-0 text-sm bg-black-100 text-white-100 placeholder-gray-700 focus:outline-none`,
+            `appearance-none flex-1 h-full px-4 py-0 text-sm bg-black-100 placeholder-gray-700 focus:outline-none`,
             className
           )}
           {...attrs}
@@ -43,7 +38,7 @@ export function Select({
           <option defaultChecked>Selecione um professor</option>
           {options.length > 0
             ? options.map(({ label, value }) => (
-                <option key={value} value={value} className="text-white-100">
+                <option key={value} value={value}>
                   {label}
                 </option>
               ))

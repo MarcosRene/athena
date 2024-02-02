@@ -33,7 +33,7 @@ export function Calendar({
     <div className="relative mb-4 flex flex-col">
       {!!label && (
         <label
-          className="mb-2 text-xs block"
+          className="mb-2 text-sm block"
           onClick={handleFocus}
           aria-label={label}
         >

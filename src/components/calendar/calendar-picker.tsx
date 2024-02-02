@@ -111,7 +111,7 @@ export function CalendarPicker({
 
       <table
         data-label="."
-        className="h-3/4 border-separate border-spacing-2 md:table-auto before:content-[attr(data-label)] before:text-transparent"
+        className="h-3/4 border-separate border-spacing-2 md:table-auto before:content-[attr(data-label)] before:text-transparent before:h-1 before:block"
       >
         <thead>
           <tr>

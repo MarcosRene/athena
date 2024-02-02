@@ -20,13 +20,13 @@ export function Dropdown({ options, className, ...attrs }: DropdownProps) {
       )}
       {...attrs}
     >
-      {options.map(({ icon: Icon = '', label }) => (
+      {options.map(({ icon: Icon, label }) => (
         <li
           key={label}
           className="w-32 py-3 px-4 text-sm border-b border-b-gray-900 flex items-center gap-2 transition-colors cursor-pointer hover:bg-gray-900 last:border-none"
         >
-          <Icon size={18} />
-          <span className="font-medium gap-4 text-gray-100">{label}</span>
+          {Icon && <Icon size={18} />}
+          <span className="font-medium gap-4">{label}</span>
         </li>
       ))}
     </ol>

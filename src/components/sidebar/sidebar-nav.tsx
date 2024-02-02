@@ -22,7 +22,7 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
 
   return (
     <div className="block">
-      <span className="font-bold text-gray-300 uppercase flex items-center justify-between">
+      <span className="font-bold uppercase flex items-center justify-between">
         <span>Geral</span>
 
         {!!onClose && (
@@ -39,7 +39,7 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${(isActive || isActiveLink) && 'text-green-500'}`
+            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-none ${(isActive || isActiveLink) && 'text-green-500'}`
           }
           title="Início"
         >
@@ -50,7 +50,7 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
         <NavLink
           to="/profile"
           className={({ isActive }) =>
-            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-[100%] ${isActive && 'text-green-500'}`
+            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-none ${isActive && 'text-green-500'}`
           }
           title="Perfil"
         >
