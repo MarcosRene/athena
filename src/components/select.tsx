@@ -21,7 +21,7 @@ export function Select({ label, options = [], ...attrs }: SelectProps) {
   return (
     <div className="w-full flex flex-col items-start mb-4">
       {!!label && (
-        <label className="mb-2 text-sm" htmlFor={selecteId}>
+        <label className="mb-2 text-sm text-gray-100" htmlFor={selecteId}>
           {label}
         </label>
       )}

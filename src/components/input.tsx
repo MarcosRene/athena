@@ -25,7 +25,7 @@ export function Input({
       className={`${fullFilled ? 'w-full sm:w-72' : 'w-full'} flex flex-col items-start mb-4`}
     >
       {!!label && (
-        <label className="mb-2 text-sm" htmlFor={inputId}>
+        <label className="mb-2 text-sm text-gray-100" htmlFor={inputId}>
           {label}
         </label>
       )}

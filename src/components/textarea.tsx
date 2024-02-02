@@ -14,7 +14,7 @@ export function Textarea({ label, ...attrs }: TextareaProps) {
   return (
     <div className="w-full flex flex-col items-start mb-4">
       {!!label && (
-        <label className="mb-2 text-sm block" htmlFor={textAreaId}>
+        <label className="mb-2 text-sm text-gray-100" htmlFor={textAreaId}>
           {label}
         </label>
       )}

@@ -20,7 +20,7 @@ export function SignUp() {
         <form
           aria-label="sign-up-form"
           onSubmit={onSubmit}
-          className="w-full max-w-[400px] py-12 px-[38px] border border-gray-900 rounded-[0.8rem] animate-slider-right-to-left"
+          className="w-full max-w-[400px] py-12 px-[38px] border border-gray-900 rounded-lg animate-slider-right-to-left"
         >
           <h2 className="mb-10 text-2xl font-bold">Crie sua conta</h2>
 
