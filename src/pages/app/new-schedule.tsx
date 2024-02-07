@@ -88,10 +88,7 @@ export function NewSchedule() {
         />
 
         <div className="w-full flex justify-end mt-4">
-          <Button
-            className={`uppercase font-medium ${!isFormValid && 'opacity-50 cursor-not-allowed hover:bg-green-600'}`}
-            disabled={!isFormValid}
-          >
+          <Button className="uppercase font-mediu" disabled={!isFormValid}>
             Salvar
           </Button>
         </div>

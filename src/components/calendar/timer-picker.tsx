@@ -41,7 +41,7 @@ export function TimerPicker({
         {availabilityTimes.map(({ time, disabled }) => (
           <li key={time}>
             <Button
-              className={`w-full font-normal text-xs md:text-sm text-gray-100 bg-gray-900 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
+              className="w-full font-normal text-xs md:text-sm text-gray-100 bg-gray-900 disabled:hover:bg-gray-900"
               onClick={() => onTimeSelected(time)}
               disabled={disabled}
             >

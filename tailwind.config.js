@@ -26,6 +26,7 @@ export default {
 
         black: 'hsl(0, 0%, 0%)',
         'black-100': 'hsl(240, 10%, 4%)',
+        'black-200': 'hsl(240, 14%, 5%)',
 
         gray: {
           100: 'hsl(240, 6%, 90%)',

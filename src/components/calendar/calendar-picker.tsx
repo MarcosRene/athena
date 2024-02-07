@@ -133,7 +133,7 @@ export function CalendarPicker({
                 <td key={`date-${index + 1}`}>
                   {!!date && (
                     <Button
-                      className={`px-0 w-8 h-8 md:py-0 md:w-12 md:h-12 text-xs md:text-sm font-normal bg-transparent text-gray-100 ${disabled && 'bg-gray-900 cursor-not-allowed hover:bg-gray-900 disabled:opacity-50'}`}
+                      className="px-0 w-8 h-8 md:py-0 md:w-12 md:h-12 text-xs md:text-sm font-normal bg-transparent text-gray-100 disabled:bg-gray-900 disabled:hover:bg-gray-900"
                       onClick={() => onDateSelected(date)}
                       disabled={disabled}
                     >
