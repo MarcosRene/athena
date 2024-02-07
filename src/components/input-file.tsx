@@ -1,13 +1,12 @@
-import { ChangeEvent, ComponentProps, useMemo, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 import { toast } from 'sonner'
 
-import { cn } from '@/lib/utils'
-
-interface InputFile extends ComponentProps<'label'> {
+interface InputFile {
   onFileSelected: (file: File) => void
+  avatarURL?: string
 }
 
-export function InputFile({ onFileSelected, className, ...attrs }: InputFile) {
+export function InputFile({ onFileSelected, avatarURL }: InputFile) {
   const [imageFile, setImageFile] = useState<File | null>(null)
 
   function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {
@@ -40,20 +39,22 @@ export function InputFile({ onFileSelected, className, ...attrs }: InputFile) {
     <div className="mb-4 block">
       <label
         htmlFor="video"
-        className={cn(
-          'relative w-28 h-28 lg:w-32 lg:h-32 border border-gray-900 flex rounded-full ring-2 ring-gray-900 overflow-hidden cursor-pointer',
-          className
-        )}
+        className="relative w-28 h-28 lg:w-32 lg:h-32 border border-gray-900 flex rounded-full ring-2 ring-gray-900 overflow-hidden cursor-pointer"
         title="Selecione uma foto"
         aria-label="Selecione uma foto"
-        {...attrs}
       >
         {previewURL ? (
           <img src={previewURL} alt="" className="absolute inset-0" />
         ) : (
-          <div className="absolute inset-0 bg-zinc-500 text-2xl lg:text-4xl font-logo font-semibold flex items-center justify-center">
-            US
-          </div>
+          <>
+            {avatarURL ? (
+              <img src={avatarURL} alt="" className="absolute inset-0" />
+            ) : (
+              <div className="absolute inset-0 bg-zinc-500 text-2xl lg:text-4xl font-logo font-semibold flex items-center justify-center">
+                US
+              </div>
+            )}
+          </>
         )}
       </label>
 
