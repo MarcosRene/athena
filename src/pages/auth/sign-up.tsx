@@ -1,15 +1,65 @@
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { User2Icon, LockIcon, MailIcon } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 
+import { delay } from '@/utils/deplay'
+
+interface FormData {
+  name: string
+  email: string
+  password: string
+  confirm_password: string
+}
+
+const initialFormDataState = {
+  name: '',
+  email: '',
+  password: '',
+  confirm_password: '',
+}
+
 export function SignUp() {
   const navigate = useNavigate()
 
-  function onSubmit() {
-    navigate('/')
+  const [formData, setFormData] = useState<FormData>(initialFormDataState)
+  const [isLoading, setIsLoading] = useState(false)
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setIsLoading(true)
+
+    try {
+      delay(1000)
+
+      await fetch('http://localhost:3333/users', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      toast.success('Usuário cadastrado com sucesso!')
+      navigate('/sign-in')
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -26,44 +76,40 @@ export function SignUp() {
 
           <Input
             id="email"
+            name="email"
             type="email"
             placeholder="E-mail"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.name)
-            }}
+            value={formData.email}
+            onChange={handleChange}
             icon={MailIcon}
           />
 
           <Input
             id="name"
+            name="name"
             placeholder="Nome"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.name)
-            }}
+            value={formData.name}
+            onChange={handleChange}
             icon={User2Icon}
           />
 
           <Input
             id="password"
+            name="password"
             type="password"
             placeholder="Senha"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.name)
-            }}
+            value={formData.password}
+            onChange={handleChange}
             icon={LockIcon}
           />
 
           <Input
             id="confirm_password"
+            name="confirm_password"
             type="password"
             placeholder="Confirmar senha"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.name)
-            }}
+            value={formData.confirm_password}
+            onChange={handleChange}
             icon={LockIcon}
           />
 
@@ -75,7 +121,12 @@ export function SignUp() {
             Voltar para login 👈
           </Link>
 
-          <Button type="submit" className="w-full uppercase">
+          <Button
+            type="submit"
+            className="w-full uppercase"
+            isLoading={isLoading}
+            disabled={isLoading}
+          >
             Cadastrar
           </Button>
         </form>
