@@ -1,14 +1,25 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { LogOutIcon } from 'lucide-react'
+
+import { useAuth } from '@/contexts/auth'
 
 import { Dropdown } from './dropdown'
 
 export function Profile() {
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  const handleDropdownOpen = useCallback(() => {
+  function handleDropdownOpen() {
     setIsDropdownOpen((prevState) => !prevState)
-  }, [])
+  }
+
+  function handleSignOut() {
+    signOut()
+    navigate('/sign-in')
+  }
 
   return (
     <div className="relative">
@@ -19,8 +30,8 @@ export function Profile() {
         title="Abrir modal"
       >
         <div className="hidden sm:flex flex-col items-end">
-          <span>Marcos Renê</span>
-          <span className="text-gray-500 text-sm">marcosrenedev@gmail.com</span>
+          <span>{user.name}</span>
+          <span className="text-gray-500 text-sm">{user.email}</span>
         </div>
 
         <img
@@ -36,6 +47,7 @@ export function Profile() {
             {
               icon: LogOutIcon,
               label: 'Sair',
+              onClick: handleSignOut,
             },
           ]}
         />

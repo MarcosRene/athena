@@ -6,18 +6,26 @@ import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 
+import { useAuth } from '@/contexts/auth'
+
+import { delay } from '@/utils/deplay'
+
 export function SignIn() {
   const navigate = useNavigate()
   const location = useLocation()
+
+  const { isLoading, signIn } = useAuth()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const hasBackFromSignUpPage = location.state?.from === '/sign-up'
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+    delay(1000)
+    await signIn({ email, password })
     navigate('/')
   }
 
@@ -61,7 +69,12 @@ export function SignIn() {
             Cadastre-se aqui 👈
           </Link>
 
-          <Button type="submit" className="w-full mb-4 uppercase">
+          <Button
+            type="submit"
+            className="w-full mb-4 uppercase"
+            isLoading={isLoading}
+            disabled={isLoading}
+          >
             Entrar
           </Button>
         </form>

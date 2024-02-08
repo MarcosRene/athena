@@ -1,5 +1,7 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
 
+import { useAuth } from '@/contexts/auth'
+
 import { AppLayout } from './pages/_layouts/app'
 import { AuthLayout } from './pages/_layouts/auth'
 import { Dashboard } from './pages/app/dashboard'
@@ -15,9 +17,9 @@ interface PrivateRoutesProps {
 }
 
 function PrivateRoutes({ children }: PrivateRoutesProps) {
-  const isLoggedInUser = true
+  const { signed } = useAuth()
 
-  if (!isLoggedInUser) {
+  if (!signed) {
     return <Navigate to="/sign-in" replace />
   }
 

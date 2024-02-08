@@ -7,6 +7,8 @@ import { toast } from 'sonner'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 
+import { api } from '@/services/api'
+
 import { delay } from '@/utils/deplay'
 
 interface FormData {
@@ -45,18 +47,13 @@ export function SignUp() {
     try {
       delay(1000)
 
-      await fetch('http://localhost:3333/users', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      await api.post('/users', formData)
 
       toast.success('Usuário cadastrado com sucesso!')
       navigate('/sign-in')
     } catch (error) {
       console.log(error)
+      toast.error('Não foi possível se cadastrar, tente novamente!')
     } finally {
       setIsLoading(false)
     }
