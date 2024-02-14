@@ -21,6 +21,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
+      type="button"
       className={cn(`button ${rlt && 'flex-row-reverse'}`, className)}
       {...attrs}
     >

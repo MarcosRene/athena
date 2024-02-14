@@ -1,4 +1,4 @@
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 
 import { Button } from '../button'
 import { useMemo } from 'react'
@@ -27,7 +27,13 @@ export function TimerPicker({
         .set('hour', currentHour)
         .set('minute', currentMinute)
 
-      return { time, disabled: selectedDate.isAfter(currentTime) }
+      const isScheduledToday = dayjs().isSame(selectedDate, 'day')
+      const isPastScheduledTime = selectedDate.isAfter(currentTime)
+
+      return {
+        time,
+        disabled: isScheduledToday && isPastScheduledTime,
+      }
     })
   }, [selectedDate])
 
