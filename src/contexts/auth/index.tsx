@@ -8,43 +8,32 @@ import {
   AuthData,
   AuthProviderProps,
   SignInCredentials,
-  User,
 } from './types'
-
-const initialAuthContextState = {
-  user: {
-    id: '',
-    name: '',
-    email: '',
-  },
-  signed: false,
-}
+import { composeStorageKey } from '@/utils/compose-storage-key'
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState(false)
 
-  const [user, setUser] = useState<User>(() => {
-    const token = localStorage.getItem('@athena:token')
-    const userData = localStorage.getItem('@athena:user')
+  const getInitialState = useCallback(() => {
+    const tokenStorate = localStorage.getItem(composeStorageKey('token'))
+    const userStorage = localStorage.getItem(composeStorageKey('user'))
 
-    if (token && userData) {
-      return JSON.parse(userData)
+    if (tokenStorate && userStorage) {
+      api.defaults.headers.authorization = `Bearer ${tokenStorate}`
+
+      return {
+        token: tokenStorate,
+        user: JSON.parse(userStorage),
+        signed: true,
+      }
     }
 
-    return initialAuthContextState.user
-  })
+    return {} as AuthData
+  }, [])
 
-  const [signed, setSigned] = useState(() => {
-    const token = localStorage.getItem('@athena:token')
-
-    if (token) {
-      return true
-    }
-
-    return initialAuthContextState.signed
-  })
+  const [data, setData] = useState<AuthData>(getInitialState())
 
   const signIn = useCallback(async (credentials: SignInCredentials) => {
     try {
@@ -52,15 +41,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const { data } = await api.post<AuthData>('/session', credentials)
 
-      const { token, user } = data
+      const user = {
+        ...data.user,
+        avatar: `http://localhost:3333/uploads/${data.user.avatar}`,
+      }
 
-      localStorage.setItem('@athena:token', token)
-      localStorage.setItem('@athena:user', JSON.stringify(user))
+      api.defaults.headers.authorization = `Bearer ${data?.token}`
 
-      api.defaults.headers.authorization = `Bearer ${token}`
+      localStorage.setItem(composeStorageKey('token'), data.token)
+      localStorage.setItem(composeStorageKey('user'), JSON.stringify(user))
 
-      setUser(user)
-      setSigned(true)
+      setData({ token: data.token, user, signed: true })
     } catch (error) {
       toast.error('Não foi possível se autenticar, tente novamente!')
     } finally {
@@ -69,15 +60,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   const signOut = useCallback(() => {
-    localStorage.removeItem('@athena:token')
-    localStorage.removeItem('@athena:user')
+    localStorage.removeItem(composeStorageKey('token'))
+    localStorage.removeItem(composeStorageKey('user'))
 
-    setUser(initialAuthContextState.user)
-    setSigned(initialAuthContextState.signed)
+    setData({} as AuthData)
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, signed, isLoading, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{
+        user: data.user,
+        signed: data.signed,
+        isLoading,
+        signIn,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )

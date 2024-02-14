@@ -11,6 +11,7 @@ export type User = {
   id: string
   name: string
   email: string
+  avatar: string
 }
 
 export interface AuthContextData {
@@ -24,4 +25,5 @@ export interface AuthContextData {
 export interface AuthData {
   user: User
   token: string
+  signed: boolean
 }

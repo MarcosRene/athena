@@ -36,7 +36,7 @@ export function Profile() {
 
         <img
           className="inline-block h-12 w-12 rounded-full cursor-pointer"
-          src="https://avatars.githubusercontent.com/MarcosRene"
+          src={user.avatar}
           alt=""
         />
       </div>
