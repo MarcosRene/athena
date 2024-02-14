@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Dayjs } from 'dayjs'
 
@@ -9,11 +10,72 @@ import { Input } from '@/components/input'
 import { Select } from '@/components/select'
 import { Textarea } from '@/components/textarea'
 
+import { getSchedule, GetScheduleResponse } from '@/services/get-schedule'
+import { getUsersTeacher } from '@/services/get-users-teacher'
+
+interface Teacher {
+  label: string
+  value: string
+}
+
 export function EditSchedule() {
+  const { id } = useParams()
+
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [selectedtime, setSelectedTime] = useState<string | null>(null)
+  const [teachers, setTeachers] = useState<Teacher[]>([])
+  const [schedule, setSchedule] = useState<GetScheduleResponse | null>(null)
 
-  console.log({ selectedDate, selectedtime })
+  console.log('selectedtime', selectedtime)
+  console.log('schedule', schedule)
+
+  useEffect(() => {
+    if (!id) return
+
+    const controller = new AbortController()
+
+    async function fetchSchedule() {
+      try {
+        const data = await getSchedule({
+          scheduleId: id,
+          signal: controller.signal,
+        })
+
+        setSchedule(data)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        //
+      }
+    }
+
+    fetchSchedule()
+
+    return () => controller.abort()
+  }, [id])
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    async function fetchTeachers() {
+      try {
+        const data = await getUsersTeacher({
+          query: 'TEACHER',
+          signal: controller.signal,
+        })
+
+        setTeachers(data)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        //
+      }
+    }
+
+    fetchTeachers()
+
+    return () => controller.abort()
+  }, [])
 
   return (
     <>
@@ -29,7 +91,7 @@ export function EditSchedule() {
       <div className="flex flex-col items-start">
         <Input id="subject" label="Assunto" placeholder="ex: TCC" />
 
-        <Select id="teacher" label="Professor" options={[]} />
+        <Select id="teacher" label="Professor" options={teachers} />
 
         <Textarea
           id="description"

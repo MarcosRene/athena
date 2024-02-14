@@ -5,7 +5,7 @@ import { PlusIcon } from 'lucide-react'
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 
-import { ListSchedules } from './schedules'
+import { Schedules } from './schedules'
 
 export function Dashboard() {
   const navigate = useNavigate()
@@ -28,7 +28,7 @@ export function Dashboard() {
         </Button>
       </div>
 
-      <ListSchedules />
+      <Schedules />
     </>
   )
 }

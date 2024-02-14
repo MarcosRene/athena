@@ -1,6 +1,8 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Dayjs } from 'dayjs'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
@@ -9,22 +11,34 @@ import { Input } from '@/components/input'
 import { Select } from '@/components/select'
 import { Textarea } from '@/components/textarea'
 
+import { api } from '@/services/api'
+import { getUsersTeacher } from '@/services/get-users-teacher'
+
 interface ValuesProps {
   subject: string
-  teacher: string
+  teacherId: string
   description: string
+}
+
+interface Teacher {
+  label: string
+  value: string
 }
 
 const initialValues: ValuesProps = {
   subject: '',
-  teacher: '',
+  teacherId: '',
   description: '',
 }
 
 export function NewSchedule() {
+  const navigate = useNavigate()
+
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [selectedtime, setSelectedTime] = useState<string | null>(null)
   const [values, setValues] = useState<ValuesProps>(initialValues)
+  const [teachers, setTeachers] = useState<Teacher[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   function handleChange(
     event: ChangeEvent<
@@ -42,7 +56,46 @@ export function NewSchedule() {
     selectedtime,
   }).every((value) => value !== '')
 
-  console.log({ selectedDate, selectedtime })
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    try {
+      const formData = {
+        ...values,
+        date: selectedDate?.format('YYYY-MM-DD'),
+        time: selectedtime,
+      }
+
+      await api.post('/schedules', formData)
+
+      navigate('/', { replace: true })
+    } catch (error) {
+      toast.error('Não foi possível criar uma agendamento, tente novamente!')
+    }
+  }
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    async function fetchTeachers() {
+      try {
+        const data = await getUsersTeacher({
+          query: 'TEACHER',
+          signal: controller.signal,
+        })
+
+        setTeachers(data)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchTeachers()
+
+    return () => controller.abort()
+  }, [])
 
   return (
     <>
@@ -55,7 +108,7 @@ export function NewSchedule() {
         ]}
       />
 
-      <div className="flex flex-col items-start">
+      <form onSubmit={onSubmit} className="flex flex-col items-start">
         <Input
           name="subject"
           label="Assunto"
@@ -65,10 +118,10 @@ export function NewSchedule() {
         />
 
         <Select
-          name="teacher"
+          name="teacherId"
           label="Professor"
-          options={[]}
-          value={values.teacher}
+          options={teachers}
+          value={values.teacherId}
           onChange={handleChange}
         />
 
@@ -88,11 +141,16 @@ export function NewSchedule() {
         />
 
         <div className="w-full flex justify-end mt-4">
-          <Button className="uppercase font-mediu" disabled={!isFormValid}>
+          <Button
+            type="submit"
+            className="uppercase font-mediu"
+            isLoading={isLoading}
+            disabled={!isFormValid || isLoading}
+          >
             Salvar
           </Button>
         </div>
-      </div>
+      </form>
     </>
   )
 }
