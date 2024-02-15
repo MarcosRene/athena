@@ -12,13 +12,17 @@ export interface GetSchedulesResponse {
 }
 
 interface GetSchedulesParams {
+  query?: string
   signal: GenericAbortSignal
 }
 
-export async function getSchedules({ signal }: GetSchedulesParams) {
-  const response = await api.get<GetSchedulesResponse[]>(`/schedules`, {
-    signal,
-  })
+export async function getSchedules({ query, signal }: GetSchedulesParams) {
+  const response = await api.get<GetSchedulesResponse[]>(
+    `/schedules${query ? `?subject=${query}` : ''}`,
+    {
+      signal,
+    }
+  )
 
   return response.data
 }
