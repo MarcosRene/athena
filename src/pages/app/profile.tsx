@@ -1,66 +1,160 @@
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { toast } from 'sonner'
 
+import { useAuth } from '@/contexts/auth'
+
+import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Input } from '@/components/input'
 import { InputFile } from '@/components/input-file'
-import { Button } from '@/components/button'
+
+import { getUserProfile, GetUserProfileResponse } from '@/services/get-user'
+import { updateUserProfile } from '@/services/update-user-profile'
+
+const initialUserProfileState = {
+  avatar: '',
+  confirm_password: '',
+  email: '',
+  name: '',
+  password: '',
+}
 
 export function Profile() {
+  const { user } = useAuth()
+
+  const [userProfile, setUserProfile] = useState<GetUserProfileResponse>(
+    initialUserProfileState
+  )
+  const [isLoading, setIsLoading] = useState(false)
+
+  function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+
+    setUserProfile((prevState) => ({
+      ...prevState,
+      name: value,
+    }))
+  }
+
+  function handleAvatarChange(value: File) {
+    setUserProfile((prevState) => ({
+      ...prevState,
+      avatar: value,
+    }))
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    try {
+      setIsLoading(true)
+
+      await updateUserProfile({ userId: user.id, userProfile })
+    } catch (error) {
+      toast.error('Não foi possível atualizar o perfil, tente novamente!')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!user.id) return
+
+    const controller = new AbortController()
+
+    async function fetchUserProfile() {
+      try {
+        setIsLoading(true)
+
+        const data = await getUserProfile({
+          userId: user.id,
+          signal: controller.signal,
+        })
+
+        if (data) {
+          setUserProfile(data)
+        }
+      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (error?.name !== 'CanceledError') {
+          toast.error(
+            'Não foi possível carregar os dados do usuário, tente novamente!'
+          )
+        }
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchUserProfile()
+
+    return () => controller.abort()
+  }, [user.id])
+
   return (
     <>
       <Helmet title="Perfil" />
 
       <Breadcrumbs breadcrumbs={[{ label: 'Perfil', href: '/profile' }]} />
 
-      <div className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-8 lg:gap-16">
+      <form
+        onSubmit={onSubmit}
+        className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-8 lg:gap-16"
+      >
         <div className="w-full max-w-40 flex flex-col items-center">
           <InputFile
-            onFileSelected={(value) => {
-              console.log({ value })
-            }}
+            avatarURL={user.avatar}
+            onFileSelected={handleAvatarChange}
           />
 
-          <span className="font-medium text-2xl">Marcos Renê</span>
+          <span className="font-medium text-2xl">{user.name}</span>
         </div>
 
         <div className="block md:grid md:grid-cols-2 gap-x-6 w-full self-baseline">
           <Input
             id="email"
             placeholder="johndoe@email.com"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.value)
-            }}
+            value={userProfile.email}
+            disabled
           />
+
           <Input
             id="name"
             placeholder="John Doe"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.value)
-            }}
+            onChange={handleNameChange}
+            value={userProfile.name}
           />
+
           <Input
             id="password"
+            type="password"
             placeholder="Senha"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.value)
-            }}
+            value={userProfile.password}
+            disabled
           />
+
           <Input
             id="confirm_password"
+            type="password"
             placeholder="Confirmar senha"
-            value={''}
-            onChange={(event) => {
-              console.log(event.target.value)
-            }}
+            value={userProfile.confirm_password}
+            disabled
           />
+
           <div className="col-start-2 col-end-2 flex justify-end">
-            <Button className="uppercase font-medium">Atualizar</Button>
+            <Button
+              type="submit"
+              className="uppercase font-medium"
+              isLoading={isLoading}
+              disabled={isLoading}
+            >
+              Atualizar
+            </Button>
           </div>
         </div>
-      </div>
+      </form>
     </>
   )
 }

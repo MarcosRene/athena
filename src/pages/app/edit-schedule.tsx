@@ -11,19 +11,14 @@ import { Select } from '@/components/select'
 import { Textarea } from '@/components/textarea'
 
 import { getSchedule, GetScheduleResponse } from '@/services/get-schedule'
-import { getUsersTeacher } from '@/services/get-users-teacher'
-
-interface Teacher {
-  label: string
-  value: string
-}
+import { getUsersTeacher, TeacherResponse } from '@/services/get-users-teacher'
 
 export function EditSchedule() {
   const { id } = useParams()
 
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [selectedtime, setSelectedTime] = useState<string | null>(null)
-  const [teachers, setTeachers] = useState<Teacher[]>([])
+  const [teachers, setTeachers] = useState<TeacherResponse[]>([])
   const [schedule, setSchedule] = useState<GetScheduleResponse | null>(null)
 
   console.log('selectedtime', selectedtime)
@@ -60,7 +55,6 @@ export function EditSchedule() {
     async function fetchTeachers() {
       try {
         const data = await getUsersTeacher({
-          query: 'TEACHER',
           signal: controller.signal,
         })
 

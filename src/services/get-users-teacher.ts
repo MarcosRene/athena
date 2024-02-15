@@ -11,24 +11,25 @@ export interface GetUsersTeacherResponse {
 }
 
 interface GetUsersTeacherParams {
-  query?: string
   signal: GenericAbortSignal
 }
 
-export async function getUsersTeacher({
-  query,
-  signal,
-}: GetUsersTeacherParams) {
+export interface TeacherResponse {
+  label: string
+  value: string
+}
+
+export async function getUsersTeacher({ signal }: GetUsersTeacherParams) {
   const { data } = await api.get<GetUsersTeacherResponse[]>(
-    `/users?role=${query}`,
+    `/users?role=TEACHER`,
     {
       signal,
     }
   )
 
-  const response = data.map((teacher) => ({
-    label: teacher?.name,
-    value: teacher?._id,
+  const response: TeacherResponse[] = data.map((teacher) => ({
+    label: teacher.name,
+    value: teacher._id,
   }))
 
   return response
