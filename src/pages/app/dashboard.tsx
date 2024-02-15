@@ -57,7 +57,11 @@ export function Dashboard() {
 
         setSchedules(data)
       } catch (error) {
-        toast.error('Não foi possível carregar os agendamentos.')
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (error?.name !== 'CanceledError') {
+          toast.error('Não foi possível carregar os agendamentos.')
+        }
       } finally {
         setIsLoading(false)
       }
