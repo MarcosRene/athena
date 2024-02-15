@@ -52,11 +52,11 @@ export function InputFile({ onFileSelected, avatarURL }: InputFile) {
         ) : (
           <>
             {avatarURL ? (
+              <img src={avatarURL} alt="Avatar" className="absolute inset-0" />
+            ) : (
               <div className="absolute inset-0 bg-zinc-500 text-2xl lg:text-4xl font-logo font-semibold flex items-center justify-center">
                 US
               </div>
-            ) : (
-              <img src={avatarURL} alt="Avatar" className="absolute inset-0" />
             )}
           </>
         )}
