@@ -12,5 +12,6 @@ export function useIsMobile() {
 
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
   return isMobile
 }
