@@ -7,7 +7,7 @@ import { Modal } from '@/components/modal'
 
 import { GetSchedulesResponse } from '@/services/get-schedules'
 
-import { Empty } from '../empty'
+import { Empty } from '../../empty'
 import { SchedulesSkeleton } from './schedules-skeleton'
 
 interface SchedulesProps {

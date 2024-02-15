@@ -2,7 +2,11 @@ import { Skeleton } from '@/components/skeleton'
 
 export function SchedulesSkeleton() {
   return (
-    <ul className="w-full grid grid-cols-1 gap-[1px] md:grid-cols-3 xl:grid-cols-4 bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
+    <ul
+      className="w-full grid grid-cols-1 gap-[1px] md:grid-cols-3 xl:grid-cols-4 bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none"
+      aria-label="schedules-skeleton"
+      title="Carregando..."
+    >
       {Array.from(Array(12).keys()).map((index) => (
         <li key={index} className="relative p-4 bg-zinc-950/75">
           <div className="mb-6 flex items-center justify-between gap-1">
