@@ -49,11 +49,10 @@ export function SignUp() {
 
       await api.post('/users', formData)
 
-      toast.success('Usuário cadastrado com sucesso!')
+      toast.success('Usuário cadastrado com sucesso.')
       navigate('/sign-in')
     } catch (error) {
-      console.log(error)
-      toast.error('Não foi possível se cadastrar, tente novamente!')
+      toast.error('Não foi possível se cadastrar, tente novamente.')
     } finally {
       setIsLoading(false)
     }

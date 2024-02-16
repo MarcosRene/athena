@@ -1,5 +1,12 @@
 import { api } from './api'
-import { GetUserProfileResponse } from './get-user'
+
+interface GetUserProfileResponse {
+  avatar: string | File
+  confirm_password: string
+  email: string
+  name: string
+  password: string
+}
 
 type UpdateUserProfileParams = {
   userId: string

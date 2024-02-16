@@ -5,14 +5,14 @@ import { PencilIcon, Trash2Icon } from 'lucide-react'
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 
-import { GetSchedulesResponse } from '@/services/get-schedules'
+import { Empty } from '@/pages/empty'
 
-import { Empty } from '../../empty'
 import { SchedulesSkeleton } from './schedules-skeleton'
+import { ScheduleResponse } from '../types'
 
 interface SchedulesProps {
   isLoading: boolean
-  schedules: GetSchedulesResponse[]
+  schedules: ScheduleResponse[] | null
 }
 
 export function Schedules({ isLoading, schedules }: SchedulesProps) {
@@ -27,11 +27,9 @@ export function Schedules({ isLoading, schedules }: SchedulesProps) {
   return (
     <>
       <div className="w-full flex items-center justify-center">
-        {!schedules.length && <Empty />}
-
-        <ul className="w-auto grid grid-cols-1 gap-[1px] sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
-          {schedules?.slice(0, 12)?.map((schedule) => {
-            return (
+        {schedules?.length ? (
+          <ul className="w-auto grid grid-cols-1 gap-[1px] sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
+            {schedules?.slice(0, 12).map((schedule) => (
               <li
                 key={schedule.identifier}
                 className="relative p-4 bg-zinc-950/75 transition-colors hover:bg-black-100"
@@ -88,9 +86,11 @@ export function Schedules({ isLoading, schedules }: SchedulesProps) {
                   </span>
                 </div>
               </li>
-            )
-          })}
-        </ul>
+            ))}
+          </ul>
+        ) : (
+          <Empty />
+        )}
       </div>
 
       <Modal

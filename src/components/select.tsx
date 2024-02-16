@@ -10,7 +10,7 @@ type OptionProps = {
 
 interface SelectProps extends ComponentProps<'select'> {
   label?: string
-  options: OptionProps[]
+  options: OptionProps[] | undefined
 }
 
 export function Select({ label, options = [], ...attrs }: SelectProps) {
@@ -36,13 +36,11 @@ export function Select({ label, options = [], ...attrs }: SelectProps) {
           {...attrs}
         >
           <option defaultChecked>Selecione um professor</option>
-          {options.length > 0
-            ? options.map(({ label, value }) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))
-            : null}
+          {options?.map(({ label, value }) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
         </select>
 
         <ChevronDownIcon size={18} className="absolute right-4 text-gray-700" />

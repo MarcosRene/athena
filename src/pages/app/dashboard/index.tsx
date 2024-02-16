@@ -1,29 +1,24 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { PlusIcon, SearchIcon } from 'lucide-react'
-import { toast } from 'sonner'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Input } from '@/components/input'
 
 import { useDebounce } from '@/hooks/useDebounce'
-
-import { GetSchedulesResponse, getSchedules } from '@/services/get-schedules'
+import { useFetch } from '@/hooks/useFetch'
 
 import { Schedules } from './schedules'
+import { ScheduleResponse } from '../types'
 
 export function Dashboard() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
-
   const subject = searchParams.get('subject')
 
   const [searchTerm, setSearchTerm] = useState(subject ?? '')
-  const [isLoading, setIsLoading] = useState(false)
-
-  const [schedules, setSchedules] = useState<GetSchedulesResponse[]>([])
 
   const debouncedValue = useDebounce(searchTerm)
 
@@ -43,36 +38,14 @@ export function Dashboard() {
     setSearchTerm(term)
   }
 
-  useEffect(() => {
-    const controller = new AbortController()
-
-    async function fetchSchedules() {
-      setIsLoading(true)
-
-      try {
-        const data = await getSchedules({
-          query: debouncedValue,
-          signal: controller.signal,
-        })
-
-        setSchedules(data)
-      } catch (error) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        if (error?.name === 'CanceledError') {
-          return
-        }
-
-        toast.error('Não foi possível carregar os agendamentos.')
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchSchedules()
-
-    return () => controller.abort()
-  }, [debouncedValue])
+  const { data: schedules, isLoading } = useFetch<ScheduleResponse[]>({
+    url: '/schedules',
+    query: {
+      key: 'subject',
+      value: debouncedValue,
+    },
+    errorMessage: 'Não foi possível carregar os agendamentos.',
+  })
 
   return (
     <>

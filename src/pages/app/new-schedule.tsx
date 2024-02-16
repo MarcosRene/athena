@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Dayjs } from 'dayjs'
@@ -11,21 +11,19 @@ import { Input } from '@/components/input'
 import { Select } from '@/components/select'
 import { Textarea } from '@/components/textarea'
 
-import { api } from '@/services/api'
-import { getUsersTeacher } from '@/services/get-users-teacher'
+import { useFetch } from '@/hooks/useFetch'
 
-interface ValuesProps {
+import { api } from '@/services/api'
+
+import { UsersTeacherResponse } from './types'
+
+interface FormData {
   subject: string
   teacherId: string
   description: string
 }
 
-interface Teacher {
-  label: string
-  value: string
-}
-
-const initialValues: ValuesProps = {
+const initialFormDataState: FormData = {
   subject: '',
   teacherId: '',
   description: '',
@@ -36,9 +34,8 @@ export function NewSchedule() {
 
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [selectedtime, setSelectedTime] = useState<string | null>(null)
-  const [values, setValues] = useState<ValuesProps>(initialValues)
-  const [teachers, setTeachers] = useState<Teacher[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [formData, setFormData] = useState<FormData>(initialFormDataState)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   function handleChange(
     event: ChangeEvent<
@@ -47,11 +44,11 @@ export function NewSchedule() {
   ) {
     const { name, value } = event.target
 
-    setValues({ ...values, [name]: value })
+    setFormData({ ...formData, [name]: value })
   }
 
   const isFormValid = Object.values({
-    ...values,
+    ...formData,
     selectedDate,
     selectedtime,
   }).every((value) => value !== '')
@@ -60,42 +57,30 @@ export function NewSchedule() {
     event.preventDefault()
 
     try {
-      const formData = {
-        ...values,
+      setIsSubmitting(true)
+      await api.post('/schedules', {
+        ...formData,
         date: selectedDate?.format('YYYY-MM-DD'),
         time: selectedtime,
-      }
-
-      await api.post('/schedules', formData)
+      })
 
       navigate('/', { replace: true })
     } catch (error) {
       toast.error('Não foi possível criar uma agendamento, tente novamente!')
+    } finally {
+      setIsSubmitting(true)
     }
   }
 
-  useEffect(() => {
-    const controller = new AbortController()
+  const { data: teachers, isLoading } = useFetch<UsersTeacherResponse[]>({
+    url: `/users?role=TEACHER`,
+    errorMessage: 'Não foi possível carregar os professores.',
+  })
 
-    async function fetchTeachers() {
-      try {
-        const data = await getUsersTeacher({
-          query: 'TEACHER',
-          signal: controller.signal,
-        })
-
-        setTeachers(data)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchTeachers()
-
-    return () => controller.abort()
-  }, [])
+  const formattedTeachers = teachers?.map((teacher) => ({
+    label: teacher.name,
+    value: teacher._id,
+  }))
 
   return (
     <>
@@ -113,23 +98,24 @@ export function NewSchedule() {
           name="subject"
           label="Assunto"
           placeholder="ex: TCC"
-          value={values.subject}
+          value={formData.subject}
           onChange={handleChange}
         />
 
         <Select
           name="teacherId"
           label="Professor"
-          options={teachers}
-          value={values.teacherId}
+          options={formattedTeachers}
+          value={formData.teacherId}
           onChange={handleChange}
+          disabled={isLoading}
         />
 
         <Textarea
           name="description"
           label="Descrição"
           placeholder="ex: Discutir tema do TCC"
-          value={values.description}
+          value={formData.description}
           onChange={handleChange}
         />
 
@@ -144,8 +130,8 @@ export function NewSchedule() {
           <Button
             type="submit"
             className="uppercase font-mediu"
-            isLoading={isLoading}
-            disabled={!isFormValid || isLoading}
+            isLoading={isSubmitting}
+            disabled={!isFormValid || isSubmitting}
           >
             Salvar
           </Button>

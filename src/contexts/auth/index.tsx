@@ -53,7 +53,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       setData({ token: data.token, user, signed: true })
     } catch (error) {
-      toast.error('Não foi possível se autenticar, tente novamente!')
+      toast.error('Não foi possível se autenticar, tente novamente.')
     } finally {
       setIsLoading(false)
     }

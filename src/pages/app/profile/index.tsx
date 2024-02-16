@@ -9,10 +9,11 @@ import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Input } from '@/components/input'
 import { InputFile } from '@/components/input-file'
 
-import { getUserProfile, GetUserProfileResponse } from '@/services/get-user'
 import { updateUserProfile } from '@/services/update-user-profile'
 
 import { ProfileSkeleton } from './profile-skeleton'
+import { useFetch } from '@/hooks/useFetch'
+import { UserProfileResponse } from '../types'
 
 const initialUserProfileState = {
   avatar: '',
@@ -25,11 +26,10 @@ const initialUserProfileState = {
 export function Profile() {
   const { user } = useAuth()
 
-  const [userProfile, setUserProfile] = useState<GetUserProfileResponse>(
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [userProfile, setUserProfile] = useState<UserProfileResponse>(
     initialUserProfileState
   )
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
@@ -54,49 +54,25 @@ export function Profile() {
       setIsSubmitting(true)
 
       await updateUserProfile({ userId: user.id, userProfile })
+
+      toast.success('Usuário atualizado com successo.')
     } catch (error) {
-      toast.error('Não foi possível atualizar o perfil, tente novamente!')
+      toast.error('Não foi possível atualizar o perfil, tente novamente.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
+  const { data, isLoading } = useFetch<UserProfileResponse>({
+    url: `/users/${user.id}`,
+    errorMessage:
+      'Não foi possível carregar os dados do usuário, tente novamente!',
+  })
+
   useEffect(() => {
-    if (!user.id) return
-
-    const controller = new AbortController()
-
-    async function fetchUserProfile() {
-      try {
-        setIsLoading(true)
-
-        const data = await getUserProfile({
-          userId: user.id,
-          signal: controller.signal,
-        })
-
-        if (data) {
-          setUserProfile(data)
-        }
-      } catch (error) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        if (error?.name === 'CanceledError') {
-          return
-        }
-
-        toast.error(
-          'Não foi possível carregar os dados do usuário, tente novamente!'
-        )
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchUserProfile()
-
-    return () => controller.abort()
-  }, [user.id])
+    if (!data) return
+    setUserProfile(data)
+  }, [data])
 
   return (
     <>
