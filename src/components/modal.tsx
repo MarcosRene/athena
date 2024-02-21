@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { XIcon } from 'lucide-react'
+import { Loader2, X } from 'lucide-react'
 
 import { Button } from './button'
 
@@ -8,8 +8,9 @@ interface ModalProps {
   description: string
   isOpen: boolean
   onClose: () => void
-  onSubmit?: () => void
+  onSubmit?: () => Promise<void>
   labelSubmitAction?: string
+  isDisabled?: boolean
 }
 
 export function Modal({
@@ -19,10 +20,11 @@ export function Modal({
   onClose,
   onSubmit,
   labelSubmitAction,
+  isDisabled,
 }: ModalProps) {
   const containerId = document.getElementById('modal-root')
 
-  if (!containerId) return
+  if (!containerId) return null
 
   return (
     isOpen &&
@@ -34,25 +36,30 @@ export function Modal({
               {title}
             </span>
 
-            <Button
-              icon={XIcon}
-              iconSize={20}
+            <Button.Root
               className="w-8 h-8 p-0 bg-transparent"
               onClick={onClose}
-            ></Button>
+            >
+              <Button.Icon name={X} />
+            </Button.Root>
           </div>
           <div className="py-4 px-6">
             <p className="text-sm md:text-base text-gray-500">{description}</p>
           </div>
           <div className="py-4 px-6 flex items-center justify-end gap-4">
-            <Button onClick={onClose}>Cancelar</Button>
+            <Button.Root onClick={onClose}>Cancelar</Button.Root>
             {!!onSubmit && (
-              <Button
+              <Button.Root
                 className="bg-[#ad0337] hover:bg-[#7e0028]"
                 onClick={onSubmit}
+                disabled={isDisabled}
               >
-                {labelSubmitAction}
-              </Button>
+                {isDisabled ? (
+                  <Loader2 className="animate-spin size-5" />
+                ) : (
+                  labelSubmitAction
+                )}
+              </Button.Root>
             )}
           </div>
         </div>

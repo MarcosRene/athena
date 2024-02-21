@@ -1,39 +1,32 @@
-import { ElementType, type ComponentProps } from 'react'
-import { LoaderIcon } from 'lucide-react'
+import { ElementType, ComponentProps } from 'react'
 
 import { cn } from '@/lib/utils'
 
-interface ButtonProps extends ComponentProps<'button'> {
-  icon?: ElementType
-  iconSize?: number
-  rlt?: boolean
-  isLoading?: boolean
-}
+interface RootProps extends ComponentProps<'button'> {}
 
-export function Button({
-  children,
-  className,
-  icon: Icon,
-  iconSize = 18,
-  rlt,
-  isLoading = false,
-  ...attrs
-}: ButtonProps) {
+function Root({ className, ...props }: RootProps) {
   return (
     <button
       type="button"
-      className={cn(`button ${rlt && 'flex-row-reverse'}`, className)}
-      {...attrs}
-    >
-      {isLoading ? (
-        <LoaderIcon size={iconSize} className="flex-shrink-0 animate-spin" />
-      ) : (
-        <>
-          {!!Icon && <Icon size={iconSize} className="flex-shrink-0" />}
-
-          {children}
-        </>
+      className={cn(
+        'h-10 py-0 px-3 flex items-center justify-center text-white text-sm leading-none font-semibold bg-green-600 transition-colors hover:bg-green-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-600',
+        className
       )}
-    </button>
+      {...props}
+    />
   )
+}
+
+interface IconProps extends ComponentProps<'div'> {
+  name: ElementType
+  size?: number
+}
+
+function Icon({ name: IconName, ...props }: IconProps) {
+  return <IconName {...props} />
+}
+
+export const Button = {
+  Root,
+  Icon,
 }

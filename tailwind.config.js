@@ -74,8 +74,8 @@ export default {
       animation: {
         'slider-right-to-left': 'slider-right-to-left 0.5s ease-in-out',
         'slider-left-to-right': 'slider-left-to-right 0.5s ease-in-out',
-        'fade-in': 'fade-in 180ms ease-in-out',
-        'fade-out': 'fade-out 180ms ease-in-out',
+        'fade-in': 'fade-in 1s forwards',
+        'fade-out': 'fade-out 1s forwards',
       },
     },
   },

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Dayjs } from 'dayjs'
 import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
@@ -23,18 +24,12 @@ interface FormData {
   description: string
 }
 
-const initialFormDataState: FormData = {
-  subject: '',
-  teacherId: '',
-  description: '',
-}
-
 export function NewSchedule() {
   const navigate = useNavigate()
 
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [selectedtime, setSelectedTime] = useState<string | null>(null)
-  const [formData, setFormData] = useState<FormData>(initialFormDataState)
+  const [formData, setFormData] = useState<FormData>({} as FormData)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   function handleChange(
@@ -127,14 +122,17 @@ export function NewSchedule() {
         />
 
         <div className="w-full flex justify-end mt-4">
-          <Button
+          <Button.Root
             type="submit"
             className="uppercase font-mediu"
-            isLoading={isSubmitting}
             disabled={!isFormValid || isSubmitting}
           >
-            Salvar
-          </Button>
+            {isSubmitting ? (
+              <Button.Icon name={Loader2} className="size-4 animate-spin" />
+            ) : (
+              'Salvar'
+            )}
+          </Button.Root>
         </div>
       </form>
     </>

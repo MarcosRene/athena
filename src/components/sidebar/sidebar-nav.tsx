@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useParams } from 'react-router-dom'
-import { XIcon, LayoutGrid, User } from 'lucide-react'
+import { X, LayoutGrid, User2 } from 'lucide-react'
 
 import { isLinkActive } from '@/utils/active-link'
 
@@ -23,15 +23,12 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
   return (
     <div className="block">
       <span className="font-bold uppercase flex items-center justify-between">
-        <span>Geral</span>
+        <h1>Geral</h1>
 
         {!!onClose && (
-          <Button
-            icon={XIcon}
-            iconSize={20}
-            className="w-6 h-6 p-4 bg-transparent"
-            onClick={onClose}
-          ></Button>
+          <Button.Root className="w-6 h-6 p-4 bg-transparent" onClick={onClose}>
+            <Button.Icon name={X} className="size-5" />
+          </Button.Root>
         )}
       </span>
 
@@ -54,7 +51,7 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
           }
           title="Perfil"
         >
-          <User size={20} />
+          <User2 size={20} />
           Perfil
         </NavLink>
       </div>

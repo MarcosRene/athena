@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Dayjs } from 'dayjs'
+import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
@@ -12,6 +14,8 @@ import { Textarea } from '@/components/textarea'
 
 import { useFetch } from '@/hooks/useFetch'
 
+import { api } from '@/services/api'
+
 import { ScheduleResponse, UsersTeacherResponse } from './types'
 
 import { FormSkeleton } from './form-skeleton'
@@ -21,10 +25,47 @@ export function EditSchedule() {
 
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [selectedtime, setSelectedTime] = useState<string | null>(null)
+  const [schedule, setSchedule] = useState<ScheduleResponse | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
-  console.log('selectedtime', selectedtime)
+  function handleChange(
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) {
+    if (!schedule) return
 
-  const { data: schedule, isLoading } = useFetch<ScheduleResponse>({
+    const { name, value } = event.target
+
+    setSchedule({ ...schedule, [name]: value })
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    try {
+      setIsSubmitting(true)
+      console.log('{ ...schedule, time: selectedtime }', {
+        ...schedule,
+        time: schedule?.time || selectedtime,
+      })
+      return
+
+      await api.put(`/schedules/${id}`, { ...schedule, time: selectedtime })
+
+      toast.success('Agendamento atualizado com successo.')
+    } catch (error) {
+      if (error instanceof Error) {
+        return
+      }
+
+      toast.error('Não foi possível atualizar o agendamento, tente novamente.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const { data, isLoading } = useFetch<ScheduleResponse>({
     url: `/schedules/${id}`,
     errorMessage: 'Não foi possível carregar o agendamento.',
   })
@@ -39,8 +80,10 @@ export function EditSchedule() {
     value: teacher._id,
   }))
 
-  console.log('schedule', schedule)
-  console.log('teachers', teachers)
+  useEffect(() => {
+    if (!data) return
+    setSchedule(data)
+  }, [data])
 
   return (
     <>
@@ -56,15 +99,32 @@ export function EditSchedule() {
       {isLoading ? (
         <FormSkeleton />
       ) : (
-        <form className="flex flex-col items-start">
-          <Input id="subject" label="Assunto" placeholder="ex: TCC" />
+        <form onSubmit={onSubmit} className="flex flex-col items-start">
+          <Input
+            id="subject"
+            name="subject"
+            label="Assunto"
+            placeholder="ex: TCC"
+            value={schedule?.subject}
+            onChange={handleChange}
+          />
 
-          <Select id="teacher" label="Professor" options={formattedTeachers} />
+          <Select
+            id="teacher"
+            name="teacher"
+            label="Professor"
+            options={formattedTeachers}
+            value={schedule?.teacherId}
+            onChange={handleChange}
+          />
 
           <Textarea
             id="description"
+            name="description"
             label="Descrição"
             placeholder="ex: Discutir tema do TCC"
+            value={schedule?.description}
+            onChange={handleChange}
           />
 
           <Calendar
@@ -75,7 +135,17 @@ export function EditSchedule() {
           />
 
           <div className="w-full flex justify-end mt-4">
-            <Button className="uppercase font-medium">Salvar</Button>
+            <Button.Root
+              type="submit"
+              className="uppercase font-medium"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <Button.Icon name={Loader2} className="size-4 animate-spin" />
+              ) : (
+                'Salvar'
+              )}
+            </Button.Root>
           </div>
         </form>
       )}

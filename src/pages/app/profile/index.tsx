@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 
 import { useAuth } from '@/contexts/auth'
 
@@ -13,22 +14,15 @@ import { updateUserProfile } from '@/services/update-user-profile'
 
 import { ProfileSkeleton } from './profile-skeleton'
 import { useFetch } from '@/hooks/useFetch'
-import { UserProfileResponse } from '../types'
 
-const initialUserProfileState = {
-  avatar: '',
-  confirm_password: '',
-  email: '',
-  name: '',
-  password: '',
-}
+import { UserProfileResponse } from '../types'
 
 export function Profile() {
   const { user } = useAuth()
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [userProfile, setUserProfile] = useState<UserProfileResponse>(
-    initialUserProfileState
+    {} as UserProfileResponse
   )
 
   function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
@@ -71,7 +65,10 @@ export function Profile() {
 
   useEffect(() => {
     if (!data) return
-    setUserProfile(data)
+    setUserProfile({
+      ...data,
+      avatar: `http://localhost:3333/uploads/${data.avatar}`,
+    })
   }, [data])
 
   return (
@@ -89,7 +86,7 @@ export function Profile() {
         >
           <div className="w-full max-w-40 flex flex-col items-center">
             <InputFile
-              avatarURL={user.avatar}
+              avatarURL={userProfile.avatar?.toString()}
               onFileSelected={handleAvatarChange}
             />
 
@@ -128,14 +125,17 @@ export function Profile() {
             />
 
             <div className="col-start-2 col-end-2 flex justify-end">
-              <Button
+              <Button.Root
                 type="submit"
                 className="uppercase font-medium"
-                isLoading={isSubmitting}
                 disabled={isSubmitting}
               >
-                Atualizar
-              </Button>
+                {isSubmitting ? (
+                  <Button.Icon name={Loader2} className="size-4 animate-spin" />
+                ) : (
+                  'Atualizar'
+                )}
+              </Button.Root>
             </div>
           </div>
         </form>

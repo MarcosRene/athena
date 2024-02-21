@@ -1,16 +1,23 @@
 import { ChangeEvent, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { PlusIcon, SearchIcon } from 'lucide-react'
+import { Plus, Search } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Input } from '@/components/input'
+import { Modal } from '@/components/modal'
 
 import { useDebounce } from '@/hooks/useDebounce'
 import { useFetch } from '@/hooks/useFetch'
 
+import { api } from '@/services/api'
+
+import { Empty } from '@/pages/empty'
 import { Schedules } from './schedules'
+import { SchedulesSkeleton } from './schedules-skeleton'
+
 import { ScheduleResponse } from '../types'
 
 export function Dashboard() {
@@ -19,6 +26,9 @@ export function Dashboard() {
   const subject = searchParams.get('subject')
 
   const [searchTerm, setSearchTerm] = useState(subject ?? '')
+  const [scheduleId, setScheduleId] = useState<string>('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const debouncedValue = useDebounce(searchTerm)
 
@@ -38,6 +48,34 @@ export function Dashboard() {
     setSearchTerm(term)
   }
 
+  function toggleModal() {
+    setIsModalOpen((prevState) => !prevState)
+  }
+
+  function onSelectedScheduleId(scheduleId: string) {
+    setScheduleId(scheduleId)
+    toggleModal()
+  }
+
+  async function onDeleteSchedule() {
+    try {
+      setIsDeleting(true)
+
+      await api.delete(`/schedules/${scheduleId}`)
+
+      toast.success('O agendamento foi excluído com successo.')
+      toggleModal()
+    } catch (error) {
+      if (error instanceof Error) {
+        return
+      }
+
+      toast.success('Não foi possível excluir o agendamento, tente novamente.')
+    } finally {
+      setIsDeleting(false)
+    }
+  }
+
   const { data: schedules, isLoading } = useFetch<ScheduleResponse[]>({
     url: '/schedules',
     query: {
@@ -47,6 +85,9 @@ export function Dashboard() {
     errorMessage: 'Não foi possível carregar os agendamentos.',
   })
 
+  const hasSchedules = !!schedules?.length && !isLoading
+  const isListEmpty = schedules?.length === 0 && !isLoading
+
   return (
     <>
       <Helmet title="Dashboard" />
@@ -54,27 +95,48 @@ export function Dashboard() {
       <div className="flex items-start justify-between">
         <Breadcrumbs breadcrumbs={[{ label: 'Dashboard', href: '/' }]} />
 
-        <Button
-          icon={PlusIcon}
-          iconSize={18}
-          rlt
+        <Button.Root
           className="uppercase font-medium gap-2"
           onClick={() => navigate('/new-schedule', { replace: true })}
         >
           Criar
-        </Button>
+          <Button.Icon name={Plus} className="size-5" />
+        </Button.Root>
       </div>
 
       <div className="flex flex-col items-end">
         <Input
           placeholder="Buscar por um agendamento"
-          icon={SearchIcon}
+          icon={Search}
           onChange={handleSearchTerm}
           value={searchTerm}
           fullFilled
         />
 
-        <Schedules isLoading={isLoading} schedules={schedules} />
+        <div className="w-full flex items-center justify-center">
+          {isLoading && <SchedulesSkeleton />}
+
+          {hasSchedules && (
+            <>
+              <Schedules
+                schedules={schedules}
+                onSelectedScheduleId={onSelectedScheduleId}
+              />
+
+              <Modal
+                title="Deseja excluir o agendamento?"
+                description="Você tem certeza que deseja excluir o agendamento? Após a exclusão, não será possível visualizar mais informações sobre o agendamento."
+                isOpen={isModalOpen}
+                onClose={toggleModal}
+                onSubmit={onDeleteSchedule}
+                labelSubmitAction="Excluir"
+                isDisabled={isDeleting}
+              />
+            </>
+          )}
+
+          {isListEmpty && <Empty />}
+        </div>
       </div>
     </>
   )

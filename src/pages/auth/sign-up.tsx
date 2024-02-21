@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { User2Icon, LockIcon, MailIcon } from 'lucide-react'
+import { User2, Lock, Mail, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/button'
@@ -77,7 +77,7 @@ export function SignUp() {
             placeholder="E-mail"
             value={formData.email}
             onChange={handleChange}
-            icon={MailIcon}
+            icon={Mail}
           />
 
           <Input
@@ -86,7 +86,7 @@ export function SignUp() {
             placeholder="Nome"
             value={formData.name}
             onChange={handleChange}
-            icon={User2Icon}
+            icon={User2}
           />
 
           <Input
@@ -96,7 +96,7 @@ export function SignUp() {
             placeholder="Senha"
             value={formData.password}
             onChange={handleChange}
-            icon={LockIcon}
+            icon={Lock}
           />
 
           <Input
@@ -106,7 +106,7 @@ export function SignUp() {
             placeholder="Confirmar senha"
             value={formData.confirm_password}
             onChange={handleChange}
-            icon={LockIcon}
+            icon={Lock}
           />
 
           <Link
@@ -117,14 +117,17 @@ export function SignUp() {
             Voltar para login 👈
           </Link>
 
-          <Button
+          <Button.Root
             type="submit"
             className="w-full uppercase"
-            isLoading={isLoading}
             disabled={isLoading}
           >
-            Cadastrar
-          </Button>
+            {!isLoading ? (
+              'Cadastrar'
+            ) : (
+              <Button.Icon name={Loader2} className="animate-spin size-5" />
+            )}
+          </Button.Root>
         </form>
       </div>
     </>

@@ -46,13 +46,13 @@ export function TimerPicker({
       <ul className="w-full grid grid-cols-[auto,auto] gap-2 text-center">
         {availabilityTimes.map(({ time, disabled }) => (
           <li key={time}>
-            <Button
+            <Button.Root
               className="w-full font-normal text-xs md:text-sm text-gray-100 bg-gray-900 disabled:hover:bg-gray-900"
               onClick={() => onTimeSelected(time)}
               disabled={disabled}
             >
               {time}
-            </Button>
+            </Button.Root>
           </li>
         ))}
       </ul>

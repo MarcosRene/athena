@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LogOutIcon } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 
 import { useAuth } from '@/contexts/auth'
 
@@ -45,7 +45,7 @@ export function Profile() {
         <Dropdown
           options={[
             {
-              icon: LogOutIcon,
+              icon: LogOut,
               label: 'Sair',
               onClick: handleSignOut,
             },

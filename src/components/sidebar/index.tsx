@@ -1,30 +1,29 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { CalendarClockIcon, MenuIcon } from 'lucide-react'
+import { CalendarClock, Menu } from 'lucide-react'
 
 import { useIsMobile } from '@/hooks/useIsMobile'
 
-import { SidebarNav } from './sidebar-nav'
 import { Button } from '../button'
+import { SidebarNav } from './sidebar-nav'
 
 export function Sidebar() {
   const isMobile = useIsMobile()
   const [isDrawerSidebar, setIsDrawerSidebar] = useState(false)
 
-  const handleDrawerSidebar = () => {
+  const handleDrawerSidebar = () =>
     setIsDrawerSidebar((prevState) => !prevState)
-  }
 
   if (isMobile) {
     return (
       <>
-        <Button
-          icon={MenuIcon}
-          iconSize={20}
+        <Button.Root
           className="flex w-6 h-w-6 p-4 bg-transparent absolute top-6 left-6 lg:hidden"
           onClick={handleDrawerSidebar}
           aria-label="Open button sidebar"
-        />
+        >
+          <Button.Icon name={Menu} />
+        </Button.Root>
 
         {isDrawerSidebar && (
           <div className="backdrop-blur-sm absolute inset-0 z-20 animate-fade-in">
@@ -44,11 +43,7 @@ export function Sidebar() {
         className="mt-6 mb-12 text-2xl font-logo font-extrabold leading-normal"
       >
         <span className="h-12 flex items-center gap-4">
-          <CalendarClockIcon
-            size={24}
-            className="text-green-500"
-            aria-label="Close button"
-          />
+          <CalendarClock size={24} className="text-green-500" />
           Athena
         </span>
       </Link>

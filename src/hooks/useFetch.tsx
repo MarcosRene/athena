@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { AxiosResponse } from 'axios'
+import { useEffect, useRef, useState } from 'react'
+import { AxiosResponse, isCancel } from 'axios'
 import { toast } from 'sonner'
 
 import { api } from '@/services/api'
@@ -28,26 +28,28 @@ export function useFetch<T>({
   const [data, setData] = useState<T | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  const abortControllerRef = useRef<AbortController | null>(null)
+
   const queryParams = query?.value ? `?${query.key}=${query.value}` : ``
 
   useEffect(() => {
-    const controller = new AbortController()
-    const signal = controller.signal
-
     async function fetchData() {
+      abortControllerRef.current?.abort()
+      abortControllerRef.current = new AbortController()
+
       try {
         setIsLoading(true)
 
         const response: AxiosResponse<T> = await api.get(
           `${url}${queryParams}`,
-          { signal }
+          { signal: abortControllerRef.current.signal }
         )
 
         setData(response.data)
       } catch (error) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        if (error?.name === 'CanceledError') {
+        if (isCancel(error)) {
           return
         }
 
@@ -58,8 +60,6 @@ export function useFetch<T>({
     }
 
     fetchData()
-
-    return () => controller.abort()
   }, [url, errorMessage, queryParams])
 
   return { data, isLoading }

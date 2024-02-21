@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Dayjs } from 'dayjs'
 
 import { Button } from '../button'
@@ -90,23 +90,23 @@ export function CalendarPicker({
   return (
     <div className="flex flex-col p-4">
       <header className="mb-6 flex items-center justify-between">
-        <Button
-          icon={ChevronLeftIcon}
-          iconSize={18}
-          className="w-8 h-w-8 p-0 bg-transparent text-gray-100"
+        <Button.Root
+          className="w-8 h-8 p-0 bg-transparent text-gray-100"
           onClick={handlePreviusMonth}
-        ></Button>
+        >
+          <Button.Icon name={ChevronLeft} className="size-5" />
+        </Button.Root>
 
         <span className="text-sm capitalize text-gray-100 md:text-base">
           {currentMonth} <span>{currentYear}</span>
         </span>
 
-        <Button
-          icon={ChevronRightIcon}
-          iconSize={18}
+        <Button.Root
           className="w-8 h-8 p-0 bg-transparent text-gray-100"
           onClick={handleNextMonth}
-        ></Button>
+        >
+          <Button.Icon name={ChevronRight} className="size-5" />
+        </Button.Root>
       </header>
 
       <table
@@ -132,13 +132,13 @@ export function CalendarPicker({
               {days.map(({ date, disabled }, index) => (
                 <td key={`date-${index + 1}`}>
                   {!!date && (
-                    <Button
+                    <Button.Root
                       className="px-0 w-8 h-8 md:py-0 md:w-12 md:h-12 text-xs md:text-sm font-normal bg-transparent text-gray-100 disabled:bg-gray-900 disabled:hover:bg-gray-900"
                       onClick={() => onDateSelected(date)}
                       disabled={disabled}
                     >
                       {date.get('date')}
-                    </Button>
+                    </Button.Root>
                   )}
                 </td>
               ))}
