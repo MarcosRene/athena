@@ -4,6 +4,8 @@ import { toast } from 'sonner'
 
 import { api } from '@/services/api'
 
+import { delay } from '@/utils/deplay'
+
 type Query = {
   key: string
   value: string
@@ -39,6 +41,8 @@ export function useFetch<T>({
 
       try {
         setIsLoading(true)
+
+        await delay(1000)
 
         const response: AxiosResponse<T> = await api.get(
           `${url}${queryParams}`,

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Pencil, Trash2 } from 'lucide-react'
 
@@ -10,7 +11,7 @@ interface SchedulesProps {
   onSelectedScheduleId: (id: string) => void
 }
 
-export function Schedules({ schedules, onSelectedScheduleId }: SchedulesProps) {
+function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
   const navigate = useNavigate()
 
   return (
@@ -40,6 +41,7 @@ export function Schedules({ schedules, onSelectedScheduleId }: SchedulesProps) {
                     <Button.Icon name={Pencil} className="size-4" />
                   </Button.Root>
                 )}
+
                 <Button.Root
                   className="w-6 h-6 p-0 bg-transparent text-gray-500"
                   onClick={() => onSelectedScheduleId(schedule._id)}
@@ -51,12 +53,12 @@ export function Schedules({ schedules, onSelectedScheduleId }: SchedulesProps) {
             </div>
 
             <div className="h-24 flex flex-col gap-2">
-              <h4
+              <h1
                 className="text-sm font-medium line-clamp-1"
                 title={schedule.subject}
               >
                 {schedule.subject}
-              </h4>
+              </h1>
 
               <p
                 className="text-sm text-gray-500 line-clamp-2"
@@ -75,3 +77,5 @@ export function Schedules({ schedules, onSelectedScheduleId }: SchedulesProps) {
     </>
   )
 }
+
+export const Schedules = memo(SchedulesBase)

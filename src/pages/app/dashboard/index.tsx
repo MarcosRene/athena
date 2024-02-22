@@ -104,14 +104,20 @@ export function Dashboard() {
         </Button.Root>
       </div>
 
-      <div className="flex flex-col items-end">
-        <Input
-          placeholder="Buscar por um agendamento"
-          icon={Search}
-          onChange={handleSearchTerm}
-          value={searchTerm}
-          fullFilled
-        />
+      <div className="flex flex-col items-end space-y-4">
+        <Input.Field className="w-full md:w-auto">
+          <Input.Container>
+            <Input.Prefix>
+              <Search className="size-4" />
+            </Input.Prefix>
+
+            <Input.Control
+              placeholder="Buscar por um agendamento"
+              onChange={handleSearchTerm}
+              value={searchTerm}
+            />
+          </Input.Container>
+        </Input.Field>
 
         <div className="w-full flex items-center justify-center">
           {isLoading && <SchedulesSkeleton />}

@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { User2, Lock, Loader2 } from 'lucide-react'
-import { useLocation, Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
@@ -40,24 +40,36 @@ export function SignIn() {
         <form
           onSubmit={onSubmit}
           aria-label="sign-in-form"
-          className="w-full max-w-[400px] py-12 px-10 border border-gray-900 rounded-lg"
+          className="w-full max-w-[400px] space-y-4 py-12 px-10 border border-gray-900 rounded-lg"
         >
-          <Input
-            id="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            icon={User2}
-          />
+          <Input.Field>
+            <Input.Container>
+              <Input.Prefix>
+                <User2 className="size-4" />
+              </Input.Prefix>
 
-          <Input
-            id="password"
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            icon={Lock}
-          />
+              <Input.Control
+                placeholder="E-mail"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </Input.Container>
+          </Input.Field>
+
+          <Input.Field>
+            <Input.Container>
+              <Input.Prefix>
+                <Lock className="size-4" />
+              </Input.Prefix>
+
+              <Input.Control
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </Input.Container>
+          </Input.Field>
 
           <Link
             to="/sign-up"

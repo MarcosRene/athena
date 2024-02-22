@@ -71,15 +71,15 @@ export function Profile() {
     })
   }, [data])
 
+  const hasUserProfile = data !== null && !isLoading
+
   return (
     <>
       <Helmet title="Perfil" />
 
       <Breadcrumbs breadcrumbs={[{ label: 'Perfil', href: '/profile' }]} />
 
-      {isLoading ? (
-        <ProfileSkeleton />
-      ) : (
+      {hasUserProfile ? (
         <form
           onSubmit={onSubmit}
           className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-8 lg:gap-16"
@@ -93,36 +93,52 @@ export function Profile() {
             <span className="font-medium text-2xl">{user.name}</span>
           </div>
 
-          <div className="block md:grid md:grid-cols-2 gap-x-6 w-full self-baseline">
-            <Input
-              id="email"
-              placeholder="johndoe@email.com"
-              value={userProfile.email}
-              disabled
-            />
+          <div className="block w-full md:grid md:grid-cols-2 gap-6 self-baseline">
+            <Input.Field>
+              <Input.Container>
+                <Input.Control
+                  id="email"
+                  placeholder="johndoe@email.com"
+                  value={userProfile.email}
+                  disabled
+                />
+              </Input.Container>
+            </Input.Field>
 
-            <Input
-              id="name"
-              placeholder="John Doe"
-              onChange={handleNameChange}
-              value={userProfile.name}
-            />
+            <Input.Field>
+              <Input.Container>
+                <Input.Control
+                  id="name"
+                  placeholder="John Doe"
+                  onChange={handleNameChange}
+                  value={userProfile.name}
+                />
+              </Input.Container>
+            </Input.Field>
 
-            <Input
-              id="password"
-              type="password"
-              placeholder="Senha"
-              value={userProfile.password}
-              disabled
-            />
+            <Input.Field>
+              <Input.Container>
+                <Input.Control
+                  id="password"
+                  type="password"
+                  placeholder="Senha"
+                  value={userProfile.password}
+                  disabled
+                />
+              </Input.Container>
+            </Input.Field>
 
-            <Input
-              id="confirm_password"
-              type="password"
-              placeholder="Confirmar senha"
-              value={userProfile.confirm_password}
-              disabled
-            />
+            <Input.Field>
+              <Input.Container>
+                <Input.Control
+                  id="confirm_password"
+                  type="password"
+                  placeholder="Confirmar senha"
+                  value={userProfile.confirm_password}
+                  disabled
+                />
+              </Input.Container>
+            </Input.Field>
 
             <div className="col-start-2 col-end-2 flex justify-end">
               <Button.Root
@@ -139,6 +155,8 @@ export function Profile() {
             </div>
           </div>
         </form>
+      ) : (
+        <ProfileSkeleton />
       )}
     </>
   )

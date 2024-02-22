@@ -18,17 +18,10 @@ interface FormData {
   confirm_password: string
 }
 
-const initialFormDataState = {
-  name: '',
-  email: '',
-  password: '',
-  confirm_password: '',
-}
-
 export function SignUp() {
   const navigate = useNavigate()
 
-  const [formData, setFormData] = useState<FormData>(initialFormDataState)
+  const [formData, setFormData] = useState<FormData>({} as FormData)
   const [isLoading, setIsLoading] = useState(false)
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -66,48 +59,76 @@ export function SignUp() {
         <form
           aria-label="sign-up-form"
           onSubmit={onSubmit}
-          className="w-full max-w-[400px] py-12 px-[38px] border border-gray-900 rounded-lg animate-slider-right-to-left"
+          className="w-full max-w-[400px] space-y-4 py-12 px-[38px] border border-gray-900 rounded-lg animate-slider-right-to-left"
         >
-          <h2 className="mb-10 text-2xl font-bold">Crie sua conta</h2>
+          <h1 className="mb-10 text-2xl font-bold">Crie sua conta</h1>
 
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="E-mail"
-            value={formData.email}
-            onChange={handleChange}
-            icon={Mail}
-          />
+          <Input.Field>
+            <Input.Container>
+              <Input.Prefix>
+                <Mail className="size-4" />
+              </Input.Prefix>
 
-          <Input
-            id="name"
-            name="name"
-            placeholder="Nome"
-            value={formData.name}
-            onChange={handleChange}
-            icon={User2}
-          />
+              <Input.Control
+                id="email"
+                name="email"
+                type="email"
+                placeholder="E-mail"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </Input.Container>
+          </Input.Field>
 
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Senha"
-            value={formData.password}
-            onChange={handleChange}
-            icon={Lock}
-          />
+          <Input.Field>
+            <Input.Container>
+              <Input.Prefix>
+                <User2 className="size-4" />
+              </Input.Prefix>
 
-          <Input
-            id="confirm_password"
-            name="confirm_password"
-            type="password"
-            placeholder="Confirmar senha"
-            value={formData.confirm_password}
-            onChange={handleChange}
-            icon={Lock}
-          />
+              <Input.Control
+                id="name"
+                name="name"
+                placeholder="Nome"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </Input.Container>
+          </Input.Field>
+
+          <Input.Field>
+            <Input.Container>
+              <Input.Prefix>
+                <Lock className="size-4" />
+              </Input.Prefix>
+
+              <Input.Control
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Senha"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </Input.Container>
+          </Input.Field>
+
+          <Input.Field>
+            <Input.Container>
+              <Input.Prefix>
+                <Lock className="size-4" />
+              </Input.Prefix>
+
+              <Input.Control
+                id="confirm_password"
+                name="confirm_password"
+                type="password"
+                placeholder="Confirmar senha"
+                value={formData.confirm_password}
+                onChange={handleChange}
+              />
+            </Input.Container>
+          </Input.Field>
 
           <Link
             to="/sign-in"

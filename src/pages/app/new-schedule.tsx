@@ -89,13 +89,18 @@ export function NewSchedule() {
       />
 
       <form onSubmit={onSubmit} className="flex flex-col items-start">
-        <Input
-          name="subject"
-          label="Assunto"
-          placeholder="ex: TCC"
-          value={formData.subject}
-          onChange={handleChange}
-        />
+        <Input.Field className="w-full">
+          <Input.Label htmlFor="subject">Assunto</Input.Label>
+
+          <Input.Container>
+            <Input.Control
+              name="subject"
+              placeholder="ex: TCC"
+              value={formData?.subject}
+              onChange={handleChange}
+            />
+          </Input.Container>
+        </Input.Field>
 
         <Select
           name="teacherId"
@@ -106,13 +111,16 @@ export function NewSchedule() {
           disabled={isLoading}
         />
 
-        <Textarea
-          name="description"
-          label="Descrição"
-          placeholder="ex: Discutir tema do TCC"
-          value={formData.description}
-          onChange={handleChange}
-        />
+        <Textarea.TextareaField>
+          <Textarea.Label htmlFor="description">Descrição</Textarea.Label>
+
+          <Textarea.Control
+            name="description"
+            placeholder="ex: Discutir tema do TCC"
+            value={formData.description}
+            onChange={handleChange}
+          />
+        </Textarea.TextareaField>
 
         <Calendar
           label="Data/Hora"

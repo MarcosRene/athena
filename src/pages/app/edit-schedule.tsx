@@ -45,11 +45,6 @@ export function EditSchedule() {
 
     try {
       setIsSubmitting(true)
-      console.log('{ ...schedule, time: selectedtime }', {
-        ...schedule,
-        time: schedule?.time || selectedtime,
-      })
-      return
 
       await api.put(`/schedules/${id}`, { ...schedule, time: selectedtime })
 
@@ -85,6 +80,8 @@ export function EditSchedule() {
     setSchedule(data)
   }, [data])
 
+  const hasSchedule = schedule !== null && !isLoading
+
   return (
     <>
       <Helmet title="Editar" />
@@ -96,18 +93,24 @@ export function EditSchedule() {
         ]}
       />
 
-      {isLoading ? (
-        <FormSkeleton />
-      ) : (
-        <form onSubmit={onSubmit} className="flex flex-col items-start">
-          <Input
-            id="subject"
-            name="subject"
-            label="Assunto"
-            placeholder="ex: TCC"
-            value={schedule?.subject}
-            onChange={handleChange}
-          />
+      {hasSchedule ? (
+        <form
+          onSubmit={onSubmit}
+          className="flex flex-col items-start space-y-4"
+        >
+          <Input.Field className="w-full">
+            <Input.Label htmlFor="subject">Assunto</Input.Label>
+
+            <Input.Container>
+              <Input.Control
+                id="subject"
+                name="subject"
+                placeholder="ex: TCC"
+                value={schedule?.subject}
+                onChange={handleChange}
+              />
+            </Input.Container>
+          </Input.Field>
 
           <Select
             id="teacher"
@@ -118,14 +121,17 @@ export function EditSchedule() {
             onChange={handleChange}
           />
 
-          <Textarea
-            id="description"
-            name="description"
-            label="Descrição"
-            placeholder="ex: Discutir tema do TCC"
-            value={schedule?.description}
-            onChange={handleChange}
-          />
+          <Textarea.TextareaField>
+            <Textarea.Label htmlFor="description">Descrição</Textarea.Label>
+
+            <Textarea.Control
+              id="description"
+              name="description"
+              placeholder="ex: Discutir tema do TCC"
+              value={schedule?.description}
+              onChange={handleChange}
+            />
+          </Textarea.TextareaField>
 
           <Calendar
             label="Data/Hora"
@@ -148,6 +154,8 @@ export function EditSchedule() {
             </Button.Root>
           </div>
         </form>
+      ) : (
+        <FormSkeleton />
       )}
     </>
   )

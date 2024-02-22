@@ -1,54 +1,69 @@
-import { ComponentProps, ElementType, useState } from 'react'
+import { ComponentProps } from 'react'
 
 import { cn } from '@/lib/utils'
 
-interface TextInputProps extends ComponentProps<'input'> {
-  icon?: ElementType
-  label?: string
-  fullFilled?: boolean
-}
+interface FieldProps extends ComponentProps<'div'> {}
 
-export function Input({
-  icon: Icon,
-  label,
-  fullFilled = false,
-  ...attrs
-}: TextInputProps) {
-  const [isFocused, setFocused] = useState(false)
-
-  const { id, name, className } = attrs
-
-  const inputId = id ?? name
-
+function Field({ className, ...props }: FieldProps) {
   return (
     <div
-      className={`${fullFilled ? 'w-full sm:w-72' : 'w-full'} flex flex-col items-start mb-4`}
-    >
-      {!!label && (
-        <label className="mb-2 text-sm text-gray-100" htmlFor={inputId}>
-          {label}
-        </label>
-      )}
-
-      <div className="w-full relative h-10 flex items-center border border-gray-900 rounded-lg overflow-hidden focus-within:border-transparent focus-within:outline outline-2 outline-green-600">
-        {!!Icon && (
-          <Icon
-            size={16}
-            className={`absolute left-3 text-gray-700 ${isFocused && 'text-green-600'}`}
-          />
-        )}
-
-        <input
-          id={inputId}
-          className={cn(
-            `flex-1 h-full pr-4 ${!Icon ? 'pl-4' : 'pl-10'} py-0 text-sm bg-black-100 placeholder-gray-700 focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-900/80 disabled:text-white-100/50`,
-            className
-          )}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          {...attrs}
-        />
-      </div>
-    </div>
+      className={cn('flex flex-col items-start group', className)}
+      {...props}
+    />
   )
+}
+
+interface LabelProps extends ComponentProps<'label'> {}
+
+function Label({ ...props }: LabelProps) {
+  return (
+    <label className="mb-2 inline-block text-sm text-gray-100" {...props} />
+  )
+}
+
+interface ContainerProps extends ComponentProps<'div'> {}
+
+function Container({ ...props }: ContainerProps) {
+  return (
+    <div
+      className="w-full relative h-10 flex items-center border border-gray-900 rounded-lg overflow-hidden focus-within:border-transparent focus-within:outline outline-2 outline-green-600"
+      {...props}
+    />
+  )
+}
+
+interface PrefixProps extends ComponentProps<'div'> {}
+
+function Prefix({ className, ...props }: PrefixProps) {
+  return (
+    <div
+      className={cn(
+        'pl-3.5 text-gray-700 group-focus-within:text-green-600',
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+interface ControlProps extends ComponentProps<'input'> {}
+
+function Control({ className, ...props }: ControlProps) {
+  return (
+    <input
+      className={cn(
+        'flex-1 h-full px-3.5 text-sm bg-black-100 placeholder-gray-700 focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-900/80 disabled:text-white-100/50',
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export const Input = {
+  Field,
+  Label,
+  Container,
+  Prefix,
+  Control,
 }
