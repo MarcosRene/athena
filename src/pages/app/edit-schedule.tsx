@@ -25,7 +25,9 @@ export function EditSchedule() {
 
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [selectedtime, setSelectedTime] = useState<string | null>(null)
-  const [schedule, setSchedule] = useState<ScheduleResponse | null>(null)
+  const [schedule, setSchedule] = useState<ScheduleResponse | null>(
+    {} as ScheduleResponse
+  )
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   function handleChange(
@@ -80,7 +82,7 @@ export function EditSchedule() {
     setSchedule(data)
   }, [data])
 
-  const hasSchedule = schedule !== null && !isLoading
+  const hasSchedule = data !== null && !isLoading
 
   return (
     <>
@@ -113,8 +115,8 @@ export function EditSchedule() {
           </Input.Field>
 
           <Select
-            id="teacher"
-            name="teacher"
+            id="teacherId"
+            name="teacherId"
             label="Professor"
             options={formattedTeachers}
             value={schedule?.teacherId}

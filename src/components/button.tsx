@@ -22,8 +22,14 @@ interface IconProps extends ComponentProps<'div'> {
   size?: number
 }
 
-function Icon({ name: IconName, ...props }: IconProps) {
-  return <IconName {...props} />
+function Icon({ name: IconName, size, className, ...props }: IconProps) {
+  return (
+    <IconName
+      className={cn('flex-shrink-0', className)}
+      size={size}
+      {...props}
+    />
+  )
 }
 
 export const Button = {

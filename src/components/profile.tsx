@@ -29,7 +29,7 @@ export function Profile() {
         aria-label="Abrir modal"
         title="Abrir modal"
       >
-        <div className="hidden sm:flex flex-col items-end">
+        <div className="flex flex-col items-end">
           <span>{user.name}</span>
           <span className="text-gray-500 text-sm">{user.email}</span>
         </div>
@@ -37,7 +37,7 @@ export function Profile() {
         <img
           className="inline-block h-12 w-12 rounded-full cursor-pointer"
           src={user.avatar}
-          alt=""
+          alt={`Avatar do usuário ${user.name}`}
         />
       </div>
 

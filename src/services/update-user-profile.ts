@@ -1,6 +1,7 @@
 import { api } from './api'
 
 interface GetUserProfileResponse {
+  _id: string
   avatar: string | File
   confirm_password: string
   email: string
@@ -29,5 +30,7 @@ export async function updateUserProfile({
     formData.append('image', userProfile.avatar)
   }
 
-  await api.patch(`/users/${userId}`, formData)
+  const response = await api.patch(`/users/${userId}`, formData)
+
+  return response.data
 }

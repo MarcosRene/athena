@@ -18,7 +18,7 @@ import { useFetch } from '@/hooks/useFetch'
 import { UserProfileResponse } from '../types'
 
 export function Profile() {
-  const { user } = useAuth()
+  const { user, updateUser } = useAuth()
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [userProfile, setUserProfile] = useState<UserProfileResponse>(
@@ -47,7 +47,14 @@ export function Profile() {
     try {
       setIsSubmitting(true)
 
-      await updateUserProfile({ userId: user.id, userProfile })
+      const response = await updateUserProfile({ userId: user.id, userProfile })
+
+      updateUser({
+        id: response._id,
+        email: response.email,
+        name: response.name,
+        avatar: response.avatar,
+      })
 
       toast.success('Usuário atualizado com successo.')
     } catch (error) {
@@ -90,10 +97,12 @@ export function Profile() {
               onFileSelected={handleAvatarChange}
             />
 
-            <span className="font-medium text-2xl">{user.name}</span>
+            <span className="font-medium text-2xl whitespace-nowrap">
+              {user.name}
+            </span>
           </div>
 
-          <div className="block w-full md:grid md:grid-cols-2 gap-6 self-baseline">
+          <div className="block space-y-4 w-full self-baseline md:space-y-0 md:grid md:grid-cols-2 md:gap-6">
             <Input.Field>
               <Input.Container>
                 <Input.Control

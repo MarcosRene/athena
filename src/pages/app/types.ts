@@ -20,6 +20,7 @@ export interface UsersTeacherResponse {
 }
 
 export interface UserProfileResponse {
+  _id: string
   avatar: string | File
   confirm_password: string
   email: string

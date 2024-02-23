@@ -13,8 +13,8 @@ interface SelectProps extends ComponentProps<'select'> {
   options: OptionProps[] | undefined
 }
 
-export function Select({ label, options = [], ...attrs }: SelectProps) {
-  const { id, name, className } = attrs
+export function Select({ label, options = [], ...props }: SelectProps) {
+  const { id, name, className } = props
 
   const selecteId = id ?? name
 
@@ -33,7 +33,7 @@ export function Select({ label, options = [], ...attrs }: SelectProps) {
             `appearance-none flex-1 h-full px-4 py-0 text-sm bg-black-100 placeholder-gray-700 focus:outline-none`,
             className
           )}
-          {...attrs}
+          {...props}
         >
           <option defaultChecked>Selecione um professor</option>
           {options?.map(({ label, value }) => (

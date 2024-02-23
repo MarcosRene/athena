@@ -13,7 +13,7 @@ export function ProfileSkeleton() {
         <Skeleton className="w-32 h-8 rounded-lg" />
       </div>
 
-      <div className="block md:grid md:grid-cols-2 gap-6 w-full self-baseline">
+      <div className="block space-y-4 w-full self-baseline md:space-y-0 md:grid md:grid-cols-2 md:gap-6">
         <Skeleton className="w-auto h-10 rounded-lg" />
         <Skeleton className="w-auto h-10 rounded-lg" />
         <Skeleton className="w-auto h-10 rounded-lg" />

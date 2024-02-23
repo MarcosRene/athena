@@ -20,6 +20,7 @@ export interface AuthContextData {
   isLoading: boolean
   signIn: (credentials: SignInCredentials) => Promise<void>
   signOut: () => void
+  updateUser: (user: User) => void
 }
 
 export interface AuthData {

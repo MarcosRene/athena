@@ -63,7 +63,7 @@ export function NewSchedule() {
     } catch (error) {
       toast.error('Não foi possível criar uma agendamento, tente novamente!')
     } finally {
-      setIsSubmitting(true)
+      setIsSubmitting(false)
     }
   }
 
@@ -88,13 +88,14 @@ export function NewSchedule() {
         ]}
       />
 
-      <form onSubmit={onSubmit} className="flex flex-col items-start">
+      <form onSubmit={onSubmit} className="flex flex-col items-start space-y-4">
         <Input.Field className="w-full">
           <Input.Label htmlFor="subject">Assunto</Input.Label>
 
           <Input.Container>
             <Input.Control
               name="subject"
+              id="subject"
               placeholder="ex: TCC"
               value={formData?.subject}
               onChange={handleChange}
@@ -115,6 +116,7 @@ export function NewSchedule() {
           <Textarea.Label htmlFor="description">Descrição</Textarea.Label>
 
           <Textarea.Control
+            id="description"
             name="description"
             placeholder="ex: Discutir tema do TCC"
             value={formData.description}

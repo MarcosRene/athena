@@ -8,6 +8,7 @@ import {
   AuthData,
   AuthProviderProps,
   SignInCredentials,
+  User,
 } from './types'
 import { composeStorageKey } from '@/utils/compose-storage-key'
 
@@ -66,6 +67,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setData({} as AuthData)
   }, [])
 
+  const updateUser = useCallback(
+    (user: User) => {
+      localStorage.setItem(composeStorageKey('user'), JSON.stringify(user))
+
+      setData({
+        token: data.token,
+        user: {
+          ...user,
+          avatar: `http://localhost:3333/uploads/${user.avatar}`,
+        },
+        signed: true,
+      })
+    },
+    [setData, data.token]
+  )
+
   return (
     <AuthContext.Provider
       value={{
@@ -74,6 +91,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isLoading,
         signIn,
         signOut,
+        updateUser,
       }}
     >
       {children}
