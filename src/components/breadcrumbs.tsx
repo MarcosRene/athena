@@ -3,8 +3,14 @@ import { ChevronRight } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
+type Breadcrumb = {
+  label: string
+  href: string
+  activeLink?: boolean
+}
+
 interface BreadcrumbsProps {
-  breadcrumbs: { label: string; href: string; activeLink?: boolean }[]
+  breadcrumbs: Breadcrumb[]
 }
 
 export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
