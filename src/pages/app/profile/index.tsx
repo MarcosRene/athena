@@ -72,10 +72,7 @@ export function Profile() {
 
   useEffect(() => {
     if (!data) return
-    setUserProfile({
-      ...data,
-      avatar: `http://localhost:3333/uploads/${data.avatar}`,
-    })
+    setUserProfile(data)
   }, [data])
 
   const hasUserProfile = data !== null && !isLoading

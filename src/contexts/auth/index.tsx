@@ -14,6 +14,8 @@ import { composeStorageKey } from '@/utils/compose-storage-key'
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
+const avatarURL = (avatar: string) => `http://localhost:3333/uploads/${avatar}`
+
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -44,7 +46,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const user = {
         ...data.user,
-        avatar: `http://localhost:3333/uploads/${data.user.avatar}`,
+        avatar: avatarURL(data.user.avatar),
       }
 
       api.defaults.headers.authorization = `Bearer ${data?.token}`
@@ -69,18 +71,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const updateUser = useCallback(
     (user: User) => {
-      localStorage.setItem(composeStorageKey('user'), JSON.stringify(user))
+      const updatedUser = {
+        ...user,
+        avatar: avatarURL(user.avatar),
+      }
+
+      localStorage.setItem(
+        composeStorageKey('user'),
+        JSON.stringify(updatedUser)
+      )
 
       setData({
         token: data.token,
-        user: {
-          ...user,
-          avatar: `http://localhost:3333/uploads/${user.avatar}`,
-        },
+        user: updatedUser,
         signed: true,
       })
     },
-    [setData, data.token]
+    [data.token]
   )
 
   return (
