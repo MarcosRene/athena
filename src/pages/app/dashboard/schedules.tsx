@@ -5,6 +5,8 @@ import { Pencil, Trash2 } from 'lucide-react'
 import { Button } from '@/components/button'
 
 import { ScheduleResponse } from '../types'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 interface SchedulesProps {
   schedules: ScheduleResponse[]
@@ -13,10 +15,6 @@ interface SchedulesProps {
 
 function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
   const navigate = useNavigate()
-
-  // width: min-content;
-  // max-width: -webkit-fill-available;
-  // margin-right: auto;
 
   return (
     <ul className="w-full grid gap-[1px] grid-cols-auto-fill bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
@@ -71,7 +69,20 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
             </p>
 
             <span className="w-full mt-auto text-sm text-gray-500 block">
-              • {schedule.dateTime}
+              {/* {new Date(schedule.date)
+                .toLocaleDateString('pt-BR', {
+                  day: '2-digit',
+                  month: 'long',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })
+                .replace(' às', ', às')
+                .replace('', '• ')
+                .concat('.')} */}
+
+              {format(schedule.date, "• dd 'de' MMMM, 'às' HH:mm.", {
+                locale: ptBR,
+              })}
             </span>
           </div>
         </li>

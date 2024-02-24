@@ -1,5 +1,6 @@
+import 'react-datepicker/dist/react-datepicker.css'
 import './global.css'
-import '@/lib/dayjs'
+import '@/lib/date-fns'
 
 import { RouterProvider } from 'react-router-dom'
 import { Helmet, HelmetProvider } from 'react-helmet-async'

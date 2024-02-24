@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Dayjs } from 'dayjs'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
@@ -14,22 +13,33 @@ import { Textarea } from '@/components/textarea'
 
 import { useFetch } from '@/hooks/useFetch'
 
+import { initializeDateTime } from '@/utils/initialize-date-time'
+
 import { api } from '@/services/api'
 
 import { UsersTeacherResponse } from './types'
+import { format } from 'date-fns'
 
 interface FormData {
   subject: string
   teacherId: string
   description: string
+  date: Date
+}
+
+const initialFormDataState: FormData = {
+  subject: '',
+  teacherId: '',
+  description: '',
+  date: new Date(),
 }
 
 export function NewSchedule() {
   const navigate = useNavigate()
 
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
-  const [selectedtime, setSelectedTime] = useState<string | null>(null)
-  const [formData, setFormData] = useState<FormData>({} as FormData)
+  const [date, setDate] = useState<Date>(initializeDateTime(0, 8))
+
+  const [formData, setFormData] = useState<FormData>(initialFormDataState)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   function handleChange(
@@ -44,8 +54,6 @@ export function NewSchedule() {
 
   const isFormValid = Object.values({
     ...formData,
-    selectedDate,
-    selectedtime,
   }).every((value) => value !== '')
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -53,10 +61,10 @@ export function NewSchedule() {
 
     try {
       setIsSubmitting(true)
+
       await api.post('/schedules', {
         ...formData,
-        date: selectedDate?.format('YYYY-MM-DD'),
-        time: selectedtime,
+        date: format(date, 'yyyy/MM/dd HH:mm'),
       })
 
       navigate('/', { replace: true })
@@ -126,15 +134,14 @@ export function NewSchedule() {
 
         <Calendar
           label="Data/Hora"
-          selectedDate={selectedDate}
-          onDateSelected={setSelectedDate}
-          onTimeSelected={setSelectedTime}
+          selected={date}
+          onChange={(value: Date) => setDate(value)}
         />
 
         <div className="w-full flex justify-end mt-4">
           <Button.Root
             type="submit"
-            className="uppercase font-mediu"
+            className="uppercase font-medium"
             disabled={!isFormValid || isSubmitting}
           >
             {isSubmitting ? (

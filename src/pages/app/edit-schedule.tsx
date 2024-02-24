@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Dayjs } from 'dayjs'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
@@ -19,15 +18,17 @@ import { api } from '@/services/api'
 import { ScheduleResponse, UsersTeacherResponse } from './types'
 
 import { FormSkeleton } from './form-skeleton'
+import { format } from 'date-fns'
 
 export function EditSchedule() {
   const { id } = useParams()
 
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
-  const [selectedtime, setSelectedTime] = useState<string | null>(null)
+  const [date, setDate] = useState<Date>(new Date())
+
   const [schedule, setSchedule] = useState<ScheduleResponse | null>(
     {} as ScheduleResponse
   )
+
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   function handleChange(
@@ -48,7 +49,10 @@ export function EditSchedule() {
     try {
       setIsSubmitting(true)
 
-      await api.put(`/schedules/${id}`, { ...schedule, time: selectedtime })
+      await api.put(`/schedules/${id}`, {
+        ...schedule,
+        date: format(date, 'yyyy/MM/dd HH:mm'),
+      })
 
       toast.success('Agendamento atualizado com successo.')
     } catch (error) {
@@ -80,6 +84,7 @@ export function EditSchedule() {
   useEffect(() => {
     if (!data) return
     setSchedule(data)
+    setDate(new Date(data.date))
   }, [data])
 
   const hasSchedule = data !== null && !isLoading
@@ -137,9 +142,8 @@ export function EditSchedule() {
 
           <Calendar
             label="Data/Hora"
-            selectedDate={selectedDate}
-            onDateSelected={setSelectedDate}
-            onTimeSelected={setSelectedTime}
+            selected={date}
+            onChange={(value: Date) => setDate(value)}
           />
 
           <div className="w-full flex justify-end mt-4">

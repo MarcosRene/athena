@@ -4,9 +4,7 @@ export interface ScheduleResponse {
   subject: string
   description: string
   teacherId: string
-  date: string
-  time: string
-  dateTime: string
+  date: Date
   oldScheduling: boolean
 }
 

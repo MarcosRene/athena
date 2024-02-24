@@ -20,7 +20,7 @@ export function FormSkeleton() {
 
       <div className="block w-full">
         <Skeleton className="mb-2 w-20 h-5" />
-        <Skeleton className="w-[446px] h-[436px] rounded-lg" />
+        <Skeleton className="w-[225px] h-10 rounded-lg" />
       </div>
 
       <div className="w-full flex justify-end mt-4">

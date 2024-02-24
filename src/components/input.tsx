@@ -1,17 +1,21 @@
-import { ComponentProps } from 'react'
+import { ComponentProps, forwardRef } from 'react'
 
 import { cn } from '@/lib/utils'
 
 interface FieldProps extends ComponentProps<'div'> {}
 
-function Field({ className, ...props }: FieldProps) {
-  return (
-    <div
-      className={cn('flex flex-col items-start group', className)}
-      {...props}
-    />
-  )
-}
+// eslint-disable-next-line react/display-name
+const Field = forwardRef<HTMLDivElement, FieldProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn('flex flex-col items-start group', className)}
+        {...props}
+      />
+    )
+  }
+)
 
 interface LabelProps extends ComponentProps<'label'> {}
 
