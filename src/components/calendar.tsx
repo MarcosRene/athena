@@ -10,7 +10,7 @@ interface CalendarProps extends ReactDatePickerProps {
 }
 
 export function Calendar({ label, ...props }: CalendarProps) {
-  const { selected, onChange } = props
+  const { selected } = props
 
   const filterPassedDate = (date: Date) => {
     const passedDate = new Date() < date
@@ -31,7 +31,6 @@ export function Calendar({ label, ...props }: CalendarProps) {
   return (
     <DatePicker
       selected={selected}
-      onChange={onChange}
       filterDate={filterPassedDate}
       filterTime={filterPassedTime}
       dateFormat="dd/MM/yyyy HH:mm"
@@ -55,6 +54,7 @@ export function Calendar({ label, ...props }: CalendarProps) {
       locale="ptBR"
       withPortal
       disabledKeyboardNavigation
+      {...props}
     />
   )
 }

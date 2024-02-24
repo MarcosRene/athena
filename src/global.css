@@ -315,3 +315,18 @@
   background: hsl(240, 4%, 16%);
   border-radius: 8px;
 }
+
+@media only screen and (max-width: 576px) {
+  .react-datepicker__tab-loop .react-datepicker__month-container,
+  .react-datepicker__tab-loop .react-datepicker__time-container {
+    width: 100%;
+  }
+
+  .react-datepicker__tab-loop
+    .react-datepicker
+    .react-datepicker__navigation--next--with-time:not(
+      .react-datepicker__navigation--next--with-today-button
+    ) {
+    right: 16px;
+  }
+}
