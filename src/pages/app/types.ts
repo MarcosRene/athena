@@ -1,11 +1,17 @@
+type Teacher = {
+  _id: string
+  name: string
+}
+
 export interface ScheduleResponse {
   _id: string
   identifier: string
   subject: string
   description: string
-  teacherId: string
+  userId: string
   date: Date
   oldScheduling: boolean
+  teacher?: Teacher | null
 }
 
 export interface UsersTeacherResponse {

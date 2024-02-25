@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Plus, Search } from 'lucide-react'
@@ -26,6 +26,7 @@ export function Dashboard() {
   const subject = searchParams.get('subject')
 
   const [searchTerm, setSearchTerm] = useState(subject ?? '')
+  const [schedules, setSchedules] = useState<ScheduleResponse[]>([])
   const [scheduleId, setScheduleId] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -65,6 +66,10 @@ export function Dashboard() {
 
       toast.success('O agendamento foi excluído com successo.')
       toggleModal()
+
+      setSchedules((prevState) =>
+        prevState.filter((item) => item._id !== scheduleId)
+      )
     } catch (error) {
       if (error instanceof Error) {
         return
@@ -76,7 +81,7 @@ export function Dashboard() {
     }
   }
 
-  const { data: schedules, isLoading } = useFetch<ScheduleResponse[]>({
+  const { data, isLoading } = useFetch<ScheduleResponse[]>({
     url: '/schedules',
     query: {
       key: 'subject',
@@ -85,9 +90,13 @@ export function Dashboard() {
     errorMessage: 'Não foi possível carregar os agendamentos.',
   })
 
-  const hasSchedules = !!schedules?.length && !isLoading
-  const isListEmpty = schedules?.length === 0 && !isLoading
+  useEffect(() => {
+    if (!data) return
+    setSchedules(data)
+  }, [data])
 
+  const hasSchedules = !!data?.length && !isLoading
+  const isListEmpty = schedules?.length === 0 && !isLoading
   return (
     <>
       <Helmet title="Dashboard" />

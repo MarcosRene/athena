@@ -17,13 +17,13 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
   const navigate = useNavigate()
 
   return (
-    <ul className="w-full grid gap-[1px] grid-cols-auto-fill bg-gray-900 border border-gray-900 rounded-lg overflow-hidden list-none">
-      {schedules?.slice(0, 12)?.map((schedule) => (
+    <ul className="w-full grid grid-cols-auto-fill gap-4 list-none">
+      {schedules?.map((schedule) => (
         <li
           key={schedule.identifier}
-          className="relative p-4 bg-zinc-950/75 transition-colors hover:bg-black-100"
+          className="relative p-4 transition-colors border border-gray-900 rounded-lg hover:bg-zinc-900"
         >
-          <div className="mb-4 flex items-center justify-between gap-1">
+          <div className="mb-4 flex items-center justify-between">
             <Link
               to="/1/edit-schedule"
               className={`relative text-sm font-medium block underline before:h-2 before:w-2 before:absolute before:top-1 before:-right-4 before:rounded-full ${schedule.oldScheduling ? 'before:bg-orange-600 aria-disabled:pointer-events-none' : 'before:bg-green-600'}`}
@@ -53,33 +53,31 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
             </div>
           </div>
 
-          <div className="h-24 flex flex-col gap-2">
-            <h1
+          <div className="h-30 flex flex-col gap-2">
+            <span
+              data-label="Professor"
+              className="text-sm font-medium line-clamp-1"
+              title={schedule.teacher?.name}
+            >
+              Professor:{' '}
+              <span className="text-gray-500">{schedule.teacher?.name}</span>
+            </span>
+
+            <span
               className="text-sm font-medium line-clamp-1"
               title={schedule.subject}
             >
               {schedule.subject}
-            </h1>
+            </span>
 
-            <p
+            <span
               className="text-sm text-gray-500 line-clamp-2"
               title={schedule.description}
             >
               {schedule.description}
-            </p>
+            </span>
 
             <span className="w-full mt-auto text-sm text-gray-500 block">
-              {/* {new Date(schedule.date)
-                .toLocaleDateString('pt-BR', {
-                  day: '2-digit',
-                  month: 'long',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })
-                .replace(' às', ', às')
-                .replace('', '• ')
-                .concat('.')} */}
-
               {format(schedule.date, "• dd 'de' MMMM, 'às' HH:mm.", {
                 locale: ptBR,
               })}

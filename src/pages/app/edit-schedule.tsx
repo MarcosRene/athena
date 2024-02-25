@@ -120,11 +120,11 @@ export function EditSchedule() {
           </Input.Field>
 
           <Select
-            id="teacherId"
-            name="teacherId"
+            id="userId"
+            name="userId"
             label="Professor"
             options={formattedTeachers}
-            value={schedule?.teacherId}
+            value={schedule?.userId}
             onChange={handleChange}
           />
 

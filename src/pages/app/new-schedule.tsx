@@ -22,14 +22,14 @@ import { format } from 'date-fns'
 
 interface FormData {
   subject: string
-  teacherId: string
+  userId: string
   description: string
   date: Date
 }
 
 const initialFormDataState: FormData = {
   subject: '',
-  teacherId: '',
+  userId: '',
   description: '',
   date: new Date(),
 }
@@ -112,10 +112,10 @@ export function NewSchedule() {
         </Input.Field>
 
         <Select
-          name="teacherId"
+          name="userId"
           label="Professor"
           options={formattedTeachers}
-          value={formData.teacherId}
+          value={formData.userId}
           onChange={handleChange}
           disabled={isLoading}
         />

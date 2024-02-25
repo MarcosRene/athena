@@ -1,12 +1,15 @@
 import { ChangeEvent, useMemo, useState } from 'react'
 import { toast } from 'sonner'
 
+import { useAuth } from '@/contexts/auth'
 interface InputFile {
   onFileSelected: (file: File) => void
   avatarURL?: string
 }
 
 export function InputFile({ onFileSelected, avatarURL }: InputFile) {
+  const { user } = useAuth()
+
   const [imageFile, setImageFile] = useState<File | null>(null)
 
   function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {
@@ -54,8 +57,8 @@ export function InputFile({ onFileSelected, avatarURL }: InputFile) {
             {avatarURL ? (
               <img src={avatarURL} alt="Avatar" className="absolute inset-0" />
             ) : (
-              <div className="absolute inset-0 bg-zinc-500 text-2xl lg:text-4xl font-logo font-semibold flex items-center justify-center">
-                US
+              <div className="absolute inset-0 bg-zinc-500 text-2xl lg:text-4xl font-logo font-semibold uppercase flex items-center justify-center">
+                {user.name.slice(0, 2)}
               </div>
             )}
           </>

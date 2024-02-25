@@ -14,7 +14,8 @@ import { composeStorageKey } from '@/utils/compose-storage-key'
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
-const avatarURL = (avatar: string) => `http://localhost:3333/uploads/${avatar}`
+const avatarURL = (avatar: string) =>
+  avatar ? `http://localhost:3333/uploads/${avatar}` : ''
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState(false)

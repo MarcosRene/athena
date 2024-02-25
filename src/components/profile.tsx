@@ -34,11 +34,17 @@ export function Profile() {
           <span className="text-gray-500 text-sm">{user.email}</span>
         </div>
 
-        <img
-          className="inline-block h-12 w-12 rounded-full cursor-pointer"
-          src={user.avatar}
-          alt={`Avatar do usuário ${user.name}`}
-        />
+        {user.avatar ? (
+          <img
+            className="inline-block h-12 w-12 rounded-full cursor-pointer"
+            src={user.avatar}
+            alt={`Avatar do usuário ${user.name}`}
+          />
+        ) : (
+          <div className="h-12 w-12 text-sm rounded-full cursor-pointer bg-zinc-500 uppercase ring-2 ring-gray-900 flex items-center justify-center font-semibold font-logo">
+            {user.name.slice(0, 2)}
+          </div>
+        )}
       </div>
 
       {isDropdownOpen && (
