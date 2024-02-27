@@ -12,7 +12,7 @@ export function SchedulesSkeleton() {
           key={index}
           className="relative px-4 py-5 transition-colors border border-gray-900 rounded-lg"
         >
-          <div className="mb-6 flex items-center justify-between gap-1">
+          <div className="mb-4 flex items-center justify-between gap-1">
             <Skeleton className="h-5 w-20" />
             <Skeleton className="h-5 w-12" />
           </div>

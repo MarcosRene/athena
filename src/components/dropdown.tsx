@@ -16,11 +16,11 @@ export function Dropdown({ options }: DropdownProps) {
       {options.map(({ icon: Icon, label, onClick }) => (
         <li
           key={label}
-          className="w-32 py-3 px-4 text-sm border-b border-b-gray-900 flex items-center gap-2 transition-colors cursor-pointer hover:bg-gray-900 last:border-none"
+          className="min-w-32 w-full py-3 px-4 text-sm border-b border-b-gray-900 flex items-center gap-2 transition-colors cursor-pointer hover:bg-zinc-900 last:border-none"
           onClick={onClick}
         >
           {Icon && <Icon size={18} />}
-          <span className="font-medium gap-4">{label}</span>
+          <span className="font-medium">{label}</span>
         </li>
       ))}
     </ol>

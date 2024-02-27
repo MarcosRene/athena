@@ -23,7 +23,7 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
           key={schedule.identifier}
           className="relative p-4 transition-colors border border-gray-900 rounded-lg hover:bg-zinc-900"
         >
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <Link
               to="/1/edit-schedule"
               className={`relative text-sm font-medium block underline before:h-2 before:w-2 before:absolute before:top-1 before:-right-4 before:rounded-full ${schedule.oldScheduling ? 'before:bg-orange-600 aria-disabled:pointer-events-none' : 'before:bg-green-600'}`}
@@ -53,7 +53,7 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
             </div>
           </div>
 
-          <div className="h-30 flex flex-col gap-2">
+          <div className="h-28 flex flex-col gap-2">
             <span
               data-label="Professor"
               className="text-sm font-medium line-clamp-1"
@@ -76,13 +76,13 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
             >
               {schedule.description}
             </span>
-
-            <span className="w-full mt-auto text-sm text-gray-500 block">
-              {format(schedule.date, "• dd 'de' MMMM, 'às' HH:mm.", {
-                locale: ptBR,
-              })}
-            </span>
           </div>
+
+          <span className="w-full mt-auto text-sm text-gray-500 block">
+            {format(schedule.date, "• dd 'de' MMMM, 'às' HH:mm.", {
+              locale: ptBR,
+            })}
+          </span>
         </li>
       ))}
     </ul>

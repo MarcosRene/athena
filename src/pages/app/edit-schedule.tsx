@@ -96,7 +96,11 @@ export function EditSchedule() {
       <Breadcrumbs
         breadcrumbs={[
           { label: 'Dashboard', href: '/' },
-          { label: 'Editar', href: '/edit-schedule', activeLink: true },
+          {
+            label: 'Editar',
+            href: `/${schedule?._id}/edit-schedule`,
+            activeLink: true,
+          },
         ]}
       />
 
@@ -108,15 +112,22 @@ export function EditSchedule() {
           <Input.Field className="w-full">
             <Input.Label htmlFor="subject">Assunto</Input.Label>
 
-            <Input.Container>
+            <Input.Container data-invalid={schedule?.subject?.length === 30}>
               <Input.Control
                 id="subject"
                 name="subject"
                 placeholder="ex: TCC"
                 value={schedule?.subject}
                 onChange={handleChange}
+                maxLength={30}
               />
             </Input.Container>
+
+            <Input.Prefix className="w-full p-0 flex justify-end">
+              <span className="text-xs text-gray-500">
+                Máximo: 30 caracteres.
+              </span>
+            </Input.Prefix>
           </Input.Field>
 
           <Select
@@ -146,7 +157,9 @@ export function EditSchedule() {
             onChange={(value: Date) => setDate(value)}
           />
 
-          <div className="w-full flex justify-end mt-4">
+          <small>• Todos os campos são obrigatórios.</small>
+
+          <div className="w-full flex justify-end">
             <Button.Root
               type="submit"
               className="uppercase font-medium"

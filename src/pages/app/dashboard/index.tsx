@@ -95,8 +95,9 @@ export function Dashboard() {
     setSchedules(data)
   }, [data])
 
-  const hasSchedules = !!data?.length && !isLoading
-  const isListEmpty = schedules?.length === 0 && !isLoading
+  const hasSchedules = schedules?.length > 0 && !isLoading
+  const isEmptyList = schedules?.length === 0 && !isLoading
+
   return (
     <>
       <Helmet title="Dashboard" />
@@ -150,7 +151,7 @@ export function Dashboard() {
             </>
           )}
 
-          {isListEmpty && <Empty />}
+          {isEmptyList && <Empty />}
         </div>
       </div>
     </>

@@ -4,33 +4,35 @@ import { cn } from '@/lib/utils'
 
 interface FieldProps extends ComponentProps<'div'> {}
 
-// eslint-disable-next-line react/display-name
 const Field = forwardRef<HTMLDivElement, FieldProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col items-start group', className)}
+        className={cn('flex flex-col items-start group space-y-2', className)}
         {...props}
       />
     )
   }
 )
 
+Field.displayName = 'Field'
+
 interface LabelProps extends ComponentProps<'label'> {}
 
 function Label({ ...props }: LabelProps) {
-  return (
-    <label className="mb-2 inline-block text-sm text-gray-100" {...props} />
-  )
+  return <label className="inline-block text-sm text-gray-100" {...props} />
 }
 
 interface ContainerProps extends ComponentProps<'div'> {}
 
-function Container({ ...props }: ContainerProps) {
+function Container({ className, ...props }: ContainerProps) {
   return (
     <div
-      className="w-full relative h-10 flex items-center border border-gray-900 rounded-lg overflow-hidden focus-within:border-transparent focus-within:outline outline-2 outline-green-600"
+      className={cn(
+        'w-full relative h-10 flex items-center border border-gray-900 rounded-lg overflow-hidden focus-within:border-transparent focus-within:outline outline-2 outline-green-600 data-[invalid=true]:focus-within:outline-red-500',
+        className
+      )}
       {...props}
     />
   )
