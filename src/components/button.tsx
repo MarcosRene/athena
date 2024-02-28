@@ -9,7 +9,7 @@ function Root({ className, ...props }: RootProps) {
     <button
       type="button"
       className={cn(
-        'h-10 py-0 px-3 flex items-center justify-center text-white text-sm leading-none font-semibold bg-green-600 transition-colors hover:bg-green-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-600',
+        'h-10 py-0 px-3 flex items-center justify-center text-white text-sm leading-none font-semibold bg-green-600 transition-colors cursor-pointer hover:bg-green-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-600',
         className
       )}
       {...props}

@@ -1,9 +1,11 @@
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import { format, getDay, getTime } from 'date-fns'
 
-import { Input } from './input'
+import { ptBR } from '@/lib/date-fns'
 
 import { initializeDateTime } from '@/utils/initialize-date-time'
+
+import { Input } from './input'
 
 interface CalendarProps extends ReactDatePickerProps {
   label?: string
@@ -35,6 +37,7 @@ export function Calendar({ label, ...props }: CalendarProps) {
       filterTime={filterPassedTime}
       dateFormat="dd/MM/yyyy HH:mm"
       showTimeSelect
+      timeCaption={format(String(selected), 'iiii, dd', { locale: ptBR })}
       minTime={initializeDateTime(0, 8)}
       maxTime={initializeDateTime(0, 17)}
       timeIntervals={30}

@@ -12,6 +12,8 @@ export function Empty() {
         height={280}
       />
 
+      <input type="hidden" name="" id="" style={{ background: ' red' }} />
+
       <div className="mt-8 flex flex-col items-center">
         <h4 className="text-base md:text-lg text-center">
           Você não possui agendamentos disponíveis!

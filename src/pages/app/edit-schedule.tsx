@@ -125,7 +125,7 @@ export function EditSchedule() {
 
             <Input.Prefix className="w-full p-0 flex justify-end">
               <span className="text-xs text-gray-500">
-                Máximo: 30 caracteres.
+                {schedule?.subject?.length}/30
               </span>
             </Input.Prefix>
           </Input.Field>

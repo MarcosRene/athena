@@ -1,22 +1,21 @@
-import { ComponentProps, forwardRef } from 'react'
+import { ComponentProps, forwardRef, ForwardRefRenderFunction } from 'react'
 
 import { cn } from '@/lib/utils'
 
 interface FieldProps extends ComponentProps<'div'> {}
 
-const Field = forwardRef<HTMLDivElement, FieldProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn('flex flex-col items-start group space-y-2', className)}
-        {...props}
-      />
-    )
-  }
-)
-
-Field.displayName = 'Field'
+const Field: ForwardRefRenderFunction<HTMLDivElement, FieldProps> = (
+  { className, ...props },
+  ref
+) => {
+  return (
+    <div
+      ref={ref}
+      className={cn('flex flex-col items-start group space-y-2', className)}
+      {...props}
+    />
+  )
+}
 
 interface LabelProps extends ComponentProps<'label'> {}
 
@@ -67,7 +66,7 @@ function Control({ className, ...props }: ControlProps) {
 }
 
 export const Input = {
-  Field,
+  Field: forwardRef(Field),
   Label,
   Container,
   Prefix,
