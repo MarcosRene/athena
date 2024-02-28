@@ -2,39 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-black-100 text-white-100 font-body text-base;
-  }
-
-  button {
-    @apply cursor-pointer;
-  }
-}
-
-.react-datepicker-wrapper > .react-datepicker__input-container input {
-  height: 38px;
-  padding: 0px 14px;
-  border-radius: 8px;
-  background: hsl(240, 10%, 4%);
-  border: 1px solid hsl(240, 4%, 16%);
-  font-size: 14px;
-}
-
-.react-datepicker-wrapper > .react-datepicker__input-container input:focus {
-  outline: 2px solid hsl(145, 48%, 35%);
-}
-
-.react-datepicker__tab-loop
-  .react-datepicker__time-container
-  .react-datepicker__time {
-  background: transparent;
-}
-
 .react-datepicker__tab-loop
   .react-datepicker__time-container
   .react-datepicker__time-list-item,
-.react-datepicker__tab-loop .react-datepicker__month-container {
+.react-datepicker__tab-loop .react-datepicker__month-container,
+.react-datepicker__time-container .react-datepicker-time__header {
   font-family: 'Inter', sans-serif;
   padding: 16px;
   background: hsl(240, 10%, 4%);
@@ -106,7 +78,7 @@
   .react-datepicker__navigation--next--with-time:not(
     .react-datepicker__navigation--next--with-today-button
   ) {
-  right: 156px;
+  right: 178px;
 }
 
 .react-datepicker__tab-loop
@@ -152,11 +124,18 @@
 .react-datepicker__tab-loop
   .react-datepicker__time-container
   .react-datepicker-time__header {
-  display: none;
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  color: hsl(240, 6%, 90%);
+  border-left: 1px solid hsl(240, 4%, 16%);
+  text-transform: lowercase;
 }
 
 .react-datepicker__tab-loop .react-datepicker__time-container {
-  min-width: 140px;
+  min-width: 156px;
   border-left: none;
   background: hsl(240, 10%, 4%);
 }
