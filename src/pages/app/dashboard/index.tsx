@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Plus, Search } from 'lucide-react'
@@ -10,7 +10,6 @@ import { Input } from '@/components/input'
 import { Modal } from '@/components/modal'
 
 import { useDebounce } from '@/hooks/useDebounce'
-import { useFetch } from '@/hooks/useFetch'
 
 import { api } from '@/services/api'
 
@@ -18,7 +17,8 @@ import { Empty } from '@/pages/empty'
 import { Schedules } from './schedules'
 import { SchedulesSkeleton } from './schedules-skeleton'
 
-import { ScheduleResponse } from '../types'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { queryClient } from '@/lib/query-client'
 
 export function Dashboard() {
   const navigate = useNavigate()
@@ -26,7 +26,6 @@ export function Dashboard() {
   const subject = searchParams.get('subject')
 
   const [searchTerm, setSearchTerm] = useState(subject ?? '')
-  const [schedules, setSchedules] = useState<ScheduleResponse[]>([])
   const [scheduleId, setScheduleId] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -58,7 +57,7 @@ export function Dashboard() {
     toggleModal()
   }
 
-  async function onDeleteSchedule() {
+  async function deleteSchedule() {
     try {
       setIsDeleting(true)
 
@@ -66,10 +65,6 @@ export function Dashboard() {
 
       toast.success('O agendamento foi excluído com successo.')
       toggleModal()
-
-      setSchedules((prevState) =>
-        prevState.filter((item) => item._id !== scheduleId)
-      )
     } catch (error) {
       if (error instanceof Error) {
         return
@@ -81,19 +76,30 @@ export function Dashboard() {
     }
   }
 
-  const { data, isLoading } = useFetch<ScheduleResponse[]>({
-    url: '/schedules',
-    query: {
-      key: 'subject',
-      value: debouncedValue,
-    },
-    errorMessage: 'Não foi possível carregar os agendamentos.',
+  async function fetchSchedules() {
+    try {
+      const response = await api.get(
+        `/schedules?${debouncedValue && `subject=${debouncedValue}`}`
+      )
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const { data: schedules, isLoading } = useQuery({
+    queryKey: ['schedules', debouncedValue],
+    queryFn: fetchSchedules,
   })
 
-  useEffect(() => {
-    if (!data) return
-    setSchedules(data)
-  }, [data])
+  const { mutateAsync: onDeleteSchedule } = useMutation({
+    mutationKey: ['delete-schedule', scheduleId],
+    mutationFn: deleteSchedule,
+    onSuccess: async () => {
+      const updatedSchedules = await fetchSchedules()
+      queryClient.setQueryData(['schedules', debouncedValue], updatedSchedules)
+    },
+  })
 
   const hasSchedules = schedules?.length > 0 && !isLoading
   const isEmptyList = schedules?.length === 0 && !isLoading
