@@ -144,17 +144,17 @@ export function Profile() {
             </Input.Field>
 
             <div className="col-start-2 col-end-2 flex justify-end">
-              <Button.Root
+              <Button
                 type="submit"
                 className="uppercase font-medium"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
-                  <Button.Icon name={Loader2} className="size-4 animate-spin" />
+                  <Loader2 className="size-4 animate-spin" />
                 ) : (
                   'Atualizar'
                 )}
-              </Button.Root>
+              </Button>
             </div>
           </div>
         </form>

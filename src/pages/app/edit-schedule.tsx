@@ -157,17 +157,13 @@ export function EditSchedule() {
           <small>• Todos os campos são obrigatórios.</small>
 
           <div className="w-full flex justify-end">
-            <Button.Root
-              type="submit"
-              className="uppercase font-medium"
-              disabled={isSubmitting}
-            >
+            <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? (
-                <Button.Icon name={Loader2} className="size-4 animate-spin" />
+                <Loader2 className="size-4 animate-spin" />
               ) : (
                 'Salvar'
               )}
-            </Button.Root>
+            </Button>
           </div>
         </form>
       ) : (

@@ -1,0 +1,27 @@
+.button__container {
+  height: 40px;
+  padding: 0 12px;
+
+  font-size: 14px;
+  line-height: normal;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: var(--green-600);
+  color: var(--white);
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.button__container:hover {
+  background-color: var(--green-700);
+}
+
+.button__container:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--green-600);
+}

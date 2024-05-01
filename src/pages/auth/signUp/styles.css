@@ -44,3 +44,9 @@
 .sign-up__container form a:hover {
   color: var(--gray-500);
 }
+
+.sign-up__container form button {
+  width: 100%;
+  text-transform: uppercase;
+}
+

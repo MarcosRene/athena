@@ -125,13 +125,10 @@ export function Dashboard() {
       <div className="flex items-start justify-between">
         <Breadcrumbs breadcrumbs={[{ label: 'Dashboard', href: '/' }]} />
 
-        <Button.Root
-          className="uppercase font-medium gap-2"
-          onClick={() => navigate('/new-schedule', { replace: true })}
-        >
+        <Button onClick={() => navigate('/new-schedule', { replace: true })}>
           Criar
-          <Button.Icon name={Plus} className="size-5" />
-        </Button.Root>
+          <Plus className="size-5" />
+        </Button>
       </div>
 
       <div className="flex flex-col items-end space-y-4">

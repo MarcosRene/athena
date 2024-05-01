@@ -4,6 +4,7 @@
 
 * {
   --black-100: hsl(240, 10%, 4%);
+  --white: hsl(0, 0%, 100%);
   --white-100: hsl(0, 0%, 95%);
   --green-500: hsl(145, 46%, 45%);
   --green-600: hsl(145, 48%, 35%);
@@ -17,6 +18,10 @@ body {
   color: var(--white-100);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .react-datepicker__tab-loop

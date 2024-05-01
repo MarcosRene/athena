@@ -35,6 +35,11 @@
   gap: 16px;
 }
 
+.sign-in__container form button {
+  width: 100%;
+  text-transform: uppercase;
+}
+
 .sign-in__container form a {
   margin-bottom: 24px;
   width: 100%;

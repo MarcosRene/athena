@@ -126,17 +126,13 @@ export function SignUp() {
 
         <Link to="/sign-in">Voltar para login 👈</Link>
 
-        <Button.Root
-          type="submit"
-          className="w-full uppercase"
-          disabled={isLoading}
-        >
+        <Button type="submit" disabled={isLoading}>
           {!isLoading ? (
             'Cadastrar'
           ) : (
-            <Button.Icon name={Loader2} className="animate-spin size-5" />
+            <Loader2 className="animate-spin size-5" />
           )}
-        </Button.Root>
+        </Button>
       </form>
     </div>
   )
