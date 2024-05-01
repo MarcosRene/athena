@@ -3,7 +3,6 @@ import './global.css'
 import '@/lib/date-fns'
 
 import { RouterProvider } from 'react-router-dom'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'sonner'
@@ -18,12 +17,8 @@ export function App() {
       <ReactQueryDevtools initialIsOpen={false} />
 
       <AuthProvider>
-        <HelmetProvider>
-          <Helmet titleTemplate="%s | Athena" />
-
-          <RouterProvider router={router} />
-          <Toaster position="bottom-center" richColors />
-        </HelmetProvider>
+        <RouterProvider router={router} />
+        <Toaster position="bottom-center" richColors />
       </AuthProvider>
     </QueryClientProvider>
   )

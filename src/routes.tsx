@@ -8,8 +8,8 @@ import { Dashboard } from './pages/app/dashboard'
 import { NewSchedule } from './pages/app/new-schedule'
 import { EditSchedule } from './pages/app/edit-schedule'
 import { Profile } from './pages/app/profile'
-import { SignIn } from './pages/auth/sign-in'
-import { SignUp } from './pages/auth/sign-up'
+import { SignIn } from './pages/auth/signIn'
+import { SignUp } from './pages/auth/signUp'
 import { NotFound } from './pages/404'
 
 interface PrivateRoutesProps {

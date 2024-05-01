@@ -1,4 +1,4 @@
-.sign-in-container {
+.sign-in__container {
   width: 100%;
   max-width: 1024px;
   padding: 48px 40px;
@@ -9,7 +9,7 @@
   gap: 32px;
 }
 
-.sign-in-container h1 {
+.sign-in__container h1 {
   font-size: 92px;
   font-weight: 900;
   line-height: 88px;
@@ -17,11 +17,11 @@
   display: none;
 }
 
-.sign-in-container h1 span {
+.sign-in__container h1 span {
   color: var(--green-500);
 }
 
-.sign-in-container form {
+.sign-in__container form {
   width: 100%;
   max-width: 400px;
   padding: 48px 40px;
@@ -35,7 +35,7 @@
   gap: 16px;
 }
 
-.sign-in-container form .register {
+.sign-in__container form a {
   margin-bottom: 24px;
   width: 100%;
   height: auto;
@@ -45,22 +45,20 @@
   background-color: transparent;
   text-decoration: underline;
 
-  transition: color 100ms ease-in-out;
-
   display: block;
 }
 
-.sign-in-container form .register:hover {
+.sign-in__container form a:hover {
   color: var(--gray-500);
 }
 
 @media (min-width: 1024px) {
-  .sign-in-container {
+  .sign-in__container {
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .sign-in-container h1 {
+  .sign-in__container h1 {
     display: block;
   }
 }

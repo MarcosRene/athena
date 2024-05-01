@@ -19,6 +19,7 @@ import { SchedulesSkeleton } from './schedules-skeleton'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { queryClient } from '@/lib/query-client'
+import type { ScheduleResponse } from '../types'
 
 export function Dashboard() {
   const navigate = useNavigate()
@@ -87,6 +88,25 @@ export function Dashboard() {
     }
   }
 
+  async function updatedSchedules(scheduleId: string) {
+    const schedulesListingCache = queryClient.getQueriesData({
+      queryKey: ['schedules'],
+    })
+
+    schedulesListingCache.forEach(([cacheKey, cached]) => {
+      if (!cached) {
+        return
+      }
+
+      queryClient.setQueryData(
+        cacheKey,
+        schedules.filter(
+          (schedule: ScheduleResponse) => schedule._id !== scheduleId
+        )
+      )
+    })
+  }
+
   const { data: schedules, isLoading } = useQuery({
     queryKey: ['schedules', debouncedValue],
     queryFn: fetchSchedules,
@@ -95,10 +115,7 @@ export function Dashboard() {
   const { mutateAsync: onDeleteSchedule } = useMutation({
     mutationKey: ['delete-schedule', scheduleId],
     mutationFn: deleteSchedule,
-    onSuccess: async () => {
-      const updatedSchedules = await fetchSchedules()
-      queryClient.setQueryData(['schedules', debouncedValue], updatedSchedules)
-    },
+    onSuccess: async () => updatedSchedules(scheduleId),
   })
 
   const hasSchedules = schedules?.length > 0 && !isLoading
