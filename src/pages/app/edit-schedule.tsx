@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
@@ -91,8 +90,6 @@ export function EditSchedule() {
 
   return (
     <>
-      <Helmet title="Editar" />
-
       <Breadcrumbs
         breadcrumbs={[
           { label: 'Dashboard', href: '/' },

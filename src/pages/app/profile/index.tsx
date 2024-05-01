@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
@@ -79,8 +78,6 @@ export function Profile() {
 
   return (
     <>
-      <Helmet title="Perfil" />
-
       <Breadcrumbs breadcrumbs={[{ label: 'Perfil', href: '/profile' }]} />
 
       {hasUserProfile ? (

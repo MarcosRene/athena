@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 import { format } from 'date-fns'
@@ -84,8 +83,6 @@ export function NewSchedule() {
 
   return (
     <>
-      <Helmet title="Novo" />
-
       <Breadcrumbs
         breadcrumbs={[
           { label: 'Dashboard', href: '/' },

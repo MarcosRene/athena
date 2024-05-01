@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Plus, Search } from 'lucide-react'
 import { toast } from 'sonner'
@@ -123,8 +122,6 @@ export function Dashboard() {
 
   return (
     <>
-      <Helmet title="Dashboard" />
-
       <div className="flex items-start justify-between">
         <Breadcrumbs breadcrumbs={[{ label: 'Dashboard', href: '/' }]} />
 
