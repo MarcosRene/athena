@@ -25,7 +25,7 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
         >
           <div className="mb-2 flex items-center justify-between">
             <Link
-              to="/1/edit-schedule"
+              to={`${schedule._id}/edit-schedule`}
               className={`relative text-sm font-medium block underline before:h-2 before:w-2 before:absolute before:top-1 before:-right-4 before:rounded-full ${schedule.oldScheduling ? 'before:bg-orange-600 aria-disabled:pointer-events-none' : 'before:bg-green-600'}`}
               aria-disabled={schedule.oldScheduling}
             >

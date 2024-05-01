@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  --black-100: hsl(240, 10%, 4%);
+  --white-100: hsl(0, 0%, 95%);
+  --green-500: hsl(145, 46%, 45%);
+  --green-600: hsl(145, 48%, 35%);
+  --green-700: hsl(146, 50%, 24%);
+  --gray-500: hsl(240, 5%, 65%);
+  --gray-900: hsl(240, 4%, 16%);
+}
+
 .react-datepicker__tab-loop
   .react-datepicker__time-container
   .react-datepicker__time-list-item,
