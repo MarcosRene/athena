@@ -14,12 +14,14 @@ import { useFetch } from '@/hooks/useFetch'
 
 import { api } from '@/services/api'
 
-import { ScheduleResponse, UsersTeacherResponse } from './types'
+import { ScheduleResponse, UsersTeacherResponse } from '../types'
 
-import { FormSkeleton } from './form-skeleton'
+import { FormSkeleton } from '../form-skeleton'
 import { format } from 'date-fns'
 import { Field } from '@/components/form/field'
 import { Label } from '@/components/form/label'
+
+import './styles.css'
 
 export function EditSchedule() {
   const { id } = useParams()
@@ -104,10 +106,7 @@ export function EditSchedule() {
       />
 
       {hasSchedule ? (
-        <form
-          onSubmit={onSubmit}
-          className="flex flex-col items-start space-y-4"
-        >
+        <form onSubmit={onSubmit} className="form__container">
           <Field>
             <Label htmlFor="subject">Assunto</Label>
 
@@ -159,10 +158,10 @@ export function EditSchedule() {
 
           <small>• Todos os campos são obrigatórios.</small>
 
-          <div className="w-full flex justify-end">
+          <div className="button__group">
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? (
-                <Loader2 className="size-4 animate-spin" />
+                <Loader2 size={16} className="animate-spin" />
               ) : (
                 'Salvar'
               )}

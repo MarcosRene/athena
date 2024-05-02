@@ -1,0 +1,16 @@
+.form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.form__container input {
+  width: 100%;
+}
+
+.form__container .button__group {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
