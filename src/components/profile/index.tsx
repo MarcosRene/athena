@@ -4,7 +4,9 @@ import { LogOut } from 'lucide-react'
 
 import { useAuth } from '@/contexts/auth'
 
-import { Dropdown } from './dropdown'
+import { Dropdown } from '../dropdown'
+
+import './styles.css'
 
 export function Profile() {
   const { user, signOut } = useAuth()
@@ -22,28 +24,22 @@ export function Profile() {
   }
 
   return (
-    <div className="relative">
+    <div className="profile__container">
       <div
-        className="flex items-center gap-4"
+        className="profile__content"
         onClick={handleDropdownOpen}
         aria-label="Abrir modal"
         title="Abrir modal"
       >
-        <div className="flex flex-col items-end">
+        <div className="profile__infor">
           <span>{user.name}</span>
-          <span className="text-gray-500 text-sm">{user.email}</span>
+          <span>{user.email}</span>
         </div>
 
         {user.avatar ? (
-          <img
-            className="inline-block h-12 w-12 rounded-full cursor-pointer"
-            src={user.avatar}
-            alt={`Avatar do usuário ${user.name}`}
-          />
+          <img src={user.avatar} alt={`Avatar do usuário ${user.name}`} />
         ) : (
-          <div className="h-12 w-12 text-sm rounded-full cursor-pointer bg-zinc-500 uppercase ring-2 ring-gray-900 flex items-center justify-center font-semibold font-logo">
-            {user.name.slice(0, 2)}
-          </div>
+          <div className="profile__preview">{user.name.slice(0, 2)}</div>
         )}
       </div>
 
