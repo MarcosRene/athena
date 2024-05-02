@@ -1,0 +1,80 @@
+.modal__overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 80;
+}
+
+.modal__overlay .modal__container {
+  margin: 0 16px;
+  max-width: 480px;
+  border: 1px solid var(--gray-900);
+  border-radius: 8px;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+.modal__overlay .modal__container .modal-head,
+.modal__overlay .modal__container .modal-body,
+.modal__overlay .modal__container .modal-footer {
+  padding: 16px 24px;
+}
+
+.modal__overlay .modal__container .modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal__overlay .modal__container .modal-head span {
+  display: inline-block;
+  font-weight: 600;
+}
+
+.modal__overlay .modal__container .modal-head button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background-color: transparent;
+}
+
+.modal__overlay .modal__container .modal-body p {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--gray-500);
+}
+
+.modal__overlay .modal__container .modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal__overlay .modal__container .modal-footer button:nth-child(2) {
+  height: 40px;
+  padding: 0 12px;
+  background-color: #ad0337;
+}
+
+.modal__overlay .modal__container .modal-footer button:nth-child(2):hover {
+  background-color: #7e0028;
+}
+
+@media (min-width: 768px) {
+  .modal__container .modal__overlay .modal-head span {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .modal__overlay .modal__container .modal-body p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

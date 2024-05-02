@@ -34,22 +34,22 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
 
             <div className="flex gap-1">
               {!schedule.oldScheduling && (
-                <Button.Root
+                <Button
                   className="w-6 h-6 p-0 bg-transparent text-gray-500"
                   onClick={() => navigate(`/${schedule._id}/edit-schedule`)}
                   title="Botão editar"
                 >
-                  <Button.Icon name={Pencil} className="size-4" />
-                </Button.Root>
+                  <Pencil className="size-4" />
+                </Button>
               )}
 
-              <Button.Root
+              <Button
                 className="w-6 h-6 p-0 bg-transparent text-gray-500"
                 onClick={() => onSelectedScheduleId(schedule._id)}
                 title="Botão excluír"
               >
-                <Button.Icon name={Trash2} className="size-4" />
-              </Button.Root>
+                <Trash2 className="size-4" />
+              </Button>
             </div>
           </div>
 
