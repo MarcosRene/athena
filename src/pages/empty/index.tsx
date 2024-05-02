@@ -6,7 +6,7 @@ import './styles.css'
 
 export function Empty() {
   return (
-    <div className="empty__container">
+    <div className="empty-container">
       <img
         src={empty}
         alt="Duas pranchetas uma sobre a outra, na cor preta, com prendedor verde e folhas cinzas."
@@ -14,7 +14,7 @@ export function Empty() {
         height={280}
       />
 
-      <div className="empty__content">
+      <div className="empty-content">
         <h4>Você não possui agendamentos disponíveis!</h4>
 
         <Link to="/new-schedule">Criar uma agendamento</Link>

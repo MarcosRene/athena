@@ -53,7 +53,7 @@ export function SignUp() {
   }
 
   return (
-    <div className="sign-up__container">
+    <div className="sign-up-container">
       <form aria-label="sign-up-form" onSubmit={onSubmit}>
         <h1>Crie sua conta</h1>
 
@@ -98,7 +98,7 @@ export function SignUp() {
           {!isLoading ? (
             'Cadastrar'
           ) : (
-            <Loader2 className="animate-spin size-5" />
+            <Loader2 size={20} className="animate-spin" />
           )}
         </Button>
       </form>

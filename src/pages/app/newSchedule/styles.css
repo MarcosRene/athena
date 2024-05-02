@@ -1,15 +1,29 @@
-.form__container {
+.form-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.form__container input {
+.form-container input {
   width: 100%;
 }
 
-.form__container .button__group {
+.form-container .button-group {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
+
+.form-container .field-message-error {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-container .field-message-error span {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--gray-500);
+}
+

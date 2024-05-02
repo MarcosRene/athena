@@ -5,5 +5,5 @@ import './styles.css'
 interface TextareaProps extends ComponentProps<'textarea'> {}
 
 export function Textarea({ ...props }: TextareaProps) {
-  return <textarea className="textarea__container" {...props} />
+  return <textarea className="textarea-container" {...props} />
 }

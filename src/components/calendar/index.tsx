@@ -3,11 +3,13 @@ import { format, getDay, getTime } from 'date-fns'
 
 import { ptBR } from '@/lib/date-fns'
 
-import { initializeDateTime } from '@/utils/initialize-date-time'
+import { initializeDateTime } from '@/utils/initializeDateTime'
 
-import { Input } from './form/input'
-import { Field } from './form/field'
-import { Label } from './form/label'
+import { Input } from '../form/input'
+import { Field } from '../form/field'
+import { Label } from '../form/label'
+
+import './styles.css'
 
 interface CalendarProps extends ReactDatePickerProps {
   label?: string

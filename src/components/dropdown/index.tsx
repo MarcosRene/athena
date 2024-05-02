@@ -14,7 +14,7 @@ interface DropdownProps {
 
 export function Dropdown({ options }: DropdownProps) {
   return (
-    <ol className="dropdown__container">
+    <ol className="dropdown-container">
       {options.map(({ icon: Icon, label, onClick }) => (
         <li key={label} onClick={onClick}>
           {Icon && <Icon size={18} />}

@@ -42,7 +42,7 @@ export function InputFile({ onFileSelected, avatarURL }: InputFile) {
   }, [imageFile])
 
   return (
-    <div className="input-file__container">
+    <div className="input-file-container">
       <label
         htmlFor="video"
         title="Selecione uma foto"
@@ -55,7 +55,7 @@ export function InputFile({ onFileSelected, avatarURL }: InputFile) {
             {avatarURL ? (
               <img src={avatarURL} alt="Avatar" />
             ) : (
-              <div className="input-file__preview">{user.name.slice(0, 2)}</div>
+              <div className="input-file-preview">{user.name.slice(0, 2)}</div>
             )}
           </>
         )}

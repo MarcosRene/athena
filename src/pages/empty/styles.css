@@ -1,4 +1,4 @@
-.empty__container {
+.empty-container {
   margin-top: 80px;
 
   display: flex;
@@ -6,19 +6,19 @@
   align-items: center;
 }
 
-.empty__container .empty__content {
+.empty-container .empty-content {
   margin-top: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.empty__container .empty__content h4 {
+.empty-container .empty-content h4 {
   line-height: 24px;
   text-align: center;
 }
 
-.empty__container .empty__content a {
+.empty-container .empty-content a {
   width: auto;
   font-size: 14px;
   line-height: 20px;
@@ -30,12 +30,12 @@
 
 
 @media (min-width: 768px) {
-  .empty__container .empty__content h4 {
+  .empty-container .empty-content h4 {
     font-size: 18px;
     line-height: 28px;
   }
 
-  .empty__container .empty__content a {
+  .empty-container .empty-content a {
     font-size: 16px;
     line-height: 24px;
   }

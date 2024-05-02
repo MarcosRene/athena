@@ -1,18 +1,18 @@
-.breadcrumbs__container {
+.breadcrumbs-container {
   margin-bottom: 48px;
   display: block;
 }
 
-.breadcrumbs__container ol {
+.breadcrumbs-container ol {
   display: flex;
 }
 
-.breadcrumbs__container ol .active-link {
+.breadcrumbs-container ol .active-link {
   font-weight: 500;
   color: var(--green-500);
 }
 
-.breadcrumbs__container ol li svg {
+.breadcrumbs-container ol li svg {
   margin: 0 8px;
   display: inline-block;
 }

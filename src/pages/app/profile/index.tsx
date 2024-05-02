@@ -1,8 +1,11 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
 
 import { useAuth } from '@/contexts/auth'
+
+import { api } from '@/services/api'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
@@ -11,10 +14,11 @@ import { InputFile } from '@/components/form/inputFile'
 
 import { updateUserProfile } from '@/services/update-user-profile'
 
-import { ProfileSkeleton } from './profile-skeleton'
-import { useFetch } from '@/hooks/useFetch'
+import { ProfileSkeleton } from './skeleton'
 
 import { UserProfileResponse } from '../types'
+
+import './styles.css'
 
 export function Profile() {
   const { user, updateUser } = useAuth()
@@ -63,44 +67,42 @@ export function Profile() {
     }
   }
 
-  const { data, isLoading } = useFetch<UserProfileResponse>({
-    url: `/users/${user.id}`,
-    errorMessage:
-      'Não foi possível carregar os dados do usuário, tente novamente!',
+  async function fetchUserProfile() {
+    try {
+      const response = await api.get(`/users/${user.id}`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const { data: profileData, isLoading } = useQuery<UserProfileResponse>({
+    queryKey: ['user-profile'],
+    queryFn: fetchUserProfile,
   })
 
-  useEffect(() => {
-    if (!data) return
-    setUserProfile(data)
-  }, [data])
-
-  const hasUserProfile = data !== null && !isLoading
+  const hasUserProfile = profileData !== null && !isLoading
 
   return (
     <>
       <Breadcrumbs breadcrumbs={[{ label: 'Perfil', href: '/profile' }]} />
 
       {hasUserProfile ? (
-        <form
-          onSubmit={onSubmit}
-          className="pt-4 flex flex-col items-center md:flex-row md:items-start gap-8 lg:gap-16"
-        >
-          <div className="w-full max-w-40 flex flex-col items-center">
+        <form onSubmit={onSubmit} className="profile-form-container">
+          <div className="user-profile-container">
             <InputFile
-              avatarURL={userProfile.avatar?.toString()}
+              avatarURL={profileData?.avatar?.toString()}
               onFileSelected={handleAvatarChange}
             />
 
-            <span className="font-medium text-2xl whitespace-nowrap">
-              {user.name}
-            </span>
+            <span>{user.name}</span>
           </div>
 
-          <div className="block space-y-4 w-full self-baseline md:space-y-0 md:grid md:grid-cols-2 md:gap-6">
+          <div className="form-field-group">
             <Input
               id="email"
               placeholder="johndoe@email.com"
-              value={userProfile.email}
+              value={profileData?.email}
               disabled
             />
 
@@ -108,14 +110,14 @@ export function Profile() {
               id="name"
               placeholder="John Doe"
               onChange={handleNameChange}
-              value={userProfile.name}
+              value={profileData?.name}
             />
 
             <Input
               id="password"
               type="password"
               placeholder="Senha"
-              value={userProfile.password}
+              value={profileData?.password}
               disabled
             />
 
@@ -123,14 +125,14 @@ export function Profile() {
               id="confirm_password"
               type="password"
               placeholder="Confirmar senha"
-              value={userProfile.confirm_password}
+              value={profileData?.confirm_password}
               disabled
             />
 
-            <div className="col-start-2 col-end-2 flex justify-end">
+            <div className="form-button-group">
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? (
-                  <Loader2 className="size-4 animate-spin" />
+                  <Loader2 size={16} className="animate-spin" />
                 ) : (
                   'Atualizar'
                 )}

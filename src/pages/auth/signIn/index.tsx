@@ -30,7 +30,7 @@ export function SignIn() {
   }
 
   return (
-    <div className="sign-in__container">
+    <div className="sign-in-container">
       <h1>
         Gerencie <br />
         seus <br />
@@ -54,7 +54,11 @@ export function SignIn() {
         <Link to="/sign-up">Cadastre-se aqui 👈</Link>
 
         <Button type="submit" disabled={isLoading}>
-          {!isLoading ? 'Entrar' : <Loader2 className="animate-spin size-5" />}
+          {!isLoading ? (
+            'Entrar'
+          ) : (
+            <Loader2 size={20} className="animate-spin" />
+          )}
         </Button>
       </form>
     </div>

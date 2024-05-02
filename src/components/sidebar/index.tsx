@@ -20,7 +20,7 @@ export function Sidebar() {
     return (
       <>
         <Button
-          className="sidebar__button"
+          className="sidebar-button"
           onClick={handleDrawerSidebar}
           aria-label="Open button sidebar"
         >
@@ -28,8 +28,8 @@ export function Sidebar() {
         </Button>
 
         {isDrawerSidebar && (
-          <div className="sidebar__overlay">
-            <aside className="sidebar__overlay-mobile">
+          <div className="sidebar-overlay">
+            <aside className="sidebar-container-mobile">
               <SidebarNav onClose={handleDrawerSidebar} />
             </aside>
           </div>
@@ -39,7 +39,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="sidebar__desktop">
+    <aside className="sidebar-container-desktop">
       <Link to="/">
         <span>
           <CalendarClock size={24} />

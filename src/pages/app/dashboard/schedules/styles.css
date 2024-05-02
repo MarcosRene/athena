@@ -1,11 +1,11 @@
-.schedules__container {
+.schedules-container {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 16px
 }
 
-.schedules__container li {
+.schedules-container li {
   flex-basis: 280px;
   position: relative;
   padding: 16px;
@@ -13,11 +13,11 @@
   border-radius: 8px;
 }
 
-.schedules__container li:hover {
+.schedules-container li:hover {
   background-color: var(--zinc-900);
 }
 
-.schedules__container li .schedules-item__head {
+.schedules-container li .schedules-item-head {
   margin-bottom: 8px;
 
   display: flex;
@@ -25,7 +25,7 @@
   justify-content: space-between;
 }
 
-.schedules__container li .schedules-item__head a {
+.schedules-container li .schedules-item-head a {
   position: relative;
   font-size: 14px;
   line-height: 20px;
@@ -33,7 +33,7 @@
   display: block;
 }
 
-.schedules__container li .schedules-item__head a::after {
+.schedules-container li .schedules-item-head a::after {
   content: '';
   height: 8px;
   width: 8px;
@@ -43,21 +43,21 @@
   border-radius: 50%;
 }
 
-.schedules__container li .schedules-item__head a.schedule-inactive::after[aria-disabled="true"] {
+.schedules-container li .schedules-item-head a.schedule-inactive::after[aria-disabled="true"] {
   pointer-events: none;
   background-color: hsl(21, 90%, 48%);
 }
 
-.schedules__container li .schedules-item__head a.schedule-active::after {
+.schedules-container li .schedules-item-head a.schedule-active::after {
   background-color: var(--green-600);
 }
 
-.schedules__container li .schedules-item__head > div {
+.schedules-container li .schedules-item-head > div {
   display: flex;
   gap: 4px;
 }
 
-.schedules__container li .schedules-item__head > div button {
+.schedules-container li .schedules-item-head > div button {
   width: 24px;
   height: 24px;
   padding: 0;
@@ -65,18 +65,17 @@
   color: var(--gray-500);
 }
 
-.schedules__container li .schedules-item__body {
+.schedules-container li .schedules-item-body {
   height: 96px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.schedules__container li .schedules-item__body span {
+.schedules-container li .schedules-item-body span {
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
-
 
   overflow: hidden;
   display: -webkit-box;
@@ -84,19 +83,16 @@
   -webkit-line-clamp: 1;
 }
 
-.schedules__container li .schedules-item__body span > span {
+.schedules-container li .schedules-item-body span > span {
   color: var(--gray-500);
   display: inline-flex;
 }
 
-.schedules__container li .schedules-item__body span:last-child {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+.schedules-container li .schedules-item-body span:last-child {
   -webkit-line-clamp: 2;
 }
 
-.schedules__container li .schedules-item__date {
+.schedules-container li .schedules-item-date {
   width: 100%;
   margin-top: auto;
   font-size: 14px;

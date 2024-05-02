@@ -14,7 +14,7 @@ interface SelectProps extends ComponentProps<'select'> {
 
 export function Select({ options = [], ...props }: SelectProps) {
   return (
-    <div className="select__container">
+    <div className="select-container">
       <select {...props}>
         <option defaultChecked>Selecione um professor</option>
         {options?.map(({ label, value }) => (

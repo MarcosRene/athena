@@ -4,7 +4,7 @@ import './styles.css'
 
 export function AuthLayout() {
   return (
-    <div className="auth_layout">
+    <div className="auth-layout">
       <Outlet />
     </div>
   )

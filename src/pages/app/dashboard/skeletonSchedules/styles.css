@@ -1,0 +1,72 @@
+.schedules-skeleton-container {
+  width: 100%;
+  display: grid;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px
+}
+
+.schedules-skeleton-container .schedules-skeleton-item {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  border: 1px solid var(--gray-900);
+  border-radius: 8px;
+  flex-basis: 268px;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-head {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-head .schedules-skeleton-item-identifier {
+  height: 20px;
+  width: 80px;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-head .schedules-skeleton-item-button:last-child {
+  height: 20px;
+  width: 48px;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-content .schedules-skeleton-item-teacher {
+  height: 16px;
+  width: 50%;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-content .schedules-skeleton-item-subject {
+  height: 16px;
+  width: 66%;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-content .schedules-skeleton-item-description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-content .schedules-skeleton-item-description .schedules-skeleton-description:first-child {
+  height: 12px;
+  width: 80%;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-content .schedules-skeleton-item-description .schedules-skeleton-description:last-child {
+  height: 12px;
+  width: 100%;
+}
+
+.schedules-skeleton-container .schedules-skeleton-item .schedules-skeleton-item-content .schedules-skeleton-datetime {
+  height: 12px;
+  width: 160px;
+}

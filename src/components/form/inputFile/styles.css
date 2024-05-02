@@ -1,9 +1,9 @@
-.input-file__container {
+.input-file-container {
   margin-bottom: 16px;
   display: block;
 }
 
-.input-file__container label {
+.input-file-container label {
   position: relative;
   width: 112px;
   height: 112px;
@@ -16,12 +16,12 @@
   display: block;
 }
 
-.input-file__container label img {
+.input-file-container label img {
   position: absolute;
   inset: 0;
 }
 
-.input-file__container label .input-file__preview {
+.input-file-container label .input-file-preview {
   position: absolute;
   inset: 0;
   font-family: 'Montserrat', sans-serif;
@@ -36,7 +36,7 @@
   justify-content: center;
 }
 
-.input-file__container input[type="file"] {
+.input-file-container input[type="file"] {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -49,12 +49,12 @@
 }
 
 @media (min-width: 1024px) {
-  .input-file__container label {
+  .input-file-container label {
     width: 128px;
     height: 128px;
   }
 
-  .input-file__container label .input-file__preview {
+  .input-file-container label .input-file-preview {
     font-size: 36px;
     line-height: 40px;
   }

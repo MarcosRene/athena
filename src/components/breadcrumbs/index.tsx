@@ -15,7 +15,7 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className="breadcrumbs__container">
+    <nav aria-label="Breadcrumb" className="breadcrumbs-container">
       <ol>
         {Object.entries(breadcrumbs).map(
           ([index, { label, href, activeLink }]) => (

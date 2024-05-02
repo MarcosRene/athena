@@ -1,7 +1,7 @@
 import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { X, LayoutGrid, User2 } from 'lucide-react'
 
-import { isLinkActive } from '@/utils/active-link'
+import { isLinkActive } from '@/utils/activeLink'
 
 import { Button } from '../button'
 
@@ -21,8 +21,8 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
   })
 
   return (
-    <div className="sidebar-nav__container">
-      <span className="sidebar-nav__head">
+    <div className="sidebar-nav-container">
+      <span className="sidebar-nav-head">
         <h1>Geral</h1>
 
         {!!onClose && (
@@ -32,7 +32,7 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
         )}
       </span>
 
-      <div className="sidebar-nav__body">
+      <div className="sidebar-nav-body">
         <NavLink
           to="/"
           className={({ isActive }) =>

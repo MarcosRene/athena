@@ -1,4 +1,4 @@
-.textarea__container {
+.textarea-container {
   width: 100%;
   min-height: 160px;
   padding: 12px 16px;
@@ -12,10 +12,10 @@
   resize: vertical;
 }
 
-.textarea__container:focus {
+.textarea-container:focus {
   outline: 2px solid var(--green-600);
 }
 
-.textarea__container::placeholder {
+.textarea-container::placeholder {
   color: var(--gray-700);
 }

@@ -24,14 +24,14 @@ export function Profile() {
   }
 
   return (
-    <div className="profile__container">
+    <div className="profile-container">
       <div
-        className="profile__content"
+        className="profile-content"
         onClick={handleDropdownOpen}
         aria-label="Abrir modal"
         title="Abrir modal"
       >
-        <div className="profile__infor">
+        <div className="profile-infor">
           <span>{user.name}</span>
           <span>{user.email}</span>
         </div>
@@ -39,7 +39,7 @@ export function Profile() {
         {user.avatar ? (
           <img src={user.avatar} alt={`Avatar do usuário ${user.name}`} />
         ) : (
-          <div className="profile__preview">{user.name.slice(0, 2)}</div>
+          <div className="profile-preview">{user.name.slice(0, 2)}</div>
         )}
       </div>
 

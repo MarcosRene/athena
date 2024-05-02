@@ -10,7 +10,7 @@ import {
   SignInCredentials,
   User,
 } from './types'
-import { composeStorageKey } from '@/utils/compose-storage-key'
+import { composeStorageKey } from '@/utils/composeStorageKey'
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 

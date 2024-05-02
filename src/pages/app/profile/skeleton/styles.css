@@ -1,0 +1,77 @@
+.profile-skeleton-container {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.profile-skeleton-container .profile-skeleton-user {
+  width: 100%;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-skeleton-container .profile-skeleton-user .profile-skeleton-avatar,
+.profile-skeleton-container .profile-skeleton-user .profile-skeleton-username {
+  width: 128px;
+}
+
+.profile-skeleton-container .profile-skeleton-user .profile-skeleton-avatar {
+  height: 128px;
+  border-radius: 50%;
+}
+
+.profile-skeleton-container .profile-skeleton-user .profile-skeleton-username {
+  height: 32px;
+  border-radius: 8px;
+}
+
+.profile-skeleton-container .profile-skeleton-field-group .profile-skeleton-field {
+  width: auto;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.profile-skeleton-container .profile-skeleton-field-group {
+  width: 100%;
+  display: flex;
+  align-self: baseline;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-skeleton-container .profile-skeleton-field-group .profile-skeleton-button-group {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-skeleton-container .profile-skeleton-field-group .profile-skeleton-button-group .button {
+  width: 112px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .profile-skeleton-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .profile-skeleton-container .profile-skeleton-field-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .profile-skeleton-container {
+    gap: 64px;
+  }
+}

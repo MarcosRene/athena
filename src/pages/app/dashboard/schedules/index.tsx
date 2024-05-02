@@ -19,10 +19,10 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
   const navigate = useNavigate()
 
   return (
-    <ul className="schedules__container">
+    <ul className="schedules-container">
       {schedules?.map((schedule) => (
         <li key={schedule.identifier}>
-          <div className="schedules-item__head">
+          <div className="schedules-item-head">
             <Link
               to={`${schedule._id}/edit-schedule`}
               className={`${schedule.oldScheduling ? 'schedule-inactive' : 'schedule-active'}`}
@@ -50,7 +50,7 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
             </div>
           </div>
 
-          <div className="schedules-item__body">
+          <div className="schedules-item-body">
             <span data-label="Professor" title={schedule.teacher?.name}>
               Professor: <span>{schedule.teacher?.name}</span>
             </span>
@@ -60,7 +60,7 @@ function SchedulesBase({ schedules, onSelectedScheduleId }: SchedulesProps) {
             <span title={schedule.description}>{schedule.description}</span>
           </div>
 
-          <span className="schedules-item__date">
+          <span className="schedules-item-date">
             {format(schedule.date, "• dd 'de' MMMM, 'às' HH:mm.", {
               locale: ptBR,
             })}

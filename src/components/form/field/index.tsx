@@ -16,7 +16,7 @@ const BaseField: ForwardRefRenderFunction<HTMLDivElement, FieldProps> = (
   ref
 ) => {
   return (
-    <div ref={ref} className="field__container" {...props}>
+    <div ref={ref} className="field-container" {...props}>
       {children}
     </div>
   )

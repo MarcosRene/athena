@@ -1,4 +1,4 @@
-.dropdown__container {
+.dropdown-container {
   position: absolute;
   bottom: -50%;
   right: 0;
@@ -10,7 +10,7 @@
   transform: translateY(100%);
 }
 
-.dropdown__container li {
+.dropdown-container li {
   width: 100%;
   min-width: 128px;
   padding: 12px 16px;
@@ -25,14 +25,14 @@
   cursor: pointer;
 }
 
-.dropdown__container li:hover {
+.dropdown-container li:hover {
   background-color: var(--zinc-900);
 }
 
-.dropdown__container li:last-child {
+.dropdown-container li:last-child {
   border: none;
 }
 
-.dropdown__container li span {
+.dropdown-container li span {
   font-weight: 500;
 }

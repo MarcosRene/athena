@@ -8,7 +8,7 @@ interface LabelProps extends ComponentProps<'label'> {
 
 export function Label({ children, ...props }: LabelProps) {
   return (
-    <label className="label__container" {...props}>
+    <label className="label-container" {...props}>
       {children}
     </label>
   )

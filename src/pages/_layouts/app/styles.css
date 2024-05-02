@@ -8,18 +8,18 @@
   flex-direction: column;
 }
 
-.app-layout .app-layout__container {
+.app-layout .app-layout-container {
   height: 100%;
   display: flex;
 }
 
-.app-layout .app-layout__container .app-layout__content {
+.app-layout .app-layout-container .app-layout-content {
   margin-left: 0;
   width: 100%;
   margin-bottom: 48px;
 }
 
-.app-layout .app-layout__container .app-layout__content header {
+.app-layout .app-layout-container .app-layout-content header {
   height: 96px;
 
   display: flex;
@@ -27,19 +27,19 @@
   justify-content: flex-end;
 }
 
-.app-layout .app-layout__container .app-layout__content section {
+.app-layout .app-layout-container .app-layout-content section {
   margin-top: 24px;
   margin-bottom: 48px;
 }
 
 @media (min-width: 1024px) {
-  .app-layout .app-layout__container .app-layout__content {
+  .app-layout .app-layout-container .app-layout-content {
     margin-left: 24px;
   }
 }
 
 @media (min-width: 1536px) {
-  .app-layout .app-layout__container .app-layout__content {
+  .app-layout .app-layout-container .app-layout-content {
     margin-left: 48px;
   }
 }

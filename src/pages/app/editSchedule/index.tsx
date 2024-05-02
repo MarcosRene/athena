@@ -16,7 +16,7 @@ import { api } from '@/services/api'
 
 import { ScheduleResponse, UsersTeacherResponse } from '../types'
 
-import { FormSkeleton } from '../form-skeleton'
+import { FormSkeleton } from '../skeletonForm'
 import { format } from 'date-fns'
 import { Field } from '@/components/form/field'
 import { Label } from '@/components/form/label'
@@ -106,7 +106,7 @@ export function EditSchedule() {
       />
 
       {hasSchedule ? (
-        <form onSubmit={onSubmit} className="form__container">
+        <form onSubmit={onSubmit} className="form-container">
           <Field>
             <Label htmlFor="subject">Assunto</Label>
 
@@ -117,13 +117,12 @@ export function EditSchedule() {
               value={schedule?.subject}
               onChange={handleChange}
               maxLength={30}
+              data-invalid={schedule?.subject?.length === 30}
             />
 
-            {/* <div className="w-full p-0 flex justify-end">
-              <span className="text-xs text-gray-500">
-                {schedule?.subject?.length}/30
-              </span>
-            </div> */}
+            <div className="field-message-error">
+              <span>{schedule?.subject?.length}/30</span>
+            </div>
           </Field>
 
           <Field>
@@ -158,7 +157,7 @@ export function EditSchedule() {
 
           <small>• Todos os campos são obrigatórios.</small>
 
-          <div className="button__group">
+          <div className="button-group">
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? (
                 <Loader2 size={16} className="animate-spin" />

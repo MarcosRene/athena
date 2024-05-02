@@ -1,4 +1,4 @@
-.sign-up__container {
+.sign-up-container {
   width: 100%;
   height: 100%;
 
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.sign-up__container form {
+.sign-up-container form {
   width: 100%;
   max-width: 400px;
   padding: 48px 40px;
@@ -21,14 +21,14 @@
   gap: 16px;
 }
 
-.sign-up__container form h1 {
+.sign-up-container form h1 {
   margin-bottom: 24px;
   font-size: 24px;
   line-height: 32px;
   font-weight: 700;
 }
 
-.sign-up__container form a {
+.sign-up-container form a {
   margin-bottom: 24px;
   width: 100%;
   height: auto;
@@ -41,11 +41,11 @@
   display: block;
 }
 
-.sign-up__container form a:hover {
+.sign-up-container form a:hover {
   color: var(--gray-500);
 }
 
-.sign-up__container form button {
+.sign-up-container form button {
   width: 100%;
   text-transform: uppercase;
 }

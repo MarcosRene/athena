@@ -1,4 +1,4 @@
-import { isLinkActive } from './active-link'
+import { isLinkActive } from './activeLink'
 
 describe('isLinkActive', () => {
   it('Is active link', () => {

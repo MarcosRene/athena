@@ -14,7 +14,7 @@ import { api } from '@/services/api'
 
 import { Empty } from '@/pages/empty'
 import { Schedules } from './schedules'
-import { SchedulesSkeleton } from './schedules-skeleton'
+import { SchedulesSkeleton } from './skeletonSchedules'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { queryClient } from '@/lib/query-client'
@@ -124,7 +124,7 @@ export function Dashboard() {
 
   return (
     <>
-      <div className="dashboard__container">
+      <div className="dashboard-container">
         <Breadcrumbs breadcrumbs={[{ label: 'Dashboard', href: '/' }]} />
 
         <Button onClick={() => navigate('/new-schedule', { replace: true })}>
@@ -133,7 +133,7 @@ export function Dashboard() {
         </Button>
       </div>
 
-      <div className="dashboard__content">
+      <div className="dashboard-content">
         <Input
           placeholder="Buscar por um agendamento"
           onChange={handleSearchTerm}

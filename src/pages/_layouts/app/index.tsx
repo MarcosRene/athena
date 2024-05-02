@@ -8,10 +8,10 @@ import './styles.css'
 export function AppLayout() {
   return (
     <main className="app-layout">
-      <div className="app-layout__container">
+      <div className="app-layout-container">
         <Sidebar />
 
-        <div className="app-layout__content">
+        <div className="app-layout-content">
           <header>
             <Profile />
           </header>

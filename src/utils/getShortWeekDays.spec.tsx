@@ -1,4 +1,4 @@
-import { getShortWeekDays } from './get-short-week-days'
+import { getShortWeekDays } from './getShortWeekDays'
 
 describe('isLinkActive', () => {
   it('should return days of the week short', () => {

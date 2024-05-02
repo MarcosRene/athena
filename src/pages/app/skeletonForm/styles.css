@@ -1,0 +1,44 @@
+.form-skeleton-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16;
+}
+
+.form-skeleton-container .form-skeleton-field-group {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-skeleton-container .form-skeleton-field-group .form-skeleton-label {
+  width: 160px;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.form-skeleton-container .form-skeleton-field-group .form-skeleton-field {
+  width: auto;
+  height: 40px;
+}
+
+.form-skeleton-container .form-skeleton-field-group:nth-child(3) .form-skeleton-field {
+  height: 160px;
+}
+
+.form-skeleton-container .form-skeleton-field-group:nth-child(4) .form-skeleton-field {
+  width: 225px;
+  height: 40px;
+}
+
+.form-skeleton-container .form-skeleton-button-group {
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-skeleton-container .form-skeleton-button-group .form-skeleton-button {
+  width: 80px;
+  height: 40px;
+  border-radius: 8px;
+}

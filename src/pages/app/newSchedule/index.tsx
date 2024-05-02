@@ -11,8 +11,8 @@ import { Input } from '@/components/form/input'
 import { Select } from '@/components/form/select'
 import { Textarea } from '@/components/form/textArea'
 
-import { formValidation } from '@/utils/form-validation'
-import { initializeDateTime } from '@/utils/initialize-date-time'
+import { formValidation } from '@/utils/formValidation'
+import { initializeDateTime } from '@/utils/initializeDateTime'
 
 import { api } from '@/services/api'
 
@@ -81,12 +81,12 @@ export function NewSchedule() {
     }
   }
 
-  const { data: teachers, isLoading } = useQuery<UsersTeacherResponse[]>({
-    queryKey: ['schedules'],
+  const { data: teachersData, isLoading } = useQuery<UsersTeacherResponse[]>({
+    queryKey: ['teachers'],
     queryFn: fetchTeachers,
   })
 
-  const formattedTeachers = teachers?.map((teacher) => ({
+  const formattedTeachers = teachersData?.map((teacher) => ({
     label: teacher.name,
     value: teacher._id,
   }))
@@ -100,7 +100,7 @@ export function NewSchedule() {
         ]}
       />
 
-      <form onSubmit={onSubmit} className="form__container">
+      <form onSubmit={onSubmit} className="form-container">
         <Field>
           <Label htmlFor="subject">Assunto</Label>
 
@@ -112,13 +112,12 @@ export function NewSchedule() {
             onChange={handleChange}
             maxLength={30}
             style={{ width: '100%' }}
+            data-invalid={formData.subject.length === 30}
           />
 
-          {/* <div className="w-full p-0 flex justify-end">
-            <span className="text-xs text-gray-500">
-              {formData.subject.length}/30
-            </span>
-          </div> */}
+          <div className="field-message-error">
+            <span>{formData.subject.length}/30</span>
+          </div>
         </Field>
 
         <Field>
@@ -153,7 +152,7 @@ export function NewSchedule() {
 
         <small>• Todos os campos são obrigatórios.</small>
 
-        <div className="button__group">
+        <div className="button-group">
           <Button type="submit" disabled={!hasButtonDisabled || isSubmitting}>
             {isSubmitting ? (
               <Loader2 size={16} className="animate-spin" />

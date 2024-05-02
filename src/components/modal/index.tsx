@@ -31,8 +31,8 @@ export function Modal({
   return (
     isOpen &&
     createPortal(
-      <section className="modal__overlay">
-        <div className="modal__container">
+      <section className="modal-overlay">
+        <div className="modal-container">
           <div className="modal-head">
             <span>{title}</span>
 
@@ -51,7 +51,7 @@ export function Modal({
             {!!onSubmit && (
               <Button onClick={onSubmit} disabled={isDisabled}>
                 {isDisabled ? (
-                  <Loader2 className="animate-spin size-5" />
+                  <Loader2 size={20} className="animate-spin" />
                 ) : (
                   labelSubmitAction
                 )}

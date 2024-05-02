@@ -1,8 +1,8 @@
-.profile__container {
+.profile-container {
   position: relative;
 }
 
-.profile__container .profile__content {
+.profile-container .profile-content {
   position: relative;
   display: flex;
   align-items: center;
@@ -10,19 +10,19 @@
   gap: 16px;
 }
 
-.profile__container .profile__content .profile__infor {
+.profile-container .profile-content .profile-infor {
   display: flex;
   flex-direction: column;
   align-items: flex-end
 }
 
-.profile__container .profile__content .profile__infor span:nth-child(2) {
+.profile-container .profile-content .profile-infor span:nth-child(2) {
   font-size: 14px;
   line-height: 20px;
   color: var(--gray-500);
 }
 
-.profile__container .profile__content img {
+.profile-container .profile-content img {
   width: 48px;
   height: 48px;
   display: inline-block;
@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.profile__container .profile__content .profile__preview {
+.profile-container .profile-content .profile-preview {
   width: 48px;
   height: 48px;
   font-family: 'Montserrat', sans-serif;

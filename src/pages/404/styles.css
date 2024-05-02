@@ -1,4 +1,4 @@
-.not-found__container {
+.not-found-container {
   height: 100vh;
 
   display: flex;
@@ -8,13 +8,13 @@
   gap: 8px;
 }
 
-.not-found__container h1 {
+.not-found-container h1 {
   font-size: 36px;
   line-height: 40px;
   font-weight: 700;
 }
 
-.not-found__container a {
+.not-found-container a {
   color: var(--green-500);
   text-decoration: underline;
 }

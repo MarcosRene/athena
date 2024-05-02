@@ -1,4 +1,4 @@
-.input__container {
+.input-container {
   height: 40px;
   padding: 0 16px;
 
@@ -14,16 +14,20 @@
   justify-content: center;
 }
 
-.input__container:disabled {
+.input-container:disabled {
   cursor: not-allowed;
   background-color: rgba(39, 39, 42, 0.8);
   color: rgba(255, 255, 255, 0.5);
 }
 
-.input__container:focus {
+.input-container:focus {
   outline: 2px solid var(--green-600);
 }
 
-.input__container::placeholder {
+.input-container::placeholder {
   color: var(--gray-700);
+}
+
+.input-container[data-invalid="true"] {
+  outline-color: hsl(0, 84%, 60%);
 }
