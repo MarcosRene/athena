@@ -1,10 +1,10 @@
 import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { User2, Lock, Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { useMutation } from '@tanstack/react-query'
 
 import { Button } from '@/components/button'
-import { Input } from '@/components/input'
+import { Input } from '@/components/form/input'
 
 import { useAuth } from '@/contexts/auth'
 
@@ -38,42 +38,22 @@ export function SignIn() {
       </h1>
 
       <form onSubmit={onSubmit} aria-label="sign-in-form">
-        <Input.Field>
-          <Input.Container>
-            <Input.Prefix>
-              <User2 className="size-4" />
-            </Input.Prefix>
+        <Input
+          placeholder="E-mail"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
 
-            <Input.Control
-              placeholder="E-mail"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </Input.Container>
-        </Input.Field>
-
-        <Input.Field>
-          <Input.Container>
-            <Input.Prefix>
-              <Lock className="size-4" />
-            </Input.Prefix>
-
-            <Input.Control
-              type="password"
-              placeholder="Senha"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </Input.Container>
-        </Input.Field>
+        <Input
+          type="password"
+          placeholder="Senha"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
 
         <Link to="/sign-up">Cadastre-se aqui 👈</Link>
 
-        <Button
-          type="submit"
-          // className="w-full uppercase"
-          disabled={isLoading}
-        >
+        <Button type="submit" disabled={isLoading}>
           {!isLoading ? 'Entrar' : <Loader2 className="animate-spin size-5" />}
         </Button>
       </form>

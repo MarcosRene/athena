@@ -6,8 +6,8 @@ import { useAuth } from '@/contexts/auth'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
-import { Input } from '@/components/input'
-import { InputFile } from '@/components/input-file'
+import { Input } from '@/components/form/input'
+import { InputFile } from '@/components/form/inputFile'
 
 import { updateUserProfile } from '@/services/update-user-profile'
 
@@ -97,58 +97,38 @@ export function Profile() {
           </div>
 
           <div className="block space-y-4 w-full self-baseline md:space-y-0 md:grid md:grid-cols-2 md:gap-6">
-            <Input.Field>
-              <Input.Container>
-                <Input.Control
-                  id="email"
-                  placeholder="johndoe@email.com"
-                  value={userProfile.email}
-                  disabled
-                />
-              </Input.Container>
-            </Input.Field>
+            <Input
+              id="email"
+              placeholder="johndoe@email.com"
+              value={userProfile.email}
+              disabled
+            />
 
-            <Input.Field>
-              <Input.Container>
-                <Input.Control
-                  id="name"
-                  placeholder="John Doe"
-                  onChange={handleNameChange}
-                  value={userProfile.name}
-                />
-              </Input.Container>
-            </Input.Field>
+            <Input
+              id="name"
+              placeholder="John Doe"
+              onChange={handleNameChange}
+              value={userProfile.name}
+            />
 
-            <Input.Field>
-              <Input.Container>
-                <Input.Control
-                  id="password"
-                  type="password"
-                  placeholder="Senha"
-                  value={userProfile.password}
-                  disabled
-                />
-              </Input.Container>
-            </Input.Field>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Senha"
+              value={userProfile.password}
+              disabled
+            />
 
-            <Input.Field>
-              <Input.Container>
-                <Input.Control
-                  id="confirm_password"
-                  type="password"
-                  placeholder="Confirmar senha"
-                  value={userProfile.confirm_password}
-                  disabled
-                />
-              </Input.Container>
-            </Input.Field>
+            <Input
+              id="confirm_password"
+              type="password"
+              placeholder="Confirmar senha"
+              value={userProfile.confirm_password}
+              disabled
+            />
 
             <div className="col-start-2 col-end-2 flex justify-end">
-              <Button
-                type="submit"
-                className="uppercase font-medium"
-                disabled={isSubmitting}
-              >
+              <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <Loader2 className="size-4 animate-spin" />
                 ) : (

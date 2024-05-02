@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Plus, Search } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
-import { Input } from '@/components/input'
+import { Input } from '@/components/form/input'
 import { Modal } from '@/components/modal'
 
 import { useDebounce } from '@/hooks/useDebounce'
@@ -132,19 +132,11 @@ export function Dashboard() {
       </div>
 
       <div className="flex flex-col items-end space-y-4">
-        <Input.Field className="w-full md:w-auto">
-          <Input.Container>
-            <Input.Prefix>
-              <Search className="size-4" />
-            </Input.Prefix>
-
-            <Input.Control
-              placeholder="Buscar por um agendamento"
-              onChange={handleSearchTerm}
-              value={searchTerm}
-            />
-          </Input.Container>
-        </Input.Field>
+        <Input
+          placeholder="Buscar por um agendamento"
+          onChange={handleSearchTerm}
+          value={searchTerm}
+        />
 
         <div className="w-full flex items-center justify-center">
           {isLoading && <SchedulesSkeleton />}

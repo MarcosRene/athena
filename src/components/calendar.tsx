@@ -5,7 +5,9 @@ import { ptBR } from '@/lib/date-fns'
 
 import { initializeDateTime } from '@/utils/initialize-date-time'
 
-import { Input } from './input'
+import { Input } from './form/input'
+import { Field } from './form/field'
+import { Label } from './form/label'
 
 interface CalendarProps extends ReactDatePickerProps {
   label?: string
@@ -42,17 +44,19 @@ export function Calendar({ label, ...props }: CalendarProps) {
       maxTime={initializeDateTime(0, 17)}
       timeIntervals={30}
       customInput={
-        <Input.Field>
-          {!!label && <Input.Label htmlFor="calendar">{label}</Input.Label>}
+        <Field>
+          {!!label && (
+            <Label htmlFor="calendar" style={{ marginBottom: 8 }}>
+              {label}
+            </Label>
+          )}
 
-          <Input.Container>
-            <Input.Control
-              id="calendar"
-              value={format(String(selected), 'dd/MM/yyyy HH:mm')}
-              readOnly
-            />
-          </Input.Container>
-        </Input.Field>
+          <Input
+            id="calendar"
+            value={format(String(selected), 'dd/MM/yyyy HH:mm')}
+            readOnly
+          />
+        </Field>
       }
       locale="ptBR"
       withPortal

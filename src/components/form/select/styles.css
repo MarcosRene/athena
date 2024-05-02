@@ -1,0 +1,38 @@
+.select__container {
+  position: relative;
+  width: 100%;
+  height: 40px;
+
+  background-color: var(--black-100);
+  border: 1px solid var(--gray-900);
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.select__container:focus-within {
+  border: transparent;
+  outline: 2px solid var(--green-600);
+}
+
+.select__container select {
+  appearance: none;
+  flex: 1;
+  height: 100%;
+  padding: 0 16px;
+
+  font-size: 14px;
+  line-height: 20px;
+  background-color: var(--black-100);
+}
+
+.select__container select:focus {
+  outline: none;
+}
+
+.select__container select::placeholder {
+  color: var(--gray-700);
+}

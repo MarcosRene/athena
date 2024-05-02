@@ -7,9 +7,9 @@ import { format } from 'date-fns'
 import { Button } from '@/components/button'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Calendar } from '@/components/calendar'
-import { Input } from '@/components/input'
-import { Select } from '@/components/select'
-import { Textarea } from '@/components/textarea'
+import { Input } from '@/components/form/input'
+import { Select } from '@/components/form/select'
+import { Textarea } from '@/components/form/textArea'
 
 import { useFetch } from '@/hooks/useFetch'
 
@@ -19,6 +19,8 @@ import { initializeDateTime } from '@/utils/initialize-date-time'
 import { api } from '@/services/api'
 
 import { UsersTeacherResponse } from './types'
+import { Field } from '@/components/form/field'
+import { Label } from '@/components/form/label'
 
 interface FormData {
   subject: string
@@ -91,47 +93,49 @@ export function NewSchedule() {
       />
 
       <form onSubmit={onSubmit} className="flex flex-col items-start space-y-4">
-        <Input.Field className="w-full">
-          <Input.Label htmlFor="subject">Assunto</Input.Label>
+        <Field>
+          <Label htmlFor="subject">Assunto</Label>
 
-          <Input.Container data-invalid={formData.subject.length === 30}>
-            <Input.Control
-              name="subject"
-              id="subject"
-              placeholder="ex: TCC"
-              value={formData?.subject}
-              onChange={handleChange}
-              maxLength={30}
-            />
-          </Input.Container>
+          <Input
+            name="subject"
+            id="subject"
+            placeholder="ex: TCC"
+            value={formData?.subject}
+            onChange={handleChange}
+            maxLength={30}
+            style={{ width: '100%' }}
+          />
 
-          <Input.Prefix className="w-full p-0 flex justify-end">
+          {/* <div className="w-full p-0 flex justify-end">
             <span className="text-xs text-gray-500">
               {formData.subject.length}/30
             </span>
-          </Input.Prefix>
-        </Input.Field>
+          </div> */}
+        </Field>
 
-        <Select
-          name="userId"
-          label="Professor"
-          options={formattedTeachers}
-          value={formData.userId}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
+        <Field>
+          <Label htmlFor="userId">Professor</Label>
 
-        <Textarea.TextareaField>
-          <Textarea.Label htmlFor="description">Descrição</Textarea.Label>
+          <Select
+            name="userId"
+            options={formattedTeachers}
+            value={formData.userId}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+        </Field>
 
-          <Textarea.Control
+        <Field>
+          <Label htmlFor="description">Descriação</Label>
+
+          <Textarea
             id="description"
             name="description"
             placeholder="ex: Discutir tema do TCC"
             value={formData.description}
             onChange={handleChange}
           />
-        </Textarea.TextareaField>
+        </Field>
 
         <Calendar
           label="Data/Hora"

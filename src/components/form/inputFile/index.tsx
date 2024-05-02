@@ -2,6 +2,9 @@ import { ChangeEvent, useMemo, useState } from 'react'
 import { toast } from 'sonner'
 
 import { useAuth } from '@/contexts/auth'
+
+import './styles.css'
+
 interface InputFile {
   onFileSelected: (file: File) => void
   avatarURL?: string
@@ -39,27 +42,20 @@ export function InputFile({ onFileSelected, avatarURL }: InputFile) {
   }, [imageFile])
 
   return (
-    <div className="mb-4 block">
+    <div className="input-file__container">
       <label
         htmlFor="video"
-        className="relative w-28 h-28 lg:w-32 lg:h-32 border border-gray-900 flex rounded-full ring-2 ring-gray-900 overflow-hidden cursor-pointer"
         title="Selecione uma foto"
         aria-label="Selecione uma foto"
       >
         {previewURL ? (
-          <img
-            src={previewURL}
-            alt="Preview do Avatar"
-            className="absolute inset-0"
-          />
+          <img src={previewURL} alt="Preview do Avatar" />
         ) : (
           <>
             {avatarURL ? (
-              <img src={avatarURL} alt="Avatar" className="absolute inset-0" />
+              <img src={avatarURL} alt="Avatar" />
             ) : (
-              <div className="absolute inset-0 bg-zinc-500 text-2xl lg:text-4xl font-logo font-semibold uppercase flex items-center justify-center">
-                {user.name.slice(0, 2)}
-              </div>
+              <div className="input-file__preview">{user.name.slice(0, 2)}</div>
             )}
           </>
         )}
@@ -69,7 +65,6 @@ export function InputFile({ onFileSelected, avatarURL }: InputFile) {
         id="video"
         type="file"
         accept="image/png, image/jpeg"
-        className="sr-only"
         onChange={handleFileSelected}
       />
     </div>

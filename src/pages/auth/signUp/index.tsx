@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { User2, Lock, Mail, Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/button'
-import { Input } from '@/components/input'
+import { Input } from '@/components/form/input'
 
 import { api } from '@/services/api'
 
@@ -57,72 +57,40 @@ export function SignUp() {
       <form aria-label="sign-up-form" onSubmit={onSubmit}>
         <h1>Crie sua conta</h1>
 
-        <Input.Field>
-          <Input.Container>
-            <Input.Prefix>
-              <Mail className="size-4" />
-            </Input.Prefix>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="E-mail"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
-            <Input.Control
-              id="email"
-              name="email"
-              type="email"
-              placeholder="E-mail"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </Input.Container>
-        </Input.Field>
+        <Input
+          id="name"
+          name="name"
+          placeholder="Nome"
+          value={formData.name}
+          onChange={handleChange}
+        />
 
-        <Input.Field>
-          <Input.Container>
-            <Input.Prefix>
-              <User2 className="size-4" />
-            </Input.Prefix>
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Senha"
+          value={formData.password}
+          onChange={handleChange}
+        />
 
-            <Input.Control
-              id="name"
-              name="name"
-              placeholder="Nome"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </Input.Container>
-        </Input.Field>
-
-        <Input.Field>
-          <Input.Container>
-            <Input.Prefix>
-              <Lock className="size-4" />
-            </Input.Prefix>
-
-            <Input.Control
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Senha"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </Input.Container>
-        </Input.Field>
-
-        <Input.Field>
-          <Input.Container>
-            <Input.Prefix>
-              <Lock className="size-4" />
-            </Input.Prefix>
-
-            <Input.Control
-              id="confirm_password"
-              name="confirm_password"
-              type="password"
-              placeholder="Confirmar senha"
-              value={formData.confirm_password}
-              onChange={handleChange}
-            />
-          </Input.Container>
-        </Input.Field>
+        <Input
+          id="confirm_password"
+          name="confirm_password"
+          type="password"
+          placeholder="Confirmar senha"
+          value={formData.confirm_password}
+          onChange={handleChange}
+        />
 
         <Link to="/sign-in">Voltar para login 👈</Link>
 
