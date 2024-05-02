@@ -11,16 +11,15 @@ import { Input } from '@/components/form/input'
 import { Select } from '@/components/form/select'
 import { Textarea } from '@/components/form/textArea'
 
-import { useFetch } from '@/hooks/useFetch'
-
 import { formValidation } from '@/utils/form-validation'
 import { initializeDateTime } from '@/utils/initialize-date-time'
 
 import { api } from '@/services/api'
 
-import { UsersTeacherResponse } from './types'
 import { Field } from '@/components/form/field'
 import { Label } from '@/components/form/label'
+import { useQuery } from '@tanstack/react-query'
+import type { UsersTeacherResponse } from '../types'
 
 interface FormData {
   subject: string
@@ -73,9 +72,18 @@ export function NewSchedule() {
     }
   }
 
-  const { data: teachers, isLoading } = useFetch<UsersTeacherResponse[]>({
-    url: `/users?role=TEACHER`,
-    errorMessage: 'Não foi possível carregar os professores.',
+  async function fetchTeachers() {
+    try {
+      const response = await api.get(`/users?role=TEACHER`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const { data: teachers, isLoading } = useQuery<UsersTeacherResponse[]>({
+    queryKey: ['schedules'],
+    queryFn: fetchTeachers,
   })
 
   const formattedTeachers = teachers?.map((teacher) => ({
@@ -92,7 +100,7 @@ export function NewSchedule() {
         ]}
       />
 
-      <form onSubmit={onSubmit} className="flex flex-col items-start space-y-4">
+      <form onSubmit={onSubmit} className="form__container">
         <Field>
           <Label htmlFor="subject">Assunto</Label>
 
@@ -145,10 +153,10 @@ export function NewSchedule() {
 
         <small>• Todos os campos são obrigatórios.</small>
 
-        <div className="w-full flex justify-end">
+        <div className="button__group">
           <Button type="submit" disabled={!hasButtonDisabled || isSubmitting}>
             {isSubmitting ? (
-              <Loader2 className="size-4 animate-spin" />
+              <Loader2 size={16} className="animate-spin" />
             ) : (
               'Salvar'
             )}
