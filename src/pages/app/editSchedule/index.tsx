@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
@@ -10,11 +10,9 @@ import { Input } from '@/components/form/input'
 import { Select } from '@/components/form/select'
 import { Textarea } from '@/components/form/textArea'
 
-import { useFetch } from '@/hooks/useFetch'
-
 import { api } from '@/services/api'
 
-import { ScheduleResponse, UsersTeacherResponse } from '../types'
+import { ScheduleResponse } from '../types'
 
 import { FormSkeleton } from '../skeletonForm'
 import { format } from 'date-fns'
@@ -22,6 +20,8 @@ import { Field } from '@/components/form/field'
 import { Label } from '@/components/form/label'
 
 import './styles.css'
+import { useUsers } from '@/hooks/useUsers'
+import { useQuery } from '@tanstack/react-query'
 
 export function EditSchedule() {
   const { id } = useParams()
@@ -33,6 +33,8 @@ export function EditSchedule() {
   )
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
+  const { data: teachersData } = useUsers()
 
   function handleChange(
     event: ChangeEvent<
@@ -69,28 +71,21 @@ export function EditSchedule() {
     }
   }
 
-  const { data, isLoading } = useFetch<ScheduleResponse>({
-    url: `/schedules/${id}`,
-    errorMessage: 'Não foi possível carregar o agendamento.',
+  async function fetchScheduleById() {
+    try {
+      const response = await api.get(`/schedules/${id}`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const { data: scheduleData, isLoading } = useQuery<ScheduleResponse>({
+    queryKey: ['schedule'],
+    queryFn: fetchScheduleById,
   })
 
-  const { data: teachers } = useFetch<UsersTeacherResponse[]>({
-    url: `/users?role=TEACHER`,
-    errorMessage: 'Não foi possível carregar os professores.',
-  })
-
-  const formattedTeachers = teachers?.map((teacher) => ({
-    label: teacher.name,
-    value: teacher._id,
-  }))
-
-  useEffect(() => {
-    if (!data) return
-    setSchedule(data)
-    setDate(new Date(data.date))
-  }, [data])
-
-  const hasSchedule = data !== null && !isLoading
+  const hasSchedule = scheduleData !== null && !isLoading
 
   return (
     <>
@@ -99,7 +94,7 @@ export function EditSchedule() {
           { label: 'Dashboard', href: '/' },
           {
             label: 'Editar',
-            href: `/${schedule?._id}/edit-schedule`,
+            href: `/${scheduleData?._id}/edit-schedule`,
             activeLink: true,
           },
         ]}
@@ -114,14 +109,14 @@ export function EditSchedule() {
               id="subject"
               name="subject"
               placeholder="ex: TCC"
-              value={schedule?.subject}
+              value={scheduleData?.subject}
               onChange={handleChange}
               maxLength={30}
-              data-invalid={schedule?.subject?.length === 30}
+              data-invalid={scheduleData?.subject?.length === 30}
             />
 
             <div className="field-message-error">
-              <span>{schedule?.subject?.length}/30</span>
+              <span>{scheduleData?.subject?.length}/30</span>
             </div>
           </Field>
 
@@ -131,8 +126,8 @@ export function EditSchedule() {
             <Select
               id="userId"
               name="userId"
-              options={formattedTeachers}
-              value={schedule?.userId}
+              options={teachersData}
+              value={scheduleData?.userId}
               onChange={handleChange}
             />
           </Field>
@@ -144,7 +139,7 @@ export function EditSchedule() {
               id="description"
               name="description"
               placeholder="ex: Discutir tema do TCC"
-              value={schedule?.description}
+              value={scheduleData?.description}
               onChange={handleChange}
             />
           </Field>

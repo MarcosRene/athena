@@ -36,3 +36,9 @@
 .select-container select::placeholder {
   color: var(--gray-700);
 }
+
+.select-container > svg {
+  position: absolute;
+  right: 16px;
+  color: var(--gray-700);
+}

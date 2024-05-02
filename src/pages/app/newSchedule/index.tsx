@@ -18,8 +18,7 @@ import { api } from '@/services/api'
 
 import { Field } from '@/components/form/field'
 import { Label } from '@/components/form/label'
-import { useQuery } from '@tanstack/react-query'
-import type { UsersTeacherResponse } from '../types'
+import { useUsers } from '@/hooks/useUsers'
 
 interface FormData {
   subject: string
@@ -40,6 +39,8 @@ export function NewSchedule() {
 
   const [formData, setFormData] = useState<FormData>(initialFormDataState)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
+  const { data: teachersData, isLoading } = useUsers()
 
   const hasButtonDisabled = formValidation(formData, date)
 
@@ -71,25 +72,6 @@ export function NewSchedule() {
       setIsSubmitting(false)
     }
   }
-
-  async function fetchTeachers() {
-    try {
-      const response = await api.get(`/users?role=TEACHER`)
-      return response.data
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const { data: teachersData, isLoading } = useQuery<UsersTeacherResponse[]>({
-    queryKey: ['teachers'],
-    queryFn: fetchTeachers,
-  })
-
-  const formattedTeachers = teachersData?.map((teacher) => ({
-    label: teacher.name,
-    value: teacher._id,
-  }))
 
   return (
     <>
@@ -125,7 +107,7 @@ export function NewSchedule() {
 
           <Select
             name="userId"
-            options={formattedTeachers}
+            options={teachersData}
             value={formData.userId}
             onChange={handleChange}
             disabled={isLoading}

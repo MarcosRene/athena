@@ -24,7 +24,7 @@ export function Select({ options = [], ...props }: SelectProps) {
         ))}
       </select>
 
-      <ChevronDownIcon size={18} className="absolute right-4 text-gray-700" />
+      <ChevronDownIcon size={18} />
     </div>
   )
 }
