@@ -21,22 +21,22 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
   })
 
   return (
-    <div className="block">
-      <span className="font-bold uppercase flex items-center justify-between">
+    <div className="sidebar-nav__container">
+      <span className="sidebar-nav__head">
         <h1>Geral</h1>
 
         {!!onClose && (
-          <Button.Root className="w-6 h-6 p-4 bg-transparent" onClick={onClose}>
-            <Button.Icon name={X} className="size-5" />
-          </Button.Root>
+          <Button onClick={onClose}>
+            <X size={20} />
+          </Button>
         )}
       </span>
 
-      <div className="my-8 flex items-start flex-col">
+      <div className="sidebar-nav__body">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-none ${(isActive || isActiveLink) && 'text-green-500'}`
+            `${(isActive || isActiveLink) && 'active-link'}`
           }
           title="Início"
         >
@@ -46,9 +46,7 @@ export function SidebarNav({ onClose }: SidebarNavProps) {
 
         <NavLink
           to="/profile"
-          className={({ isActive }) =>
-            `w-full mb-6 flex items-center gap-4 transition-colors hover:text-green-500 font-medium leading-none ${isActive && 'text-green-500'}`
-          }
+          className={({ isActive }) => `${isActive && 'active-link'}`}
           title="Perfil"
         >
           <User2 size={20} />
