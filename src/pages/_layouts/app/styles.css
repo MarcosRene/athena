@@ -1,5 +1,6 @@
 .app-layout {
-  width: 1440px;
+  width: 100%;
+  max-width: 1440px;
   height: 100vh;
   margin: 0 auto;
   padding: 0 24px;
@@ -15,8 +16,7 @@
 .app-layout .app-layout__container .app-layout__content {
   margin-left: 0;
   width: 100%;
-
-  /* ml-0 w-full lg:ml-6 2xl:ml-12 mb-12 */
+  margin-bottom: 48px;
 }
 
 .app-layout .app-layout__container .app-layout__content header {
@@ -30,4 +30,16 @@
 .app-layout .app-layout__container .app-layout__content section {
   margin-top: 24px;
   margin-bottom: 48px;
+}
+
+@media (min-width: 1024px) {
+  .app-layout .app-layout__container .app-layout__content {
+    margin-left: 24px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .app-layout .app-layout__container .app-layout__content {
+    margin-left: 48px;
+  }
 }

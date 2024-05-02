@@ -20,6 +20,8 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { queryClient } from '@/lib/query-client'
 import type { ScheduleResponse } from '../types'
 
+import './styles.css'
+
 export function Dashboard() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -122,23 +124,23 @@ export function Dashboard() {
 
   return (
     <>
-      <div className="flex items-start justify-between">
+      <div className="dashboard__container">
         <Breadcrumbs breadcrumbs={[{ label: 'Dashboard', href: '/' }]} />
 
         <Button onClick={() => navigate('/new-schedule', { replace: true })}>
           Criar
-          <Plus className="size-5" />
+          <Plus size={20} />
         </Button>
       </div>
 
-      <div className="flex flex-col items-end space-y-4">
+      <div className="dashboard__content">
         <Input
           placeholder="Buscar por um agendamento"
           onChange={handleSearchTerm}
           value={searchTerm}
         />
 
-        <div className="w-full flex items-center justify-center">
+        <div className="schedules-list">
           {isLoading && <SchedulesSkeleton />}
 
           {hasSchedules && (

@@ -1,0 +1,107 @@
+.schedules__container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px
+}
+
+.schedules__container li {
+  flex-basis: 280px;
+  position: relative;
+  padding: 16px;
+  border: 1px solid var(--gray-900);
+  border-radius: 8px;
+}
+
+.schedules__container li:hover {
+  background-color: var(--zinc-900);
+}
+
+.schedules__container li .schedules-item__head {
+  margin-bottom: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.schedules__container li .schedules-item__head a {
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: underline;
+  display: block;
+}
+
+.schedules__container li .schedules-item__head a::after {
+  content: '';
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  top: 4px;
+  right: -16px;
+  border-radius: 50%;
+}
+
+.schedules__container li .schedules-item__head a.schedule-inactive::after[aria-disabled="true"] {
+  pointer-events: none;
+  background-color: hsl(21, 90%, 48%);
+}
+
+.schedules__container li .schedules-item__head a.schedule-active::after {
+  background-color: var(--green-600);
+}
+
+.schedules__container li .schedules-item__head > div {
+  display: flex;
+  gap: 4px;
+}
+
+.schedules__container li .schedules-item__head > div button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background-color: transparent;
+  color: var(--gray-500);
+}
+
+.schedules__container li .schedules-item__body {
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.schedules__container li .schedules-item__body span {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.schedules__container li .schedules-item__body span > span {
+  color: var(--gray-500);
+  display: inline-flex;
+}
+
+.schedules__container li .schedules-item__body span:last-child {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.schedules__container li .schedules-item__date {
+  width: 100%;
+  margin-top: auto;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--gray-500);
+
+  display: block;
+}

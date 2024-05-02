@@ -30,6 +30,10 @@ button {
   cursor: pointer;
 }
 
+ul {
+  list-style: none;
+}
+
 .react-datepicker__tab-loop
   .react-datepicker__time-container
   .react-datepicker__time-list-item,
