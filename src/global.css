@@ -17,6 +17,10 @@
 
   --zinc-500: hsl(240, 4%, 46%);
   --zinc-900: hsl(240, 6%, 10%);
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -28,9 +32,19 @@ body {
 
 button {
   cursor: pointer;
+  border: 0;
 }
 
-ul {
+button, input, textarea, select {
+  font-family: 'Inter', sans-serif;
+}
+
+a {
+  color: var(--white-100);
+  text-decoration: none;
+}
+
+ul, ol {
   list-style: none;
 }
 

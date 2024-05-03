@@ -7,12 +7,15 @@
   display: flex;
 }
 
-.breadcrumbs-container ol .active-link {
+.breadcrumbs-container ol li {
+  display: flex;
+}
+
+.breadcrumbs-container ol li.active-link a {
   font-weight: 500;
   color: var(--green-500);
 }
 
 .breadcrumbs-container ol li svg {
   margin: 0 8px;
-  display: inline-block;
 }
