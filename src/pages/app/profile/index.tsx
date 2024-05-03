@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
@@ -83,6 +83,12 @@ export function Profile() {
 
   const hasUserProfile = profileData !== null && !isLoading
 
+  useEffect(() => {
+    if (profileData) {
+      setUserProfile(profileData)
+    }
+  }, [profileData])
+
   return (
     <>
       <Breadcrumbs breadcrumbs={[{ label: 'Perfil', href: '/profile' }]} />
@@ -91,7 +97,7 @@ export function Profile() {
         <form onSubmit={onSubmit} className="profile-form-container">
           <div className="user-profile-container">
             <InputFile
-              avatarURL={profileData?.avatar?.toString()}
+              avatarURL={userProfile?.avatar?.toString()}
               onFileSelected={handleAvatarChange}
             />
 
@@ -102,7 +108,7 @@ export function Profile() {
             <Input
               id="email"
               placeholder="johndoe@email.com"
-              value={profileData?.email}
+              value={userProfile?.email}
               disabled
             />
 
@@ -110,14 +116,14 @@ export function Profile() {
               id="name"
               placeholder="John Doe"
               onChange={handleNameChange}
-              value={profileData?.name}
+              value={userProfile?.name}
             />
 
             <Input
               id="password"
               type="password"
               placeholder="Senha"
-              value={profileData?.password}
+              value={userProfile?.password}
               disabled
             />
 
@@ -125,7 +131,7 @@ export function Profile() {
               id="confirm_password"
               type="password"
               placeholder="Confirmar senha"
-              value={profileData?.confirm_password}
+              value={userProfile?.confirm_password}
               disabled
             />
 

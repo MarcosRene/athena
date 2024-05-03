@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
@@ -87,6 +87,12 @@ export function EditSchedule() {
 
   const hasSchedule = scheduleData !== null && !isLoading
 
+  useEffect(() => {
+    if (scheduleData) {
+      setSchedule(scheduleData)
+    }
+  }, [scheduleData])
+
   return (
     <>
       <Breadcrumbs
@@ -94,7 +100,7 @@ export function EditSchedule() {
           { label: 'Dashboard', href: '/' },
           {
             label: 'Editar',
-            href: `/${scheduleData?._id}/edit-schedule`,
+            href: `/${schedule?._id}/edit-schedule`,
             activeLink: true,
           },
         ]}
@@ -109,14 +115,14 @@ export function EditSchedule() {
               id="subject"
               name="subject"
               placeholder="ex: TCC"
-              value={scheduleData?.subject}
+              value={schedule?.subject}
               onChange={handleChange}
               maxLength={30}
-              data-invalid={scheduleData?.subject?.length === 30}
+              data-invalid={schedule?.subject?.length === 30}
             />
 
             <div className="field-message-error">
-              <span>{scheduleData?.subject?.length}/30</span>
+              <span>{schedule?.subject?.length}/30</span>
             </div>
           </Field>
 
@@ -127,7 +133,7 @@ export function EditSchedule() {
               id="userId"
               name="userId"
               options={teachersData}
-              value={scheduleData?.userId}
+              value={schedule?.userId}
               onChange={handleChange}
             />
           </Field>
@@ -139,7 +145,7 @@ export function EditSchedule() {
               id="description"
               name="description"
               placeholder="ex: Discutir tema do TCC"
-              value={scheduleData?.description}
+              value={schedule?.description}
               onChange={handleChange}
             />
           </Field>
